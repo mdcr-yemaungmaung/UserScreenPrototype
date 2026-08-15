@@ -1,0 +1,95 @@
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Be Vietnam Pro', 'Noto Sans Myanmar', 'Myanmar Text', sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+.font-headline,
+.font-display,
+h1,
+h2,
+h3 {
+  font-family: 'Epilogue', 'Be Vietnam Pro', sans-serif;
+}
+
+.font-label,
+button,
+input,
+select,
+textarea {
+  font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', sans-serif;
+}
+
+.prototype-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  line-height: 1;
+}
+
+.shadow-2xs {
+  box-shadow: 0 2px 8px rgba(43, 33, 29, 0.05);
+}
+
+/* Custom On/Off Toggle Switch */
+.toggle-switch-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+.toggle-switch-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+.toggle-switch-slider {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background-color: #E2D5C3;
+  border-radius: 9999px;
+  transition: background-color 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+  display: block;
+}
+.toggle-switch-slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  top: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.toggle-switch-input:checked + .toggle-switch-slider {
+  background-color: #840f16;
+}
+.toggle-switch-input:checked + .toggle-switch-slider::before {
+  transform: translateX(22px);
+}
+.toggle-switch-input:focus-visible + .toggle-switch-slider {
+  outline: 2px solid #840f16;
+  outline-offset: 2px;
+}

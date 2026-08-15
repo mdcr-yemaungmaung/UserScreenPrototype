@@ -1,0 +1,6 @@
+{
+  "name": "EzBookNow User Screen Prototypes",
+  "description": "Interactive restaurant discovery and table reservation prototype",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
