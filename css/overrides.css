@@ -582,12 +582,11 @@ textarea {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
-  scroll-padding-left: 1rem;
-  scroll-padding-right: 1.5rem;
+  scroll-padding-left: 16px;
+  scroll-padding-right: 16px;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE / Edge */
   padding-bottom: 0.75rem;
-  padding-right: 1.5rem;
 }
 
 .mobile-horizontal-scroll::-webkit-scrollbar {
@@ -596,13 +595,27 @@ textarea {
 
 .mobile-horizontal-scroll > * {
   scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 .mobile-horizontal-scroll::after {
   content: '';
-  flex: 0 0 1rem;
+  flex: 0 0 16px;
+  width: 16px;
   height: 1px;
   pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mobile-horizontal-scroll {
+    scroll-padding-left: 24px;
+    scroll-padding-right: 24px;
+  }
+
+  .mobile-horizontal-scroll::after {
+    flex: 0 0 24px;
+    width: 24px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -612,13 +625,13 @@ textarea {
     overflow-y: visible;
     scroll-snap-type: none;
     padding-bottom: 0;
-    padding-right: 0;
     scroll-padding-left: 0;
     scroll-padding-right: 0;
   }
 
   .mobile-horizontal-scroll > * {
     scroll-snap-align: none;
+    flex-shrink: 1;
   }
 
   .mobile-horizontal-scroll::after {

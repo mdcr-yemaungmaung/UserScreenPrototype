@@ -17,10 +17,10 @@
     const popularRestaurants = [...RESTAURANTS_DATA].sort((a, b) => (b.rating * b.reviewCount) - (a.rating * a.reviewCount));
 
     return `
-      <div class="space-y-16 pb-16">
+      <div class="space-y-8 sm:space-y-10 lg:space-y-16 pb-10 sm:pb-12 lg:pb-16">
         
         <!-- HERO SEARCH SECTION -->
-        <section class="relative pt-6 pb-4 overflow-hidden">
+        <section class="relative pt-4 sm:pt-6 pb-2 sm:pb-4 overflow-hidden">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
@@ -237,20 +237,20 @@
           </div>
 
           <!-- Explore by Cuisine Carousel/Grid -->
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-2 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-2 lg:pb-0">
             ${CUISINES_DATA.map(c => `
               <button
                 data-cuisine-filter="${c.name}"
-                class="shrink-0 w-[105px] h-[105px] sm:w-[120px] sm:h-[120px] lg:w-auto lg:h-auto snap-start group bg-[#FBF3E2] p-2.5 sm:p-3 lg:p-4 rounded-2xl lg:rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-center lg:text-left flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1.5 lg:gap-4 cursor-pointer"
+                class="shrink-0 w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] lg:w-auto lg:h-auto snap-start group bg-[#FBF3E2] p-2 sm:p-2.5 lg:p-4 rounded-2xl lg:rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-center lg:text-left flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 sm:gap-1.5 lg:gap-4 cursor-pointer"
               >
-                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0">
                   <img src="${c.image}" alt="${c.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div class="min-w-0">
-                  <div class="font-headline text-xs sm:text-sm lg:text-base font-bold text-[#231916] group-hover:text-[#840f16] transition-colors truncate">
+                  <div class="font-headline text-[11px] sm:text-xs lg:text-base font-bold text-[#231916] group-hover:text-[#840f16] transition-colors truncate">
                     ${isMm ? c.nameMM : c.name}
                   </div>
-                  <div class="font-label text-[10px] sm:text-xs text-[#58413f] mt-0.5 hidden sm:block">
+                  <div class="font-label text-[9px] sm:text-[10px] text-[#58413f] mt-0.5 hidden sm:block">
                     ${c.count} ${isMm ? 'ဆိုင်များ' : 'Venues'}
                   </div>
                 </div>
@@ -261,10 +261,10 @@
 
         <!-- PROMOTION & ANNOUNCEMENT BANNERS (ကြေညာချက်ဘန်နာများ) -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-2 gap-4 pb-2 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-2 gap-3 sm:gap-4 pb-2 lg:pb-0">
             
             <!-- Banner 1: KBZPay / WavePay Special Offer -->
-            <div class="shrink-0 w-[290px] sm:w-[360px] md:w-[420px] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#840f16] to-[#a52a2a] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#840f16]/30">
+            <div class="shrink-0 w-[calc(85vw-28px)] sm:w-[calc(48vw-28px)] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#840f16] to-[#a52a2a] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#840f16]/30">
               <div class="space-y-1.5 z-10 text-left min-w-0">
                 <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-amber-200">
                   <span class="material-symbols-outlined text-xs">local_activity</span>
@@ -284,7 +284,7 @@
             </div>
 
             <!-- Banner 2: Instant VIP Table Pass Info -->
-            <div class="shrink-0 w-[290px] sm:w-[360px] md:w-[420px] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-[#1c1311] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#362723]">
+            <div class="shrink-0 w-[calc(85vw-28px)] sm:w-[calc(48vw-28px)] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-[#1c1311] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#362723]">
               <div class="space-y-1.5 z-10 text-left min-w-0">
                 <div class="inline-flex items-center gap-1.5 bg-[#d08e1c]/20 px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-[#d08e1c]">
                   <span class="material-symbols-outlined text-xs">verified</span>
@@ -318,11 +318,11 @@
           </div>
 
           <!-- Cards Grid / Horizontal Scroll for Mobile & Tablet -->
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-3 lg:pb-0">
             ${COLLECTIONS_DATA.map(col => `
               <div
                 data-collection-target="${col.targetRestaurantId}"
-                class="shrink-0 w-[280px] h-[160px] sm:w-[320px] sm:h-[180px] lg:w-auto lg:h-[400px] snap-start group relative rounded-2xl lg:rounded-[28px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-4 sm:p-5 lg:p-8 text-left text-white"
+                class="shrink-0 w-[260px] h-[180px] sm:w-[320px] sm:h-[220px] lg:w-auto lg:h-[420px] snap-start group relative rounded-2xl lg:rounded-[28px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-4 sm:p-5 lg:p-8 text-left text-white"
               >
                 <img
                   src="${col.image}"
@@ -343,7 +343,7 @@
                   <h3 class="font-headline text-lg sm:text-xl lg:text-3xl font-extrabold text-white leading-tight line-clamp-1 lg:line-clamp-none">
                     ${isMm ? col.titleMM : col.title}
                   </h3>
-                  <p class="font-body text-[11px] sm:text-xs text-white/80 line-clamp-1 lg:line-clamp-2">
+                  <p class="font-body text-xs sm:text-sm text-white/80 line-clamp-1 lg:line-clamp-2">
                     ${isMm ? col.subtitleMM : col.subtitle}
                   </p>
                 </div>
@@ -388,14 +388,14 @@
             </button>
           </div>
 
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-4 sm:gap-6 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-3 lg:pb-0">
             ${popularRestaurants.slice(0, 4).map(r => {
               const rawStart = r.priceRange ? r.priceRange.split('-')[0].trim() : '150,000 MMK';
               const fitPrice = rawStart.endsWith('MMK') ? rawStart : `${rawStart} MMK`;
               return `
               <div
                 data-card-select-id="${r.id}"
-                class="shrink-0 w-[220px] sm:w-[240px] lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-2xl lg:rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
+                class="shrink-0 w-[200px] sm:w-[260px] lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-2xl lg:rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
               >
                 <!-- Image Container -->
                 <div class="relative h-36 sm:h-40 lg:h-48 overflow-hidden">
@@ -454,9 +454,9 @@
             </div>
           </div>
 
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-6 sm:gap-8 pb-4 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-4 lg:pb-0">
             ${RESTAURANTS_DATA.map(restaurant => `
-              <div class="shrink-0 w-[240px] sm:w-[260px] md:w-[280px] lg:w-auto snap-start flex">
+              <div class="shrink-0 w-[200px] sm:w-[260px] lg:w-auto snap-start flex">
                 ${renderRestaurantCard(restaurant, state)}
               </div>
             `).join('')}
