@@ -26,7 +26,7 @@
               
               <!-- Left Hero Content & Search Glass Panel -->
               <div class="lg:col-span-7 space-y-6 text-left">
-                <div class="inline-flex items-center gap-2 bg-[#840f16]/10 text-[#840f16] px-4 py-1.5 rounded-full font-label text-xs font-bold uppercase tracking-widest border border-[#840f16]/20">
+                <div class="hidden lg:inline-flex items-center gap-2 bg-[#840f16]/10 text-[#840f16] px-4 py-1.5 rounded-full font-label text-xs font-bold uppercase tracking-widest border border-[#840f16]/20">
                   <span class="material-symbols-outlined text-sm">restaurant</span>
                   <span>${isMm ? 'မည်သည့် ဘတ်ဂျက်မဆို စားပွဲဝိုင်းများကို အလွယ်တကူ စိုတ်ယူပါ' : 'Table Bookings For Every Budget & Occasion'}</span>
                 </div>
@@ -39,7 +39,7 @@
                   }
                 </h1>
 
-                <p class="font-body text-base sm:text-lg text-[#58413f] max-w-2xl leading-relaxed font-medium">
+                <p class="hidden lg:block font-body text-base sm:text-lg text-[#58413f] max-w-2xl leading-relaxed font-medium">
                   ${
                     isMm
                       ? 'ရန်ကုန်မြို့၏ နာမည်ကြီး လက်ဖက်ရည်ဆိုင်များ၊ မိသားစု စားသောက်ဆိုင်များနှင့် သီးသန့် အဆင့်မြင့် စားသောက်ဆိုင်များတွင် စားပွဲဝိုင်းများကို အလွယ်တကူ ချက်ချင်း စိုတ်ယူလိုက်ပါ။'
@@ -218,12 +218,12 @@
 
         <!-- EXPLORE BY CUISINE -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div class="flex justify-between items-end mb-6">
+          <div class="flex justify-between items-end mb-4 lg:mb-6">
             <div>
               <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916]">
                 ${isMm ? 'အစားအစာ အမျိုးအစားများ' : 'Explore by Cuisine'}
               </h2>
-              <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1">
+              <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1 hidden lg:block">
                 ${isMm ? 'မိမိနှစ်သက်သော ဟင်းလျာအလိုက် စားသောက်ဆိုင်များကို ရွေးချယ်ပါ' : 'Select from traditional heritage recipes to contemporary international fusion.'}
               </p>
             </div>
@@ -236,20 +236,21 @@
             </button>
           </div>
 
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-4 sm:gap-6 pb-2 lg:pb-0">
+          <!-- Explore by Cuisine Carousel/Grid -->
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-2 lg:pb-0">
             ${CUISINES_DATA.map(c => `
               <button
                 data-cuisine-filter="${c.name}"
-                class="shrink-0 w-60 sm:w-68 lg:w-auto snap-start group bg-[#FBF3E2] p-4 rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-left flex items-center gap-4 cursor-pointer"
+                class="shrink-0 w-[105px] h-[105px] sm:w-[120px] sm:h-[120px] lg:w-auto lg:h-auto snap-start group bg-[#FBF3E2] p-2.5 sm:p-3 lg:p-4 rounded-2xl lg:rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-center lg:text-left flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1.5 lg:gap-4 cursor-pointer"
               >
-                <div class="w-14 h-14 rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0">
                   <img src="${c.image}" alt="${c.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <div>
-                  <div class="font-headline text-base font-bold text-[#231916] group-hover:text-[#840f16] transition-colors">
+                <div class="min-w-0">
+                  <div class="font-headline text-xs sm:text-sm lg:text-base font-bold text-[#231916] group-hover:text-[#840f16] transition-colors truncate">
                     ${isMm ? c.nameMM : c.name}
                   </div>
-                  <div class="font-label text-xs text-[#58413f] mt-0.5">
+                  <div class="font-label text-[10px] sm:text-xs text-[#58413f] mt-0.5 hidden sm:block">
                     ${c.count} ${isMm ? 'ဆိုင်များ' : 'Venues'}
                   </div>
                 </div>
@@ -260,43 +261,43 @@
 
         <!-- PROMOTION & ANNOUNCEMENT BANNERS (ကြေညာချက်ဘန်နာများ) -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-2 gap-4 pb-2 lg:pb-0">
             
             <!-- Banner 1: KBZPay / WavePay Special Offer -->
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#840f16] to-[#a52a2a] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#840f16]/30">
-              <div class="space-y-1.5 z-10 text-left">
+            <div class="shrink-0 w-[290px] sm:w-[360px] md:w-[420px] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#840f16] to-[#a52a2a] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#840f16]/30">
+              <div class="space-y-1.5 z-10 text-left min-w-0">
                 <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-amber-200">
                   <span class="material-symbols-outlined text-xs">local_activity</span>
                   <span>${isMm ? 'ပရိုမိုးရှင်း အထူးအစီအစဉ်' : 'Exclusive Dining Offer'}</span>
                 </div>
-                <h3 class="font-headline text-lg sm:text-xl font-extrabold leading-tight">
+                <h3 class="font-headline text-base sm:text-lg lg:text-xl font-extrabold leading-tight">
                   ${isMm ? 'KBZPay & WavePay ဖြင့် စိုတ်ယူပါက ၂၀% လျှော့ဈေး' : '20% Off Weekend Dining Pass with KBZPay'}
                 </h3>
-                <p class="font-body text-xs text-white/80">
+                <p class="font-body text-xs text-white/80 line-clamp-2 sm:line-clamp-none">
                   ${isMm ? 'ယခုပတ်အတွင်း စားပွဲဝိုင်း စိုတ်ယူသူများအတွက် ရရှိနိုင်သော ကူပွန်' : 'Apply voucher code YOYAKUKBZ50K at checkout for instant table discount.'}
                 </p>
               </div>
-              <button data-nav-tab="mypage" class="shrink-0 bg-white text-[#840f16] px-4 py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-amber-100 transition-colors shadow-md cursor-pointer z-10">
+              <button data-nav-tab="mypage" class="shrink-0 bg-white text-[#840f16] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-amber-100 transition-colors shadow-md cursor-pointer z-10 whitespace-nowrap">
                 ${isMm ? 'ကူပွန်ယူမည်' : 'Claim Voucher'}
               </button>
               <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
             </div>
 
             <!-- Banner 2: Instant VIP Table Pass Info -->
-            <div class="relative overflow-hidden rounded-3xl bg-[#1c1311] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#362723]">
-              <div class="space-y-1.5 z-10 text-left">
+            <div class="shrink-0 w-[290px] sm:w-[360px] md:w-[420px] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-[#1c1311] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#362723]">
+              <div class="space-y-1.5 z-10 text-left min-w-0">
                 <div class="inline-flex items-center gap-1.5 bg-[#d08e1c]/20 px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-[#d08e1c]">
                   <span class="material-symbols-outlined text-xs">verified</span>
                   <span>${isMm ? 'စနစ်ဆိုင်ရာ အသိပေးချက်' : 'System Announcement'}</span>
                 </div>
-                <h3 class="font-headline text-lg sm:text-xl font-extrabold text-[#e8dfd8] leading-tight">
+                <h3 class="font-headline text-base sm:text-lg lg:text-xl font-extrabold text-[#e8dfd8] leading-tight">
                   ${isMm ? 'ဗဟန်း၊ ဒဂုံ၊ မြို့ထဲတွင် Instant Pass စတင်ပါပြီ' : 'Instant Table Confirmation Enabled in Yangon'}
                 </h3>
-                <p class="font-body text-xs text-[#bcaaa4]">
+                <p class="font-body text-xs text-[#bcaaa4] line-clamp-2 sm:line-clamp-none">
                   ${isMm ? 'စောင့်ဆိုင်းရန် မလိုဘဲ စားပွဲဝိုင်းများကို ချက်ချင်းအတည်ပြုပေးပါသည်' : 'No phone calls needed. Receive instant QR entry pass right on your phone.'}
                 </p>
               </div>
-              <button data-nav-tab="resultlist" class="shrink-0 bg-[#d08e1c] text-white px-4 py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-[#b07616] transition-colors shadow-md cursor-pointer z-10">
+              <button data-nav-tab="resultlist" class="shrink-0 bg-[#d08e1c] text-white px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-[#b07616] transition-colors shadow-md cursor-pointer z-10 whitespace-nowrap">
                 ${isMm ? 'စိုတ်ယူရန်' : 'Book Table'}
               </button>
             </div>
@@ -307,21 +308,21 @@
         <!-- CURATED COLLECTIONS -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <!-- Header Centered -->
-          <div class="max-w-2xl mx-auto mb-10 text-center">
+          <div class="max-w-2xl mx-auto mb-6 lg:mb-10 text-center">
             <h2 class="font-headline text-3xl sm:text-4xl font-extrabold text-[#231916]">
               ${isMm ? 'အထူး စုစည်းမှုများ' : 'Curated Collections'}
             </h2>
-            <p class="font-body text-sm sm:text-base text-[#58413f] mt-2">
+            <p class="font-body text-sm sm:text-base text-[#58413f] mt-2 hidden lg:block">
               ${isMm ? 'အစီအစဉ်အမျိုးမျိုးအတွက် အထူးသီးသန့် ရွေးချယ်ပေးထားသော စားသောက်ဆိုင်များ' : 'Hand-picked selections by our editors for every special occasion.'}
             </p>
           </div>
 
           <!-- Cards Grid / Horizontal Scroll for Mobile & Tablet -->
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-6 sm:gap-8 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pb-3 lg:pb-0">
             ${COLLECTIONS_DATA.map(col => `
               <div
                 data-collection-target="${col.targetRestaurantId}"
-                class="shrink-0 w-72 sm:w-80 md:w-96 lg:w-auto snap-start group relative h-96 sm:h-[400px] rounded-[28px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-6 sm:p-8 text-left text-white"
+                class="shrink-0 w-[280px] h-[160px] sm:w-[320px] sm:h-[180px] lg:w-auto lg:h-[400px] snap-start group relative rounded-2xl lg:rounded-[28px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-4 sm:p-5 lg:p-8 text-left text-white"
               >
                 <img
                   src="${col.image}"
@@ -335,14 +336,14 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
                 <!-- Card Content -->
-                <div class="relative z-10 space-y-1">
-                  <div class="font-label text-xs font-extrabold uppercase tracking-widest text-[#D08E1C]">
+                <div class="relative z-10 space-y-0.5 lg:space-y-1">
+                  <div class="font-label text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[#D08E1C]">
                     ${isMm ? col.categoryTagMM : col.categoryTag}
                   </div>
-                  <h3 class="font-headline text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                  <h3 class="font-headline text-lg sm:text-xl lg:text-3xl font-extrabold text-white leading-tight line-clamp-1 lg:line-clamp-none">
                     ${isMm ? col.titleMM : col.title}
                   </h3>
-                  <p class="font-body text-xs sm:text-sm text-white/80 line-clamp-2">
+                  <p class="font-body text-[11px] sm:text-xs text-white/80 line-clamp-1 lg:line-clamp-2">
                     ${isMm ? col.subtitleMM : col.subtitle}
                   </p>
                 </div>
@@ -365,7 +366,7 @@
 
         <!-- TRENDING VENUES SECTION -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div class="flex justify-between items-end mb-6">
+          <div class="flex justify-between items-end mb-4 lg:mb-6">
             <div>
               <div class="inline-flex items-center gap-1.5 bg-[#840f16]/10 text-[#840f16] px-3 py-1 rounded-full text-xs font-label font-bold uppercase tracking-wider mb-2 border border-[#840f16]/20">
                 <span class="material-symbols-outlined text-sm">trending_up</span>
@@ -374,7 +375,7 @@
               <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916]">
                 ${isMm ? 'ရေပန်းစားသော စားသောက်ဆိုင်များ' : 'Trending Venues'}
               </h2>
-              <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1">
+              <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1 hidden lg:block">
                 ${isMm ? 'လက်ရှိ လူကြိုက်များပြီး စိုတ်ယူမှု အများဆုံး စားသောက်ဆိုင်များ' : 'Top trending dining destinations curated dynamically based on user bookings and high ratings.'}
               </p>
             </div>
@@ -387,17 +388,17 @@
             </button>
           </div>
 
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-6 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-4 sm:gap-6 pb-3 lg:pb-0">
             ${popularRestaurants.slice(0, 4).map(r => {
               const rawStart = r.priceRange ? r.priceRange.split('-')[0].trim() : '150,000 MMK';
               const fitPrice = rawStart.endsWith('MMK') ? rawStart : `${rawStart} MMK`;
               return `
               <div
                 data-card-select-id="${r.id}"
-                class="shrink-0 w-64 sm:w-72 md:w-80 lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
+                class="shrink-0 w-[220px] sm:w-[240px] lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-2xl lg:rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
               >
                 <!-- Image Container -->
-                <div class="relative h-48 overflow-hidden">
+                <div class="relative h-36 sm:h-40 lg:h-48 overflow-hidden">
                   <img
                     src="${r.heroImage}"
                     alt="${r.name}"
@@ -413,23 +414,23 @@
                 </div>
 
                 <!-- Card Content Area -->
-                <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
-                  <div class="space-y-1.5">
+                <div class="p-3.5 sm:p-4 lg:p-5 flex-1 flex flex-col justify-between space-y-2 lg:space-y-3">
+                  <div class="space-y-1">
                     <!-- Venue Name / Location -->
-                    <div class="flex items-center gap-1 text-xs font-label font-bold text-[#840f16] uppercase tracking-wider">
+                    <div class="flex items-center gap-1 text-[11px] sm:text-xs font-label font-bold text-[#840f16] uppercase tracking-wider">
                       <span class="material-symbols-outlined text-sm">location_on</span>
                       <span class="truncate">${r.location || r.area}</span>
                     </div>
 
                     <!-- Restaurant Name -->
-                    <h3 class="font-headline text-lg sm:text-xl font-bold text-[#231916] group-hover:text-[#840f16] transition-colors leading-snug line-clamp-1">
+                    <h3 class="font-headline text-base sm:text-lg lg:text-xl font-bold text-[#231916] group-hover:text-[#840f16] transition-colors leading-snug line-clamp-1">
                       ${r.name}
                     </h3>
                   </div>
 
                   <!-- Price Row -->
                   <div class="pt-2 border-t border-[#EADFD1] flex items-center justify-between">
-                    <span class="font-label text-xs text-[#58413f]">${isMm ? 'စျေးနှုန်း' : 'Price'}</span>
+                    <span class="font-label text-[10px] sm:text-xs text-[#58413f]">${isMm ? 'စျေးနှုန်း' : 'Price'}</span>
                     <span class="font-label text-xs font-bold text-[#231916]">${fitPrice}</span>
                   </div>
                 </div>
@@ -442,20 +443,20 @@
 
         <!-- FEATURED VENUES GRID (အကြံပြုထားသောဆိုင်များ) -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div class="flex justify-between items-end mb-6">
+          <div class="flex justify-between items-end mb-4 lg:mb-6">
             <div>
               <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916]">
-                ${isMm ? 'အကြံပြုထားသော စားသောက်ဆိုင်များ' : 'Featured Recommended Shops'}
+                ${isMm ? 'အကြံပြုစားသောက်ဆိုင်များ' : 'Recommended Shops'}
               </h2>
-              <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1">
+              <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1 hidden lg:block">
                 ${isMm ? 'စနစ်မှ အထူးအကြံပြုထားသော စားသောက်ဆိုင်များ' : 'Hand-picked dining recommendations with instant table booking.'}
               </p>
             </div>
           </div>
 
-          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-8 pb-4 lg:pb-0">
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-6 sm:gap-8 pb-4 lg:pb-0">
             ${RESTAURANTS_DATA.map(restaurant => `
-              <div class="shrink-0 w-[290px] sm:w-[340px] md:w-[380px] lg:w-auto snap-start flex">
+              <div class="shrink-0 w-[240px] sm:w-[260px] md:w-[280px] lg:w-auto snap-start flex">
                 ${renderRestaurantCard(restaurant, state)}
               </div>
             `).join('')}
