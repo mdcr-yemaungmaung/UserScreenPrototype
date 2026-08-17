@@ -236,11 +236,11 @@
             </button>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-4 sm:gap-6 pb-2 lg:pb-0">
             ${CUISINES_DATA.map(c => `
               <button
                 data-cuisine-filter="${c.name}"
-                class="group bg-[#FBF3E2] p-4 rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-left flex items-center gap-4 cursor-pointer"
+                class="shrink-0 w-60 sm:w-68 lg:w-auto snap-start group bg-[#FBF3E2] p-4 rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-left flex items-center gap-4 cursor-pointer"
               >
                 <div class="w-14 h-14 rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0">
                   <img src="${c.image}" alt="${c.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
@@ -316,12 +316,12 @@
             </p>
           </div>
 
-          <!-- Cards Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Cards Grid / Horizontal Scroll for Mobile & Tablet -->
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-6 sm:gap-8 pb-3 lg:pb-0">
             ${COLLECTIONS_DATA.map(col => `
               <div
                 data-collection-target="${col.targetRestaurantId}"
-                class="group relative h-96 sm:h-[400px] rounded-[28px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-6 sm:p-8 text-left text-white"
+                class="shrink-0 w-72 sm:w-80 md:w-96 lg:w-auto snap-start group relative h-96 sm:h-[400px] rounded-[28px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-6 sm:p-8 text-left text-white"
               >
                 <img
                   src="${col.image}"
@@ -387,14 +387,14 @@
             </button>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-4 gap-6 pb-3 lg:pb-0">
             ${popularRestaurants.slice(0, 4).map(r => {
               const rawStart = r.priceRange ? r.priceRange.split('-')[0].trim() : '150,000 MMK';
               const fitPrice = rawStart.endsWith('MMK') ? rawStart : `${rawStart} MMK`;
               return `
               <div
                 data-card-select-id="${r.id}"
-                class="group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
+                class="shrink-0 w-64 sm:w-72 md:w-80 lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
               >
                 <!-- Image Container -->
                 <div class="relative h-48 overflow-hidden">
@@ -453,8 +453,12 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            ${RESTAURANTS_DATA.map(restaurant => renderRestaurantCard(restaurant, state)).join('')}
+          <div class="mobile-horizontal-scroll lg:grid lg:grid-cols-3 gap-8 pb-4 lg:pb-0">
+            ${RESTAURANTS_DATA.map(restaurant => `
+              <div class="shrink-0 w-[290px] sm:w-[340px] md:w-[380px] lg:w-auto snap-start flex">
+                ${renderRestaurantCard(restaurant, state)}
+              </div>
+            `).join('')}
           </div>
         </section>
 

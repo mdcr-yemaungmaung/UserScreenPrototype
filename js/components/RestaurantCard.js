@@ -9,7 +9,7 @@
     const isMm = state.currentLanguage === 'MM';
 
     return `
-      <div class="luxe-card group relative bg-[#FFF9EE] rounded-[28px] border border-[#EADFD1] overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-left">
+      <div class="w-full luxe-card group relative bg-[#FFF9EE] rounded-[28px] border border-[#EADFD1] overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-left">
         
         <!-- Card Image & Floating Badges -->
         <div class="relative h-56 overflow-hidden cursor-pointer" data-card-select-id="${restaurant.id}">

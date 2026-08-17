@@ -573,3 +573,32 @@ textarea {
   font-weight: 700;
 }
 
+/* =========================================================================
+   MOBILE & TABLET HORIZONTAL SCROLL FOR HOME SECTIONS
+   ========================================================================= */
+.mobile-horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+  padding-bottom: 0.75rem;
+}
+
+.mobile-horizontal-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@media (min-width: 1024px) {
+  .mobile-horizontal-scroll {
+    display: grid;
+    overflow-x: visible;
+    overflow-y: visible;
+    scroll-snap-type: none;
+    padding-bottom: 0;
+  }
+}
+
+

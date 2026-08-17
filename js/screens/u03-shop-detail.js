@@ -144,7 +144,7 @@
                     : 'text-[#58413f] hover:text-[#231916]'
                 }"
               >
-                ${isMm ? 'ဆိုင်အချက်အလက်များနှင့် အငွေ့အသက်' : 'Overview & Atmosphere'}
+                ${isMm ? 'ဆိုင်အချက်အလက်' : 'Overview'}
               </button>
 
               <button
@@ -155,7 +155,7 @@
                     : 'text-[#58413f] hover:text-[#231916]'
                 }"
               >
-                ${isMm ? 'အစားအစာ မီနူးများ' : 'Food Menus'}
+                ${isMm ? 'မီနူးများ' : 'Menus'}
               </button>
 
               <button
@@ -166,7 +166,7 @@
                     : 'text-[#58413f] hover:text-[#231916]'
                 }"
               >
-                ${isMm ? 'သုံးစွဲသူများ၏ ထင်မြင်ချက်များ' : 'Guest Reviews'}
+                ${isMm ? 'ထင်မြင်ချက်များ' : 'Reviews'}
               </button>
             </div>
 
@@ -175,14 +175,6 @@
               detailState.activeTab === 'overview'
                 ? `
                 <div class="space-y-8 animate-fadeIn">
-                  <!-- Shop Description -->
-                  <div class="space-y-3">
-                    <h3 class="font-headline text-xl font-bold text-[#231916]">${isMm ? 'ဆိုင်အကြောင်း မိတ်ဆက်' : 'Shop Overview'}</h3>
-                    <p class="font-body text-sm text-[#58413f] leading-relaxed">
-                      ${restaurant.description} Every dish is orchestrated to honor tradition while offering guests a refined dining experience in Yangon.
-                    </p>
-                  </div>
-
                   <!-- Facilities & Amenities Icons (အဆောက်အအုံနှင့် ဝန်ဆောင်မှုဆိုင်ရာ အိုင်ကွန်များ) -->
                   <div class="space-y-3 pt-2">
                     <h3 class="font-headline text-xl font-bold text-[#231916]">
@@ -270,20 +262,6 @@
                     </div>
 
                     <div class="bg-[#FBF3E2] p-4 sm:p-5 rounded-3xl border border-[#EADFD1] space-y-4">
-                      <div class="flex items-start gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0 mt-0.5">
-                          <span class="material-symbols-outlined text-xl">location_on</span>
-                        </div>
-                        <div class="space-y-1">
-                          <div class="font-headline text-base font-bold text-[#231916]">
-                            ${restaurant.name}
-                          </div>
-                          <p class="font-body text-xs sm:text-sm text-[#58413f]">
-                            ${restaurant.address}
-                          </p>
-                        </div>
-                      </div>
-
                       <!-- Interactive Embedded Google Map -->
                       <div class="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-[#EADFD1] shadow-inner bg-[#f0e8d8]">
                         <iframe
