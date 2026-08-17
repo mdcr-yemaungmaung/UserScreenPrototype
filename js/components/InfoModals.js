@@ -320,16 +320,146 @@
       `;
     }
 
+    if (activeModal === 'pwa_install' || (window.PwaManager && window.PwaManager.showInstallModal)) {
+      const isIos = window.PwaManager ? window.PwaManager.isIos() : false;
+      const canPrompt = window.PwaManager ? window.PwaManager.canPromptInstall() : false;
+
+      return `
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn text-left">
+          <div class="bg-[#FFF7E8] border border-[#EADFD1] rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
+            
+            <button id="close-pwa-modal-btn" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#FBF3E2] border border-[#EADFD1] flex items-center justify-center text-[#58413f] hover:text-[#840f16] cursor-pointer">
+              <span class="material-symbols-outlined text-lg">close</span>
+            </button>
+
+            <!-- App Badge & Header -->
+            <div class="space-y-3">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#840f16] to-[#231916] p-0.5 shadow-md flex items-center justify-center">
+                <div class="w-full h-full rounded-[14px] bg-[#840f16] flex items-center justify-center text-white">
+                  <span class="material-symbols-outlined text-2xl">restaurant</span>
+                </div>
+              </div>
+
+              <div>
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#840f16]/10 text-[#840f16] font-label text-[10px] font-bold uppercase tracking-wider mb-1">
+                  Progressive Web App (PWA)
+                </span>
+                <h3 class="font-headline text-2xl font-extrabold text-[#231916]">
+                  ${isMm ? 'Yoyaku အက်ပ်ကို ထည့်သွင်းပါ' : 'Install Yoyaku App'}
+                </h3>
+                <p class="font-body text-xs text-[#58413f] mt-1 leading-relaxed">
+                  ${
+                    isMm
+                      ? 'ဖုန်းတွင် အက်ပ်အနေဖြင့် ထည့်သွင်းထားပါက အင်တာနက် မရှိချိန်တွင်လည်း သင်၏ QR Pass နှင့် စားပွဲဝိုင်းများကို အချိန်မရွေး ကြည့်ရှုနိုင်ပါသည်'
+                      : 'Get full-screen speed, instant table booking, and offline access to all your confirmed dining QR passes.'
+                  }
+                </p>
+              </div>
+            </div>
+
+            <!-- Highlights -->
+            <div class="space-y-2.5 bg-[#FFF8F6] p-4 rounded-2xl border border-[#EADFD1]">
+              <div class="flex items-center gap-3 text-xs text-[#231916]">
+                <span class="material-symbols-outlined text-[#840f16] text-base shrink-0">offline_pin</span>
+                <span class="font-bold">${isMm ? 'အော့ဖ်လိုင်း QR Pass ရယူနိုင်ခြင်း' : 'Offline Access to QR Dining Passes'}</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-[#231916]">
+                <span class="material-symbols-outlined text-[#840f16] text-base shrink-0">speed</span>
+                <span class="font-bold">${isMm ? 'လျင်မြန် ချောမွေ့သော မျက်နှာပြင်' : 'Instant Loading & Fullscreen Experience'}</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-[#231916]">
+                <span class="material-symbols-outlined text-[#840f16] text-base shrink-0">notifications_active</span>
+                <span class="font-bold">${isMm ? 'ဘွတ်ကင် အချိန်မီ သတိပေးချက်များ' : 'Real-Time Table Reminder Alerts'}</span>
+              </div>
+            </div>
+
+            <!-- Install Instructions / Action -->
+            ${
+              canPrompt
+                ? `
+              <button
+                type="button"
+                id="pwa-prompt-install-action-btn"
+                class="w-full py-3.5 bg-[#840f16] hover:bg-[#680b11] text-white rounded-2xl font-label text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer"
+              >
+                <span class="material-symbols-outlined text-lg">download</span>
+                <span>${isMm ? 'ဖုန်းတွင် အက်ပ် ထည့်သွင်းမည်' : 'Install Yoyaku App Now'}</span>
+              </button>
+            `
+                : isIos
+                  ? `
+              <div class="p-4 rounded-2xl bg-[#FBF3E2] border border-[#EADFD1] space-y-3">
+                <div class="font-headline font-bold text-xs text-[#231916] uppercase tracking-wider">
+                  ${isMm ? 'iOS Safari တွင် ထည့်သွင်းနည်း' : 'Instructions for iPhone / iPad'}
+                </div>
+                <div class="space-y-2 text-xs text-[#58413f]">
+                  <div class="flex items-start gap-2.5">
+                    <span class="w-5 h-5 rounded-full bg-[#840f16] text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
+                    <span>${isMm ? 'Safari ဘရောက်ဆာ အောက်ခြေရှိ <b>Share (မျှဝေရန်)</b> ခလုတ်ကို နှိပ်ပါ' : 'Tap the <b>Share</b> button <span class="material-symbols-outlined text-xs align-middle">ios_share</span> in Safari’s toolbar.'}</span>
+                  </div>
+                  <div class="flex items-start gap-2.5">
+                    <span class="w-5 h-5 rounded-full bg-[#840f16] text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
+                    <span>${isMm ? 'အောက်သို့ ဆွဲချပြီး <b>"Add to Home Screen"</b> ကို ရွေးချယ်ပါ' : 'Scroll down and tap <b>"Add to Home Screen"</b> <span class="material-symbols-outlined text-xs align-middle">add_box</span>.'}</span>
+                  </div>
+                </div>
+              </div>
+            `
+                  : `
+              <div class="p-4 rounded-2xl bg-[#FBF3E2] border border-[#EADFD1] space-y-2">
+                <div class="font-headline font-bold text-xs text-[#231916]">
+                  ${isMm ? 'ဘရောက်ဆာ ဆက်တင်မှ ထည့်သွင်းရန်' : 'Install via Browser Menu'}
+                </div>
+                <p class="font-body text-xs text-[#58413f] leading-relaxed">
+                  ${
+                    isMm
+                      ? 'ဘရောက်ဆာ၏ ညာဘက်အပေါ်ထောင့်ရှိ Menu (⋮) ကို နှိပ်ပြီး <b>"Install app"</b> သို့မဟုတ် <b>"Add to Home screen"</b> ကို ရွေးချယ်ပါ'
+                      : 'Click the browser menu (⋮) and choose <b>"Install Yoyaku"</b> or <b>"Add to Home Screen"</b>.'
+                  }
+                </p>
+              </div>
+            `
+            }
+
+            <div class="text-center pt-1">
+              <button
+                type="button"
+                id="pwa-dismiss-modal-btn"
+                class="font-label text-xs font-bold text-[#8d7b75] hover:text-[#231916] cursor-pointer"
+              >
+                ${isMm ? 'နောက်မှ ပြုလုပ်မည်' : 'Maybe Later'}
+              </button>
+            </div>
+
+          </div>
+        </div>
+      `;
+    }
+
     return '';
   }
 
   function attachInfoModalsEvents(container = document) {
     // Close buttons
-    container.querySelectorAll('#close-info-modal').forEach(btn => {
+    container.querySelectorAll('#close-info-modal, #close-pwa-modal-btn, #pwa-dismiss-modal-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        if (window.PwaManager) {
+          window.PwaManager.closeInstallModal();
+        }
         store.closeInfoModal();
       });
     });
+
+    // PWA Prompt Install Button Action
+    const pwaPromptBtn = container.querySelector('#pwa-prompt-install-action-btn');
+    if (pwaPromptBtn) {
+      pwaPromptBtn.addEventListener('click', () => {
+        if (window.PwaManager) {
+          window.PwaManager.promptInstall();
+          window.PwaManager.closeInstallModal();
+        }
+        store.closeInfoModal();
+      });
+    }
 
     // Auth Submit
     const authForm = container.querySelector('#auth-form');

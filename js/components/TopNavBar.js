@@ -8,8 +8,17 @@
     const isMm = state.currentLanguage === 'MM';
     const isMyPageActive = state.activeTab === 'mypage';
     const unreadNotifsCount = state.myPageData.notifications.filter(n => n.isUnread).length;
+    const isOnline = window.PwaManager ? window.PwaManager.isOnline : true;
+    const isStandalone = window.PwaManager ? window.PwaManager.isStandalone : false;
 
     return `
+      ${!isOnline ? `
+        <div class="bg-[#231916] text-[#FBF3E2] px-4 py-2 text-center text-xs font-label font-bold flex items-center justify-center gap-2 border-b border-amber-500/40 z-50">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          <span class="material-symbols-outlined text-sm text-amber-400">cloud_off</span>
+          <span>${isMm ? 'လိုင်းမရှိပါ (Offline Mode) — သင်၏ QR Pass နှင့် စိုတ်ယူထားမှုများကို ကြည့်ရှုနိုင်ပါသည်' : 'Offline Mode Active — Your saved bookings & QR passes remain available.'}</span>
+        </div>
+      ` : ''}
       <header class="sticky top-0 z-40 bg-[#FFF7E8]/95 backdrop-blur-md border-b border-[#EADFD1] transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           
@@ -18,12 +27,15 @@
             <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#840f16] to-[#a52a2a] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
               <span class="material-symbols-outlined text-2xl font-bold">restaurant</span>
             </div>
-            <span class="font-headline text-2xl font-extrabold tracking-tight text-[#231916]">
-              Yoyaku
-            </span>
+            <div>
+              <span class="font-headline text-2xl font-extrabold tracking-tight text-[#231916] block leading-none">
+                Yoyaku
+              </span>
+              <span class="font-label text-[9px] tracking-widest text-[#8d7b75] uppercase block mt-1">
+                Myanmar Dining
+              </span>
+            </div>
           </button>
-
-
 
           <!-- Header Actions: Owner Link, Check Booking, Language & Auth -->
           <div class="flex items-center gap-2 sm:gap-3">
@@ -196,7 +208,9 @@
     const checkBtn = document.getElementById('nav-check-booking-link');
     if (checkBtn) {
       checkBtn.addEventListener('click', () => {
-        store.openInfoModal('check_guest_booking');
+        store.setSelectedRestaurant(null);
+        store.setLoginTab('lookup');
+        store.setActiveTab('login');
       });
     }
 
@@ -212,14 +226,20 @@
     const loginBtn = document.getElementById('nav-login-btn');
     if (loginBtn) {
       loginBtn.addEventListener('click', () => {
-        store.openInfoModal('auth');
+        store.setSelectedRestaurant(null);
+        store.setLoginTab('login');
+        store.setActiveTab('login');
       });
     }
 
     const signupBtn = document.getElementById('nav-signup-btn');
     if (signupBtn) {
       signupBtn.addEventListener('click', () => {
-        store.openInfoModal('auth');
+        store.setSelectedRestaurant(null);
+        store.setLoginTab('login');
+        store.toggleEmailLoginForm(true);
+        store.setLoginField('showSignUp', true);
+        store.setActiveTab('login');
       });
     }
 

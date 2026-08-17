@@ -1,6 +1,6 @@
 {
   "name": "EzBookNow User Screen Prototypes",
-  "description": "Interactive restaurant discovery and table reservation prototype",
+  "description": "Yoyaku - Interactive restaurant discovery, table reservations, and PWA mobile dining passes for Yangon",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -216,7 +216,29 @@
         },
 
         // QR Pass Inspection Modal
-        inspectedPassBooking: null
+        inspectedPassBooking: null,
+
+        // Login & Reservation Lookup State (U-10)
+        loginState: {
+          activeTab: 'login', // 'login' | 'lookup'
+          isEmailFormExpanded: false,
+          email: '',
+          password: '',
+          showPassword: false,
+          rememberMe: true,
+          lookupResNo: '',
+          lookupPhone: '',
+          lookupResult: null,
+          isLoading: false,
+          loadingAction: null, // 'google' | 'facebook' | 'email' | 'lookup'
+          errorType: 'none', // 'none' | 'credentials' | 'locked' | 'suspended' | 'ratelimit' | 'lookup_notfound'
+          errorMessage: null,
+          showForgotPassword: false,
+          resetEmailSent: false,
+          resetEmail: '',
+          showSignUp: false,
+          isGuestFlow: false
+        }
       };
 
       this.listeners = [];
@@ -631,6 +653,160 @@
       });
       this.showToast(`🔔 [Web Push] ${testTitle}: ${testMsg}`);
       this.notify();
+    }
+
+    // Login & Lookup Methods (U-10)
+    setLoginTab(tab) {
+      this.state.loginState.activeTab = tab;
+      this.state.loginState.errorType = 'none';
+      this.state.loginState.errorMessage = null;
+      this.notify();
+    }
+
+    toggleEmailLoginForm(forceValue) {
+      this.state.loginState.isEmailFormExpanded = forceValue !== undefined ? forceValue : !this.state.loginState.isEmailFormExpanded;
+      this.notify();
+    }
+
+    setLoginField(field, value) {
+      this.state.loginState[field] = value;
+      this.notify();
+    }
+
+    setLoginError(typeOrMsg, maybeMsg) {
+      if (maybeMsg !== undefined) {
+        this.state.loginState.errorType = typeOrMsg;
+        this.state.loginState.errorMessage = maybeMsg;
+      } else {
+        this.state.loginState.errorType = 'error';
+        this.state.loginState.errorMessage = typeOrMsg;
+      }
+      this.state.loginState.isLoading = false;
+      this.state.loginState.loadingAction = null;
+      this.notify();
+    }
+
+    clearLoginError() {
+      this.state.loginState.errorType = 'none';
+      this.state.loginState.errorMessage = null;
+      this.notify();
+    }
+
+    executeSocialLogin(provider) {
+      this.state.loginState.isLoading = true;
+      this.state.loginState.loadingAction = provider;
+      this.notify();
+
+      setTimeout(() => {
+        this.state.loginState.isLoading = false;
+        this.state.loginState.loadingAction = null;
+        this.state.isAuthenticated = true;
+        this.state.myPageData.authProvider = provider;
+        this.state.myPageData.userName = provider === 'facebook' ? 'Alex Aung (FB)' : 'Alex Aung (Google)';
+        this.state.myPageData.userEmail = provider === 'facebook' ? 'alex.fb@example.com' : 'alex.google@gmail.com';
+        
+        // If guest flow was active, resume booking, else navigate to mypage
+        if (this.state.loginState.isGuestFlow && this.state.bookingModalState.restaurant) {
+          this.state.bookingModalState.isOpen = true;
+        } else {
+          this.setActiveTab('mypage');
+        }
+        
+        const isMm = this.state.currentLanguage === 'MM';
+        this.showToast(isMm ? `${provider === 'facebook' ? 'Facebook' : 'Google'} ဖြင့် အောင်မြင်စွာ ဝင်ရောက်ပြီးပါပြီ` : `Signed in with ${provider === 'facebook' ? 'Facebook' : 'Google'}!`);
+      }, 700);
+    }
+
+    executeEmailLogin(email, password) {
+      this.state.loginState.isLoading = true;
+      this.state.loginState.loadingAction = 'email';
+      this.notify();
+
+      setTimeout(() => {
+        this.state.loginState.isLoading = false;
+        this.state.loginState.loadingAction = null;
+        const cleanEmail = (email || '').trim().toLowerCase();
+
+        // Security / Demo error conditions
+        if (cleanEmail.includes('locked')) {
+          const isMm = this.state.currentLanguage === 'MM';
+          this.setLoginError('locked', isMm ? 'အကြိမ်ကြိမ် မှားယွင်းမှုကြောင့် အကောင့်ကို ယာယီပိတ်ထားပါသည်။ ၁၅ မိနစ်အကြာတွင် ပြန်လည်ကြိုးစားပါ။' : 'Account temporarily locked due to failed attempts. Please try again in 15 minutes.');
+          return;
+        }
+        if (cleanEmail.includes('suspend')) {
+          const isMm = this.state.currentLanguage === 'MM';
+          this.setLoginError('suspended', isMm ? 'သင့်အကောင့်ကို ရပ်ဆိုင်းထားပါသည်။ ကျေးဇူးပြု၍ စီမံခန့်ခွဲသူထံ ဆက်သွယ်ပါ။' : 'Your account has been suspended. Please contact us.');
+          return;
+        }
+        if (cleanEmail.includes('rate')) {
+          const isMm = this.state.currentLanguage === 'MM';
+          this.setLoginError('ratelimit', isMm ? 'ကြိုးစားမှု အကြိမ်ရေ များလွန်းနေပါသည်။ ခဏအကြာမှ ထပ်မံကြိုးစားပါ။' : 'Too many attempts. Please try again later.');
+          return;
+        }
+        if (!cleanEmail.includes('@') || !cleanEmail.includes('.') || (password || '').length < 6) {
+          const isMm = this.state.currentLanguage === 'MM';
+          this.setLoginError('credentials', isMm ? 'အီးမေးလ် သို့မဟုတ် စကားဝှက် မှားယွင်းနေပါသည်' : 'Email address or password is incorrect');
+          return;
+        }
+
+        // Successful authentication
+        this.state.isAuthenticated = true;
+        this.state.myPageData.authProvider = 'email';
+        this.state.myPageData.userEmail = cleanEmail;
+        this.state.myPageData.userName = cleanEmail.split('@')[0] || 'alex';
+        this.state.loginState.errorType = 'none';
+        this.state.loginState.errorMessage = null;
+
+        if (this.state.loginState.isGuestFlow && this.state.bookingModalState.restaurant) {
+          this.state.bookingModalState.isOpen = true;
+        } else {
+          this.setActiveTab('mypage');
+        }
+
+        const isMm = this.state.currentLanguage === 'MM';
+        this.showToast(isMm ? 'အောင်မြင်စွာ အကောင့်ဝင်ပြီးပါပြီ' : 'Logged in successfully!');
+      }, 750);
+    }
+
+    executeLookupReservation(resNo, phone) {
+      this.state.loginState.isLoading = true;
+      this.state.loginState.loadingAction = 'lookup';
+      this.notify();
+
+      setTimeout(() => {
+        this.state.loginState.isLoading = false;
+        this.state.loginState.loadingAction = null;
+        const cleanResNo = (resNo || '').replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+        const cleanPhone = (phone || '').replace(/[^0-9]/g, '');
+
+        if (!cleanResNo || !cleanPhone) {
+          const isMm = this.state.currentLanguage === 'MM';
+          this.setLoginError('lookup_notfound', isMm ? 'ဘွတ်ကင်နံပါတ် သို့မဟုတ် ဖုန်းနံပါတ် မကိုက်ညီပါ။' : 'Reservation number or phone number does not match.');
+          return;
+        }
+
+        // Match against existing bookings
+        const match = this.state.reservations.find(r => {
+          const rNo = (r.reservationNo || r.id || '').replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+          const rPh = (r.guestPhone || '').replace(/[^0-9]/g, '');
+          const noMatches = rNo === cleanResNo || cleanResNo.includes(rNo) || rNo.includes(cleanResNo) || cleanResNo.endsWith('001') || cleanResNo.endsWith('k7m2qx');
+          const phMatches = rPh.endsWith(cleanPhone.slice(-7)) || cleanPhone.endsWith(rPh.slice(-7)) || cleanPhone.includes('791234567');
+          return noMatches && phMatches;
+        });
+
+        if (match || cleanResNo.includes('k7m2qx') || cleanResNo.includes('001')) {
+          this.state.loginState.lookupResult = match || this.state.reservations[0];
+          this.state.loginState.errorType = 'none';
+          this.state.loginState.errorMessage = null;
+          const isMm = this.state.currentLanguage === 'MM';
+          this.showToast(isMm ? 'ဘွတ်ကင် အချက်အလက် တွေ့ရှိပါသည်' : 'Reservation found!');
+        } else {
+          this.state.loginState.lookupResult = null;
+          const isMm = this.state.currentLanguage === 'MM';
+          this.setLoginError('lookup_notfound', isMm ? 'ဘွတ်ကင်နံပါတ် သို့မဟုတ် ဖုန်းနံပါတ် မကိုက်ညီပါ။' : 'Reservation number or phone number does not match.');
+        }
+        this.notify();
+      }, 700);
     }
   }
 

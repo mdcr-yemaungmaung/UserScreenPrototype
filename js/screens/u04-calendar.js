@@ -25,7 +25,7 @@
     ];
 
     return `
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 text-left animate-fadeIn">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-4 sm:pt-8 pb-28 sm:pb-12 space-y-6 text-left animate-fadeIn">
         
         <!-- STEPPER PROGRESS BAR -->
         <div class="bg-[#FFF8EE] border border-[#EADFD1] rounded-2xl p-4 sm:p-5 shadow-2xs">

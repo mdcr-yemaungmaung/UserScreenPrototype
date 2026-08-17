@@ -1,6 +1,6 @@
 (() => {
   const store = window.store;
-  const { renderTopNavBar, attachTopNavBarEvents, renderBottomNavBar, attachBottomNavBarEvents, renderFooter, attachFooterEvents, renderDiscoverView, attachDiscoverViewEvents, renderResultListView, attachResultListViewEvents, renderRestaurantDetailView, attachRestaurantDetailViewEvents, renderBookingStep1, attachBookingStep1Events, renderBookingStep2, attachBookingStep2Events, renderBookingStep3, attachBookingStep3Events, renderBookingStep4, attachBookingStep4Events, renderReservationsListView, attachReservationsListViewEvents, renderFavoritesView, attachFavoritesViewEvents, renderCuratedView, attachCuratedViewEvents, renderMyPageView, attachMyPageViewEvents, renderInfoModals, attachInfoModalsEvents, renderToast } = window.YoyakuComponents;
+  const { renderTopNavBar, attachTopNavBarEvents, renderBottomNavBar, attachBottomNavBarEvents, renderFooter, attachFooterEvents, renderDiscoverView, attachDiscoverViewEvents, renderResultListView, attachResultListViewEvents, renderRestaurantDetailView, attachRestaurantDetailViewEvents, renderBookingStep1, attachBookingStep1Events, renderBookingStep2, attachBookingStep2Events, renderBookingStep3, attachBookingStep3Events, renderBookingStep4, attachBookingStep4Events, renderReservationsListView, attachReservationsListViewEvents, renderFavoritesView, attachFavoritesViewEvents, renderCuratedView, attachCuratedViewEvents, renderMyPageView, attachMyPageViewEvents, renderLoginView, attachLoginViewEvents, renderInfoModals, attachInfoModalsEvents, renderToast } = window.YoyakuComponents;
 
 
 
@@ -63,12 +63,41 @@
         case 'mypage':
           mainContentHtml = renderMyPageView(state);
           break;
+        case 'login':
+          mainContentHtml = renderLoginView(state);
+          break;
         default:
           mainContentHtml = renderDiscoverView(state);
       }
     }
 
+    const isLoginPage = !state.bookingModalState.isOpen && !state.selectedRestaurant && state.activeTab === 'login';
+
     // Full Shell Assembly
+    if (isLoginPage) {
+      root.innerHTML = `
+        <div class="min-h-screen w-full bg-[#F8F4EC] flex items-center justify-center">
+          <!-- Main Body Container -->
+          <main class="w-full flex items-center justify-center">
+            ${mainContentHtml}
+          </main>
+
+          <!-- Toast Overlay -->
+          ${renderToast(state)}
+
+          <!-- Info & Auth Modals Overlay -->
+          ${renderInfoModals(state)}
+        </div>
+      `;
+
+      window.YoyakuPrototype.enhanceRuntime(root);
+
+      // Attach Login & Modal Event Handlers
+      attachLoginViewEvents(root);
+      attachInfoModalsEvents(root);
+      return;
+    }
+
     root.innerHTML = `
       <div class="min-h-screen flex flex-col justify-between pb-20 md:pb-0">
         
@@ -135,6 +164,9 @@
           break;
         case 'mypage':
           attachMyPageViewEvents(root);
+          break;
+        case 'login':
+          attachLoginViewEvents(root);
           break;
       }
     }

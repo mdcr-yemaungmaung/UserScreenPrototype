@@ -114,10 +114,65 @@
         </div>
 
         <!-- MAIN DUAL-COLUMN GRID -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          <!-- LEFT SIDEBAR -->
-          <div class="lg:col-span-4 xl:col-span-3 bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-6 space-y-6 shadow-sm">
+          <!-- MOBILE COMPACT PROFILE & HORIZONTAL MENU (VISIBLE ON MOBILE & TABLET) -->
+          <div class="lg:hidden space-y-4">
+            <!-- Mobile User Profile Bar -->
+            <div class="bg-[#FBF3E2] rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between shadow-xs">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-11 h-11 rounded-2xl bg-[#840f16] text-white flex items-center justify-center font-headline font-bold text-base shadow-xs shrink-0 uppercase">
+                  ${(myData.userName || 'A').charAt(0)}
+                </div>
+                <div class="space-y-0.5 min-w-0">
+                  <div class="flex items-center gap-2">
+                    <h2 class="font-headline font-bold text-sm text-[#231916] truncate">
+                      ${isMm ? (myData.userNameMM || myData.userName || 'alex') : (myData.userName || 'alex')}
+                    </h2>
+                    <span class="inline-flex items-center gap-0.5 bg-[#D08E1C]/15 text-[#8f5d0b] border border-[#D08E1C]/30 text-[9px] font-label font-bold uppercase tracking-wider px-2 py-0.2 rounded-full shrink-0">
+                      VIP
+                    </span>
+                  </div>
+                  <p class="font-body text-[11px] text-[#58413f] truncate">
+                    ${myData.userEmail || 'alex@example.com'}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                data-mypage-nav="logout"
+                class="p-2 rounded-xl text-[#840f16] hover:bg-[#840f16]/10 transition-colors cursor-pointer shrink-0"
+                title="${isMm ? 'အကောင့်ထွက်ရန်' : 'Logout'}"
+              >
+                <span class="material-symbols-outlined text-lg">logout</span>
+              </button>
+            </div>
+
+            <!-- Mobile Horizontal Scrolling Tab Navigation Bar -->
+            <div class="overflow-x-auto no-scrollbar flex items-center gap-2 pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+              ${menuItems
+                .map(item => {
+                  const isActive = activeMenu === item.id;
+                  return `
+                    <button
+                      data-mypage-nav="${item.id}"
+                      class="flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer min-h-[40px] ${
+                        isActive
+                          ? 'bg-[#840f16] text-white shadow-sm'
+                          : 'bg-[#FBF3E2] text-[#58413f] hover:text-[#231916] border border-[#EADFD1]'
+                      }"
+                    >
+                      <span class="material-symbols-outlined text-base">${item.icon}</span>
+                      <span>${item.label}</span>
+                    </button>
+                  `;
+                })
+                .join('')}
+            </div>
+          </div>
+
+          <!-- LEFT SIDEBAR (DESKTOP ONLY) -->
+          <div class="hidden lg:block lg:col-span-4 xl:col-span-3 bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-6 space-y-6 shadow-sm">
             
             <!-- User Profile Summary -->
             <div class="flex items-center gap-3.5 pb-4 border-b border-[#EADFD1]/80">
@@ -177,6 +232,29 @@
                   <span class="material-symbols-outlined text-lg">logout</span>
                   <span>${isMm ? 'အကောင့်ထွက်ရန်' : 'Logout'}</span>
                 </button>
+              </div>
+
+              <!-- PWA Install & Offline Badge -->
+              <div class="pt-3 border-t border-[#EADFD1]">
+                <div class="bg-[#FFF8F6] border border-[#EADFD1] rounded-2xl p-3.5 space-y-2 text-left">
+                  <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-lg bg-[#840f16] text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-sm">install_mobile</span>
+                    </div>
+                    <span class="font-headline font-bold text-xs text-[#231916]">${isMm ? 'Yoyaku PWA အက်ပ်' : 'Yoyaku Mobile PWA'}</span>
+                  </div>
+                  <p class="font-body text-[11px] text-[#58413f] leading-relaxed">
+                    ${isMm ? 'အော့ဖ်လိုင်း QR Pass နှင့် လျင်မြန်သော ဝိုင်းစိုတ်မှုအတွက် သင့်ဖုန်းတွင် ထည့်သွင်းပါ' : 'Instant offline passes and lightning-fast table reservations.'}
+                  </p>
+                  <button
+                    type="button"
+                    id="mypage-pwa-install-btn"
+                    class="w-full py-2 px-3 rounded-xl bg-[#840f16] hover:bg-[#680b11] text-white font-label text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs"
+                  >
+                    <span class="material-symbols-outlined text-sm">download</span>
+                    <span>${isMm ? 'အက်ပ် ထည့်သွင်းရန်' : 'Install App'}</span>
+                  </button>
+                </div>
               </div>
             </nav>
 
@@ -821,6 +899,18 @@
       });
     }
 
+    // PWA Install Button
+    const pwaInstallBtn = containerElement.querySelector('#mypage-pwa-install-btn');
+    if (pwaInstallBtn) {
+      pwaInstallBtn.addEventListener('click', () => {
+        if (window.PwaManager) {
+          window.PwaManager.promptInstall();
+        } else {
+          store.openInfoModal('pwa_install');
+        }
+      });
+    }
+
     // Sidebar navigation
     containerElement.querySelectorAll('[data-mypage-nav]').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -834,7 +924,10 @@
         } else if (navId === 'favorites') {
           store.setActiveTab('favorites');
         } else if (navId === 'logout') {
-          store.showToast('Logged out successfully.');
+          const isMm = store.getState().currentLanguage === 'MM';
+          store.toggleAuth(false);
+          store.setActiveTab('discover');
+          store.showToast(isMm ? 'အကောင့်ထွက်ပြီးပါပြီ' : 'Logged out successfully.');
         } else {
           store.setMyPageActiveMenu(navId);
           store.openMyPageModal(navId);

@@ -9,7 +9,7 @@
     const reservations = state.reservations;
 
     return `
-      <div class="space-y-8 pb-16 text-left max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="space-y-8 pb-28 sm:pb-16 text-left max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         
         <!-- HEADER -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#EADFD1] pb-6">

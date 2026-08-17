@@ -8,12 +8,14 @@
     const isMm = state.currentLanguage === 'MM';
     const reservationCount = state.reservations.length;
 
+    const isAuth = !!state.isAuthenticated;
+
     const items = [
       { id: 'discover', icon: 'explore', label: isMm ? 'ပင်မ' : 'Home' },
       { id: 'resultlist', icon: 'search', label: isMm ? 'ရှာဖွေရန်' : 'Search' },
       { id: 'reservations', icon: 'calendar_month', label: isMm ? 'စိုတ်ထားမှု' : 'Bookings', badge: reservationCount },
       { id: 'favorites', icon: 'favorite', label: isMm ? 'သိမ်းဆည်း' : 'Saved' },
-      { id: 'mypage', icon: 'person', label: isMm ? 'မိုင်ပေ့ချ်' : 'My Page' }
+      { id: isAuth ? 'mypage' : 'login', icon: isAuth ? 'person' : 'account_circle', label: isAuth ? (isMm ? 'မိုင်ပေ့ချ်' : 'My Page') : (isMm ? 'အကောင့်ဝင်' : 'Login') }
     ];
 
     return `
