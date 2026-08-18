@@ -457,7 +457,7 @@
 
           <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-4 lg:pb-0">
             ${RESTAURANTS_DATA.map(restaurant => `
-              <div class="shrink-0 w-[200px] sm:w-[260px] lg:w-auto snap-start flex">
+              <div class="shrink-0 w-[290px] sm:w-[340px] lg:w-auto snap-start flex">
                 ${renderRestaurantCard(restaurant, state)}
               </div>
             `).join('')}
