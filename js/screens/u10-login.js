@@ -709,7 +709,7 @@
     const openSignUpBtn = root.querySelector('#btn-open-signup-link');
     if (openSignUpBtn) {
       openSignUpBtn.addEventListener('click', () => {
-        store.setLoginField('showSignUp', true);
+        store.setActiveTab('register');
       });
     }
 

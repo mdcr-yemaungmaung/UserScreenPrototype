@@ -318,7 +318,7 @@
           </div>
 
           <!-- Cards Grid / Horizontal Scroll for Mobile & Tablet -->
-          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-3 lg:pb-0 h-[230px]">
             ${COLLECTIONS_DATA.map(col => `
               <div
                 data-collection-target="${col.targetRestaurantId}"
@@ -388,7 +388,7 @@
             </button>
           </div>
 
-          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-3 lg:pb-0">
             ${popularRestaurants.slice(0, 4).map(r => {
               const rawStart = r.priceRange ? r.priceRange.split('-')[0].trim() : '150,000 MMK';
               const fitPrice = rawStart.endsWith('MMK') ? rawStart : `${rawStart} MMK`;
@@ -441,20 +441,21 @@
         </section>
 
 
-        <!-- FEATURED VENUES GRID (အကြံပြုထားသောဆိုင်များ) -->
+        <!-- HOT PROMOTIONS VENUES GRID (အထူးပရိုမိုးရှင်း စားသောက်ဆိုင်များ) -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           <div class="flex justify-between items-end mb-4 lg:mb-6">
             <div>
-              <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916]">
-                ${isMm ? 'အကြံပြုစားသောက်ဆိုင်များ' : 'Recommended Shops'}
+              <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916] flex items-center gap-2">
+                <span>${isMm ? 'အထူးပရိုမိုးရှင်း စားသောက်ဆိုင်များ' : 'Hot Promotions'}</span>
+                <span class="material-symbols-outlined text-[#840f16] text-2xl sm:text-3xl">local_fire_department</span>
               </h2>
               <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1 hidden lg:block">
-                ${isMm ? 'စနစ်မှ အထူးအကြံပြုထားသော စားသောက်ဆိုင်များ' : 'Hand-picked dining recommendations with instant table booking.'}
+                ${isMm ? 'အချိန်အကန့်အသတ်ဖြင့် ရရှိနိုင်သော အထူးလျှော့စျေးနှင့် ပရိုမိုးရှင်း စားသောက်ဆိုင်များ' : 'Limited-time exclusive dining deals, promotional offers, and special table discounts in Yangon.'}
               </p>
             </div>
           </div>
 
-          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-4 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-4 lg:pb-0">
             ${RESTAURANTS_DATA.map(restaurant => `
               <div class="shrink-0 w-[200px] sm:w-[260px] lg:w-auto snap-start flex">
                 ${renderRestaurantCard(restaurant, state)}

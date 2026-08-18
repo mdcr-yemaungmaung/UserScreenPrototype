@@ -639,4 +639,21 @@ textarea {
   }
 }
 
+/* Promotion Badge Styling */
+.promo-badge-yellow,
+.bg-\[\#E59819\] {
+  background-color: #E59819 !important;
+}
+
+.border-\[\#C68010\] {
+  border-color: #C68010 !important;
+}
+
+.promo-badge-yellow {
+  color: #ffffff !important;
+  background-color: #E59819 !important;
+  border-color: #C68010 !important;
+}
+
+
 

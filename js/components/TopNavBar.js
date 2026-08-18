@@ -27,7 +27,7 @@
             <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#840f16] to-[#a52a2a] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
               <span class="material-symbols-outlined text-2xl font-bold">restaurant</span>
             </div>
-            <div>
+            <div class="hidden lg:block">
               <span class="font-headline text-2xl font-extrabold tracking-tight text-[#231916] block leading-none">
                 Yoyaku
               </span>
@@ -236,10 +236,7 @@
     if (signupBtn) {
       signupBtn.addEventListener('click', () => {
         store.setSelectedRestaurant(null);
-        store.setLoginTab('login');
-        store.toggleEmailLoginForm(true);
-        store.setLoginField('showSignUp', true);
-        store.setActiveTab('login');
+        store.setActiveTab('register');
       });
     }
 

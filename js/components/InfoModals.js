@@ -475,9 +475,8 @@
     const signupBtn = container.querySelector('#auth-toggle-signup');
     if (signupBtn) {
       signupBtn.addEventListener('click', () => {
-        store.toggleAuth(true);
         store.closeInfoModal();
-        store.showToast('Account created & logged in!');
+        store.setActiveTab('register');
       });
     }
 

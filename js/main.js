@@ -1,25 +1,6 @@
 (() => {
   const store = window.store;
-  const { renderTopNavBar, attachTopNavBarEvents, renderBottomNavBar, attachBottomNavBarEvents, renderFooter, attachFooterEvents, renderDiscoverView, attachDiscoverViewEvents, renderResultListView, attachResultListViewEvents, renderRestaurantDetailView, attachRestaurantDetailViewEvents, renderBookingStep1, attachBookingStep1Events, renderBookingStep2, attachBookingStep2Events, renderBookingStep3, attachBookingStep3Events, renderBookingStep4, attachBookingStep4Events, renderReservationsListView, attachReservationsListViewEvents, renderFavoritesView, attachFavoritesViewEvents, renderCuratedView, attachCuratedViewEvents, renderMyPageView, attachMyPageViewEvents, renderLoginView, attachLoginViewEvents, renderInfoModals, attachInfoModalsEvents, renderToast } = window.YoyakuComponents;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const { renderTopNavBar, attachTopNavBarEvents, renderBottomNavBar, attachBottomNavBarEvents, renderFooter, attachFooterEvents, renderDiscoverView, attachDiscoverViewEvents, renderResultListView, attachResultListViewEvents, renderRestaurantDetailView, attachRestaurantDetailViewEvents, renderBookingStep1, attachBookingStep1Events, renderBookingStep2, attachBookingStep2Events, renderBookingStep3, attachBookingStep3Events, renderBookingStep4, attachBookingStep4Events, renderReservationsListView, attachReservationsListViewEvents, renderFavoritesView, attachFavoritesViewEvents, renderCuratedView, attachCuratedViewEvents, renderMyPageView, attachMyPageViewEvents, renderLoginView, attachLoginViewEvents, renderRegisterView, attachRegisterViewEvents, renderInfoModals, attachInfoModalsEvents, renderToast } = window.YoyakuComponents;
 
   function renderApp() {
     const root = document.getElementById('root');
@@ -66,15 +47,18 @@
         case 'login':
           mainContentHtml = renderLoginView(state);
           break;
+        case 'register':
+          mainContentHtml = renderRegisterView(state);
+          break;
         default:
           mainContentHtml = renderDiscoverView(state);
       }
     }
 
-    const isLoginPage = !state.bookingModalState.isOpen && !state.selectedRestaurant && state.activeTab === 'login';
+    const isAuthPage = !state.bookingModalState.isOpen && !state.selectedRestaurant && (state.activeTab === 'login' || state.activeTab === 'register');
 
-    // Full Shell Assembly
-    if (isLoginPage) {
+    // Full Shell Assembly for Auth Pages (Login & Register)
+    if (isAuthPage) {
       root.innerHTML = `
         <div class="min-h-screen w-full bg-[#F8F4EC] flex items-center justify-center">
           <!-- Main Body Container -->
@@ -92,8 +76,12 @@
 
       window.YoyakuPrototype.enhanceRuntime(root);
 
-      // Attach Login & Modal Event Handlers
-      attachLoginViewEvents(root);
+      // Attach Login or Register & Modal Event Handlers
+      if (state.activeTab === 'login') {
+        attachLoginViewEvents(root);
+      } else if (state.activeTab === 'register') {
+        attachRegisterViewEvents(root);
+      }
       attachInfoModalsEvents(root);
       return;
     }
@@ -167,6 +155,9 @@
           break;
         case 'login':
           attachLoginViewEvents(root);
+          break;
+        case 'register':
+          attachRegisterViewEvents(root);
           break;
       }
     }

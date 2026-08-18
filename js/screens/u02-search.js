@@ -2,7 +2,7 @@
   window.YoyakuComponents = window.YoyakuComponents || {};
   const store = window.store;
   const { RESTAURANTS_DATA } = window.YoyakuData;
-  const { renderRestaurantCard, attachRestaurantCardEvents } = window.YoyakuComponents;
+  const { renderSearchResultCard, attachRestaurantCardEvents } = window.YoyakuComponents;
 
 
 
@@ -273,7 +273,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 ${
                   filtered.length > 0
-                    ? filtered.map(rest => renderRestaurantCard(rest, state)).join('')
+                    ? filtered.map(rest => renderSearchResultCard(rest, state)).join('')
                     : `
                       <div class="col-span-full py-16 text-center bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] space-y-3">
                         <span class="material-symbols-outlined text-4xl text-[#58413f]">search_off</span>
@@ -342,7 +342,7 @@
                   ${(() => {
                     const activeRest = filtered.find(r => r.id === rState.activeMapPin) || filtered[0];
                     if (!activeRest) return '<div class="text-xs text-[#58413f]">No venue selected</div>';
-                    return renderRestaurantCard(activeRest, state);
+                    return renderSearchResultCard(activeRest, state);
                   })()}
                 </div>
 

@@ -62,6 +62,180 @@
     `;
   }
 
+  function renderReservationsContent(state) {
+    const isMm = state.currentLanguage === 'MM';
+    const currentSubTab = state.myPageSubTab || 'past';
+    const allReservations = state.reservations || [];
+    let displayedReservations = allReservations;
+
+    if (currentSubTab === 'upcoming') {
+      displayedReservations = allReservations.filter(r => r.status === 'Confirmed' || r.status === 'Pending');
+    } else if (currentSubTab === 'past') {
+      displayedReservations = allReservations;
+    }
+
+    return `
+      <!-- SUB-TABS (Upcoming Reservations vs Past Reservations) -->
+      <div class="flex items-center gap-8 border-b border-[#EADFD1] pb-0.5">
+        <button
+          data-subtab="upcoming"
+          class="pb-3 font-label text-xs sm:text-sm tracking-wide transition-all cursor-pointer relative ${
+            currentSubTab === 'upcoming'
+              ? 'font-bold text-[#840f16] border-b-2 border-[#840f16] -mb-[1.5px]'
+              : 'font-semibold text-[#58413f] hover:text-[#231916]'
+          }"
+        >
+          ${isMm ? 'လာမည့် စိုတ်ထားမှုများ' : 'Upcoming Reservations'}
+        </button>
+        <button
+          data-subtab="past"
+          class="pb-3 font-label text-xs sm:text-sm tracking-wide transition-all cursor-pointer relative ${
+            currentSubTab === 'past'
+              ? 'font-bold text-[#840f16] border-b-2 border-[#840f16] -mb-[1.5px]'
+              : 'font-semibold text-[#58413f] hover:text-[#231916]'
+          }"
+        >
+          ${isMm ? 'ယခင် စိုတ်ထားမှုများ' : 'Past Reservations'}
+        </button>
+      </div>
+
+      <!-- RESERVATION CARDS LIST -->
+      <div class="space-y-4">
+        ${
+          displayedReservations.length === 0
+            ? `
+              <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-8 sm:p-12 text-center space-y-4 shadow-sm">
+                <div class="w-14 h-14 bg-[#840f16]/10 text-[#840f16] rounded-full flex items-center justify-center mx-auto">
+                  <span class="material-symbols-outlined text-2xl">event_busy</span>
+                </div>
+                <h3 class="font-headline text-xl font-bold text-[#231916]">
+                  ${isMm ? 'စိုတ်ထားမှု မှတ်တမ်း မရှိသေးပါ' : `No ${currentSubTab} reservations found`}
+                </h3>
+                <p class="font-body text-xs sm:text-sm text-[#58413f] max-w-sm mx-auto">
+                  ${isMm ? 'ရန်ကုန်မြို့ရှိ အဆင့်မြင့် စားသောက်ဆိုင်များကို ရှာဖွေပြီး စားပွဲဝိုင်း ချက်ချင်း စိုတ်ယူလိုက်ပါ' : `You have no ${currentSubTab} reservations. Browse our curated collection to book your next dining experience.`}
+                </p>
+                <button
+                  id="mypage-explore-btn"
+                  class="btn-primary px-6 py-2.5 rounded-full font-label text-xs font-semibold shadow-md inline-flex items-center gap-2 cursor-pointer mt-2"
+                >
+                  <span>${isMm ? 'ဆိုင်များ ရှာဖွေရန်' : 'Explore Restaurants'}</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </div>
+            `
+            : displayedReservations
+                .map(item => {
+                  const isCompleted = (item.status || '').toLowerCase() === 'completed';
+                  return `
+                    <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-4 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-5">
+                      
+                      <!-- Left: Icon & Details -->
+                      <div class="flex items-start gap-3.5 sm:gap-4 min-w-0">
+                        ${renderDiningPlateIcon()}
+
+                        <div class="space-y-1.5 min-w-0">
+                          <h3
+                            data-resv-select-id="${item.restaurantId}"
+                            class="font-headline text-base sm:text-xl font-bold text-[#231916] hover:text-[#840f16] cursor-pointer transition-colors truncate"
+                          >
+                            ${item.restaurantName}
+                          </h3>
+
+                          <div class="flex items-center flex-wrap gap-x-2.5 gap-y-1 text-xs text-[#58413f] font-medium font-label">
+                            <span class="inline-flex items-center gap-1 text-[#840f16] font-semibold">
+                              <span class="material-symbols-outlined text-[15px]">calendar_today</span>
+                              <span>${item.date} at ${item.time}</span>
+                            </span>
+                            <span class="text-[#8d7b75]">·</span>
+                            <span class="inline-flex items-center gap-1">
+                              <span class="material-symbols-outlined text-[15px] text-[#8d7b75]">group</span>
+                              <span>${item.guests} ${isMm ? 'ဦး' : 'guests'}</span>
+                            </span>
+                            ${item.location ? `
+                              <span class="text-[#8d7b75] hidden sm:inline">·</span>
+                              <span class="hidden sm:inline-flex items-center gap-1 text-[#8d7b75]">
+                                <span class="material-symbols-outlined text-[14px]">location_on</span>
+                                <span class="truncate max-w-[180px]">${item.location}</span>
+                              </span>
+                            ` : ''}
+                          </div>
+
+                          <div class="flex items-center gap-2 pt-0.5">
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider ${
+                              item.status === 'Confirmed'
+                                ? 'bg-[#31572C]/15 text-[#1b3d17] border border-[#31572C]/30'
+                                : item.status === 'Pending'
+                                  ? 'bg-[#D08E1C]/15 text-[#8f5d0b] border border-[#D08E1C]/30'
+                                  : item.status === 'Cancelled'
+                                    ? 'bg-[#840f16]/15 text-[#840f16] border border-[#840f16]/30'
+                                    : 'bg-[#58413f]/15 text-[#58413f] border border-[#58413f]/30'
+                            }">
+                              <span class="w-1.5 h-1.5 rounded-full ${
+                                item.status === 'Confirmed'
+                                  ? 'bg-[#31572C]'
+                                  : item.status === 'Pending'
+                                    ? 'bg-[#D08E1C]'
+                                    : item.status === 'Cancelled'
+                                      ? 'bg-[#840f16]'
+                                      : 'bg-[#58413f]'
+                              }"></span>
+                              <span>${item.status}</span>
+                            </span>
+
+                            <span class="font-mono text-[10px] text-[#8d7b75]">
+                              #${item.id}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Right Actions -->
+                      <div class="flex items-center gap-2 w-full md:w-auto justify-end pt-2 md:pt-0 border-t md:border-t-0 border-[#EADFD1]/80">
+                        <button
+                          data-mypage-view-pass-id="${item.id}"
+                          class="btn-secondary px-3.5 sm:px-4 py-2 rounded-xl font-label text-xs font-semibold flex items-center gap-1.5 shadow-2xs hover:border-[#840f16] hover:text-[#840f16] cursor-pointer"
+                        >
+                          <span class="material-symbols-outlined text-sm">qr_code_2</span>
+                          <span>${isMm ? 'QR Pass ကြည့်ရန်' : 'QR Pass'}</span>
+                        </button>
+
+                        ${
+                          item.status === 'Confirmed' || item.status === 'Pending'
+                            ? `
+                              <button
+                                data-mypage-cancel-resv-id="${item.id}"
+                                class="px-3 sm:px-4 py-2 rounded-xl text-xs font-label font-semibold text-[#840f16] hover:bg-[#840f16]/10 border border-[#840f16]/30 transition-colors cursor-pointer"
+                              >
+                                ${isMm ? 'ဖျက်သိမ်းရန်' : 'Cancel'}
+                              </button>
+                            `
+                            : ''
+                        }
+
+                        ${
+                          isCompleted
+                            ? `
+                              <button
+                                data-mypage-review-resv-id="${item.id}"
+                                class="btn-primary px-3.5 sm:px-4 py-2 rounded-xl font-label text-xs font-semibold flex items-center gap-1 shadow-2xs cursor-pointer"
+                              >
+                                <span class="material-symbols-outlined text-sm">rate_review</span>
+                                <span>${isMm ? 'သုံးသပ်ချက်ရေးမည်' : 'Review'}</span>
+                              </button>
+                            `
+                            : ''
+                        }
+                      </div>
+
+                    </div>
+                  `;
+                })
+                .join('')
+        }
+      </div>
+    `;
+  }
+
   function renderMyPageView(state) {
     const isMm = state.currentLanguage === 'MM';
     const myData = state.myPageData || {};
@@ -90,11 +264,13 @@
       displayedReservations = allReservations;
     }
 
+    const isSubPageActiveOnMobile = activeMenu === 'account' || activeMenu === 'notif-settings' || activeMenu === 'reservations-view';
+
     return `
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-left">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 space-y-6 lg:space-y-8 text-left">
         
-        <!-- PAGE TITLE -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <!-- DESKTOP HEADER (HIDDEN ON MOBILE/TABLET) -->
+        <div class="hidden lg:flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 class="font-headline text-3xl sm:text-4xl font-extrabold text-[#231916] tracking-tight">
               ${isMm ? 'ကျွန်ုပ်၏ စာမျက်နှာ' : 'My Page'}
@@ -116,59 +292,219 @@
         <!-- MAIN DUAL-COLUMN GRID -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          <!-- MOBILE COMPACT PROFILE & HORIZONTAL MENU (VISIBLE ON MOBILE & TABLET) -->
+          <!-- MOBILE/TABLET VIEW -->
           <div class="lg:hidden space-y-4">
-            <!-- Mobile User Profile Bar -->
-            <div class="bg-[#FBF3E2] rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between shadow-xs">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-11 h-11 rounded-2xl bg-[#840f16] text-white flex items-center justify-center font-headline font-bold text-base shadow-xs shrink-0 uppercase">
-                  ${(myData.userName || 'A').charAt(0)}
-                </div>
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <h2 class="font-headline font-bold text-sm text-[#231916] truncate">
-                      ${isMm ? (myData.userNameMM || myData.userName || 'alex') : (myData.userName || 'alex')}
-                    </h2>
-                    <span class="inline-flex items-center gap-0.5 bg-[#D08E1C]/15 text-[#8f5d0b] border border-[#D08E1C]/30 text-[9px] font-label font-bold uppercase tracking-wider px-2 py-0.2 rounded-full shrink-0">
-                      VIP
+            
+            ${
+              isSubPageActiveOnMobile
+                ? `
+                  <!-- Back to My Page Menu Bar on Mobile -->
+                  <div class="flex items-center justify-between bg-[#FFF8F6] border border-[#EADFD1] rounded-2xl p-3 shadow-xs">
+                    <button
+                      data-mypage-back="menu"
+                      class="inline-flex items-center gap-2 text-xs font-label font-bold text-[#840f16] hover:text-[#680b11] cursor-pointer"
+                    >
+                      <span class="material-symbols-outlined text-base">arrow_back</span>
+                      <span>${isMm ? 'ကျွန်ုပ်၏ စာမျက်နှာ မီနူးသို့ ပြန်သွားရန်' : 'Back to My Page'}</span>
+                    </button>
+                    <span class="font-label text-[11px] font-bold uppercase tracking-wider text-[#8d7b75]">
+                      ${
+                        activeMenu === 'account'
+                          ? (isMm ? 'အကောင့် ဆက်တင်' : 'Account Settings')
+                          : activeMenu === 'notif-settings'
+                            ? (isMm ? 'အသိပေးချက် ဆက်တင်' : 'Notification Settings')
+                            : (isMm ? 'စိုတ်ထားမှုများ' : 'Reservations')
+                      }
                     </span>
                   </div>
-                  <p class="font-body text-[11px] text-[#58413f] truncate">
-                    ${myData.userEmail || 'alex@example.com'}
-                  </p>
-                </div>
+
+                  <!-- Render active screen in mobile view -->
+                  <div>
+                    ${
+                      activeMenu === 'account'
+                        ? (window.YoyakuComponents.renderAccountSettingsView ? window.YoyakuComponents.renderAccountSettingsView(state) : '')
+                        : activeMenu === 'notif-settings'
+                          ? (window.YoyakuComponents.renderNotificationSettingsView ? window.YoyakuComponents.renderNotificationSettingsView(state) : '')
+                          : ''
+                    }
+                  </div>
+                `
+                : `
+            <!-- User Profile Card -->
+            <div class="bg-[#FFF8F6] rounded-3xl border border-[#EADFD1] p-6 text-center shadow-sm space-y-3 relative">
+              <div class="relative inline-block mx-auto">
+                <img
+                  src="assets/images/user_avatar.jpg"
+                  alt="${myData.userName || 'alex'}"
+                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80';"
+                  class="w-20 h-20 rounded-full object-cover border-4 border-[#EADFD1] mx-auto shadow-md"
+                />
               </div>
 
+              <div class="space-y-1">
+                <h2 class="font-headline font-bold text-xl text-[#231916]">
+                  ${isMm ? (myData.userNameMM || myData.userName || 'alex') : (myData.userName || 'alex')}
+                </h2>
+                <p class="font-body text-xs text-[#58413f]">
+                  ${myData.userEmail || 'alex@example.com'}
+                </p>
+              </div>
+
+              <div class="pt-1">
+                <span class="inline-flex items-center gap-1.5 bg-[#FFF3D6] text-[#8f5d0b] border border-[#D08E1C]/40 text-xs font-label font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs">
+                  <span class="material-symbols-outlined text-sm text-[#D08E1C]">star</span>
+                  <span>VIP Member</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Group 1: Primary Navigation (Reservation History) -->
+            <div class="bg-[#FFF8F6] rounded-2xl border border-[#EADFD1] overflow-hidden shadow-sm">
               <button
-                data-mypage-nav="logout"
-                class="p-2 rounded-xl text-[#840f16] hover:bg-[#840f16]/10 transition-colors cursor-pointer shrink-0"
-                title="${isMm ? 'အကောင့်ထွက်ရန်' : 'Logout'}"
+                data-mypage-nav="reservations"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
               >
-                <span class="material-symbols-outlined text-lg">logout</span>
+                <div class="flex items-center gap-3.5">
+                  <div class="w-9 h-9 rounded-full bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-xl">history</span>
+                  </div>
+                  <span class="font-headline font-bold text-sm text-[#231916]">
+                    ${isMm ? 'စိုတ်ထားမှု မှတ်တမ်း' : 'Reservation History'}
+                  </span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
               </button>
             </div>
 
-            <!-- Mobile Horizontal Scrolling Tab Navigation Bar -->
-            <div class="overflow-x-auto no-scrollbar flex items-center gap-2 pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
-              ${menuItems
-                .map(item => {
-                  const isActive = activeMenu === item.id;
-                  return `
-                    <button
-                      data-mypage-nav="${item.id}"
-                      class="flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer min-h-[40px] ${
-                        isActive
-                          ? 'bg-[#840f16] text-white shadow-sm'
-                          : 'bg-[#FBF3E2] text-[#58413f] hover:text-[#231916] border border-[#EADFD1]'
-                      }"
-                    >
-                      <span class="material-symbols-outlined text-base">${item.icon}</span>
-                      <span>${item.label}</span>
-                    </button>
-                  `;
-                })
-                .join('')}
+            <!-- Group 2: User Activity Items -->
+            <div class="bg-[#FFF8F6] rounded-2xl border border-[#EADFD1] divide-y divide-[#EADFD1] overflow-hidden shadow-sm">
+              <!-- Favorites -->
+              <button
+                data-mypage-nav="favorites"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">favorite_border</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အကြိုက်ဆုံး ဆိုင်များ' : 'Favorites'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+
+              <!-- Cancel Waitlist -->
+              <button
+                data-mypage-nav="waitlist"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">cancel</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'လူပြည့် စောင့်ဆိုင်းစာရင်း' : 'Cancel Waitlist'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+
+              <!-- Coupons -->
+              <button
+                data-mypage-nav="coupons"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">confirmation_number</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'ဘောက်ချာနှင့် ကူပွန်များ' : 'Coupons'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+
+              <!-- Points & Membership -->
+              <button
+                data-mypage-nav="points"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">loyalty</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အမှတ်နှင့် အသင်းဝင်အဆင့်' : 'Points & Membership'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
             </div>
+
+            <!-- Group 3: System & Account Settings -->
+            <div class="bg-[#FFF8F6] rounded-2xl border border-[#EADFD1] divide-y divide-[#EADFD1] overflow-hidden shadow-sm">
+              <!-- Notification Center -->
+              <button
+                data-mypage-nav="notifications"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">notifications</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အသိပေးချက် စင်တာ' : 'Notification Center'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+
+              <!-- Notification Settings -->
+              <button
+                data-mypage-nav="notif-settings"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">tune</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အသိပေးချက် ဆက်တင်' : 'Notification Settings'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+
+              <!-- Announcements -->
+              <button
+                data-mypage-nav="announcements"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">campaign</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အထူး ကြေညာချက်များ' : 'Announcements'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+
+              <!-- Account Settings -->
+              <button
+                data-mypage-nav="account"
+                class="w-full flex items-center justify-between p-4 text-left hover:bg-[#FBF3E2] transition-colors cursor-pointer"
+              >
+                <div class="flex items-center gap-3.5">
+                  <span class="material-symbols-outlined text-xl text-[#8d7b75]">manage_accounts</span>
+                  <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အကောင့် ဆက်တင်' : 'Account Settings'}</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-[#8d7b75]">chevron_right</span>
+              </button>
+            </div>
+
+            <!-- Get App Promo Banner -->
+            <div class="bg-[#FBF3E2] rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between shadow-xs">
+              <div class="space-y-0.5 text-left pr-2">
+                <div class="font-headline font-bold text-xs text-[#231916]">Get the EzBookNow App</div>
+                <div class="font-body text-[11px] text-[#58413f]">For a faster booking experience</div>
+              </div>
+              <button
+                id="mypage-mobile-app-install-btn"
+                class="px-4 py-1.5 rounded-lg bg-[#840f16] hover:bg-[#680b11] text-white font-label font-bold text-xs shadow-xs transition-colors shrink-0 cursor-pointer"
+              >
+                Install
+              </button>
+            </div>
+
+            <!-- Logout Button -->
+            <button
+              data-mypage-nav="logout"
+              class="w-full py-3 rounded-2xl border border-[#840f16]/30 bg-[#FFF8F6] text-[#840f16] font-headline font-bold text-sm hover:bg-[#840f16]/10 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+            >
+              <span class="material-symbols-outlined text-lg">logout</span>
+              <span>${isMm ? 'အကောင့်ထွက်ရန်' : 'Logout'}</span>
+            </button>
+            `
+            }
+
+          </div>
+
           </div>
 
           <!-- LEFT SIDEBAR (DESKTOP ONLY) -->
@@ -176,9 +512,12 @@
             
             <!-- User Profile Summary -->
             <div class="flex items-center gap-3.5 pb-4 border-b border-[#EADFD1]/80">
-              <div class="w-12 h-12 rounded-2xl bg-[#840f16] text-white flex items-center justify-center font-headline font-bold text-lg shadow-sm shrink-0 uppercase">
-                ${(myData.userName || 'A').charAt(0)}
-              </div>
+              <img
+                src="assets/images/user_avatar.jpg"
+                alt="${myData.userName || 'alex'}"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80';"
+                class="w-12 h-12 rounded-2xl object-cover border border-[#EADFD1] shadow-sm shrink-0"
+              />
               <div class="space-y-0.5 min-w-0">
                 <h2 class="font-headline font-bold text-base text-[#231916] truncate">
                   ${isMm ? (myData.userNameMM || myData.userName || 'alex') : (myData.userName || 'alex')}
@@ -241,7 +580,7 @@
                     <div class="w-6 h-6 rounded-lg bg-[#840f16] text-white flex items-center justify-center">
                       <span class="material-symbols-outlined text-sm">install_mobile</span>
                     </div>
-                    <span class="font-headline font-bold text-xs text-[#231916]">${isMm ? 'Yoyaku PWA အက်ပ်' : 'Yoyaku Mobile PWA'}</span>
+                    <span class="font-headline font-bold text-xs text-[#231916]">${isMm ? 'EzBookNow PWA အက်ပ်' : 'EzBookNow Mobile PWA'}</span>
                   </div>
                   <p class="font-body text-[11px] text-[#58413f] leading-relaxed">
                     ${isMm ? 'အော့ဖ်လိုင်း QR Pass နှင့် လျင်မြန်သော ဝိုင်းစိုတ်မှုအတွက် သင့်ဖုန်းတွင် ထည့်သွင်းပါ' : 'Instant offline passes and lightning-fast table reservations.'}
@@ -260,8 +599,8 @@
 
           </div>
 
-          <!-- RIGHT MAIN CONTENT (RESERVATIONS, U-20 ACCOUNT SETTINGS, OR U-17 NOTIFICATION SETTINGS) -->
-          <div class="lg:col-span-8 xl:col-span-9 space-y-6">
+          <!-- RIGHT MAIN CONTENT (DESKTOP ONLY OR WHEN SPECIFIC SECTION OPENED) -->
+          <div class="hidden lg:block lg:col-span-8 xl:col-span-9 space-y-6">
             
             ${
               activeMenu === 'account'
@@ -911,12 +1250,30 @@
       });
     }
 
+    const mobileAppInstallBtn = containerElement.querySelector('#mypage-mobile-app-install-btn');
+    if (mobileAppInstallBtn) {
+      mobileAppInstallBtn.addEventListener('click', () => {
+        if (window.PwaManager) {
+          window.PwaManager.promptInstall();
+        } else {
+          store.openInfoModal('pwa_install');
+        }
+      });
+    }
+
+    // Mobile Back to Menu button
+    containerElement.querySelectorAll('[data-mypage-back]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        store.setMyPageActiveMenu('menu');
+      });
+    });
+
     // Sidebar navigation
     containerElement.querySelectorAll('[data-mypage-nav]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const navId = e.currentTarget.getAttribute('data-mypage-nav');
         if (navId === 'reservations') {
-          store.setMyPageActiveMenu('reservations');
+          store.setMyPageActiveMenu('reservations-view');
         } else if (navId === 'account') {
           store.setMyPageActiveMenu('account');
         } else if (navId === 'notif-settings') {

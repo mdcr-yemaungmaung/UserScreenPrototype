@@ -177,14 +177,14 @@
                           type="password"
                           id="u20-email-confirm-pw"
                           placeholder="${isMm ? 'လက်ရှိ စကားဝှက် ရိုက်ထည့်ပါ' : 'Enter current account password'}"
-                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
+                          class="w-full bg-[#FFF8F6] border border-[#EADFD1] focus:border-[#840f16] focus:bg-white rounded-2xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
                           required
                         />
                         <button
                           type="button"
                           data-toggle-pw="u20-email-confirm-pw"
                           aria-label="Toggle password visibility"
-                          class="absolute inset-y-0 right-0 pr-3.5 flex items-center justify-center text-[#8d7b75] hover:text-[#231916] transition-colors cursor-pointer -mt-[30px] mr-[8px]"
+                          class="absolute inset-y-0 right-0 pr-3.5 flex items-center justify-center text-[#8d7b75] hover:text-[#231916] transition-colors cursor-pointer"
                         >
                           ${EYE_ICON_SHOW}
                         </button>
@@ -250,7 +250,6 @@
             </div>
 
             <div class="flex items-center gap-3 shrink-0">
-              <span class="hidden sm:inline-block font-label text-xs text-[#8d7b75] font-mono">••••••••</span>
               <div class="w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${isPasswordOpen ? 'bg-[#840f16] text-white border border-[#840f16]' : 'bg-white text-[#58413f] border border-[#EADFD1]'}">
                 <span class="material-symbols-outlined text-base select-none pointer-events-none">${isPasswordOpen ? 'expand_less' : 'expand_more'}</span>
               </div>

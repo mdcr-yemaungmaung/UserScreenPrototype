@@ -218,6 +218,35 @@
         // QR Pass Inspection Modal
         inspectedPassBooking: null,
 
+        // System registered users (for duplicate email validation check)
+        registeredUsers: [
+          { email: 'alex@example.com', name: 'Alex Aung', phone: '09791234567', provider: 'email' },
+          { email: 'evelyn.clair@example.com', name: 'Evelyn Clair', phone: '09450012345', provider: 'email' },
+          { email: 'alex.fb@example.com', name: 'Alex Aung (FB)', phone: '09791234567', provider: 'facebook' },
+          { email: 'alex.google@gmail.com', name: 'Alex Aung (Google)', phone: '09791234567', provider: 'google' }
+        ],
+
+        // Member Registration State (U-11)
+        registerState: {
+          showEmailForm: false,
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          phone: '',
+          agreeTerms: false,
+          showPassword: false,
+          showConfirmPassword: false,
+          isLoading: false,
+          loadingAction: null, // 'facebook' | 'google' | 'email'
+          errors: {},
+          showSsoTermsModal: false,
+          pendingSsoProvider: null, // 'facebook' | 'google'
+          showMail01Modal: false,
+          registeredUserEmail: null,
+          registeredUserName: null
+        },
+
         // Login & Reservation Lookup State (U-10)
         loginState: {
           activeTab: 'login', // 'login' | 'lookup'
@@ -807,6 +836,225 @@
         }
         this.notify();
       }, 700);
+    }
+
+    // =========================================================================
+    // U-11: Member Registration State & Handlers
+    // =========================================================================
+    setRegisterField(field, value) {
+      this.state.registerState[field] = value;
+      // Clear corresponding error on edit
+      if (this.state.registerState.errors && this.state.registerState.errors[field]) {
+        delete this.state.registerState.errors[field];
+      }
+      this.notify();
+    }
+
+    clearRegisterErrors() {
+      this.state.registerState.errors = {};
+      this.notify();
+    }
+
+    toggleEmailRegisterForm(forceValue) {
+      this.state.registerState.showEmailForm = forceValue !== undefined ? forceValue : !this.state.registerState.showEmailForm;
+      this.clearRegisterErrors();
+      this.notify();
+    }
+
+    executeSsoRegistration(provider) {
+      const isMm = this.state.currentLanguage === 'MM';
+      this.state.registerState.pendingSsoProvider = provider;
+      this.state.registerState.showSsoTermsModal = true;
+      this.notify();
+    }
+
+    cancelSsoRegistration() {
+      this.state.registerState.showSsoTermsModal = false;
+      this.state.registerState.pendingSsoProvider = null;
+      this.notify();
+    }
+
+    confirmSsoRegistrationWithTerms() {
+      const provider = this.state.registerState.pendingSsoProvider || 'google';
+      const isMm = this.state.currentLanguage === 'MM';
+
+      this.state.registerState.isLoading = true;
+      this.state.registerState.loadingAction = provider;
+      this.state.registerState.showSsoTermsModal = false;
+      this.notify();
+
+      setTimeout(() => {
+        this.state.registerState.isLoading = false;
+        this.state.registerState.loadingAction = null;
+        this.state.registerState.pendingSsoProvider = null;
+
+        const userName = provider === 'facebook' ? 'Alex Aung (FB)' : 'Alex Aung (Google)';
+        const userEmail = provider === 'facebook' ? 'alex.fb@example.com' : 'alex.google@gmail.com';
+        const userPhone = '+95 9 791 234 567';
+
+        // Add to registered users list if not already
+        if (!this.state.registeredUsers.some(u => u.email.toLowerCase() === userEmail.toLowerCase())) {
+          this.state.registeredUsers.push({
+            email: userEmail,
+            name: userName,
+            phone: userPhone,
+            provider
+          });
+        }
+
+        // Authenticate user
+        this.state.isAuthenticated = true;
+        this.state.myPageData.authProvider = provider;
+        this.state.myPageData.userName = userName;
+        this.state.myPageData.userNameMM = 'အဲလက်စ်';
+        this.state.myPageData.userEmail = userEmail;
+        this.state.myPageData.userPhone = userPhone;
+        this.state.myPageData.emailVerified = true;
+        this.state.myPageData.phoneVerified = false; // Package 1: Unverified
+
+        this.state.myPageData.notifications.unshift({
+          id: 'n_' + Date.now(),
+          title: isMm ? `${provider === 'facebook' ? 'Facebook' : 'Google'} SSO ဖြင့် အကောင့်အသစ် ဖွင့်ပြီးပါပြီ` : `Welcome to Yoyaku! Account registered via ${provider === 'facebook' ? 'Facebook' : 'Google'} SSO.`,
+          time: 'Just now',
+          isUnread: true
+        });
+
+        if (this.state.loginState.isGuestFlow && this.state.bookingModalState.restaurant) {
+          this.state.bookingModalState.isOpen = true;
+        } else {
+          this.setActiveTab('mypage');
+        }
+
+        this.showToast(isMm ? `${provider === 'facebook' ? 'Facebook' : 'Google'} ဖြင့် အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်!` : `Account created with ${provider === 'facebook' ? 'Facebook' : 'Google'}!`);
+      }, 750);
+    }
+
+    executeEmailRegistration({ name, email, password, confirmPassword, phone, agreeTerms }) {
+      const isMm = this.state.currentLanguage === 'MM';
+      const errors = {};
+
+      const cleanName = (name || '').trim();
+      const cleanEmail = (email || '').trim().toLowerCase();
+      const cleanPassword = password || '';
+      const cleanConfirmPassword = confirmPassword || '';
+      const cleanPhone = (phone || '').trim();
+
+      // 1. Name validation: 1 to 100 characters (Unicode friendly)
+      if (!cleanName || cleanName.length < 1 || cleanName.length > 100) {
+        errors.name = isMm ? 'အမည်ကို အနည်းဆုံး ၁ လုံးမှ ၁၀၀ လုံးအတွင်း ထည့်ပေးပါ' : 'Name must be between 1 and 100 characters';
+      }
+
+      // 2. Email validation: Format check & Uniqueness check
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!cleanEmail || !emailRegex.test(cleanEmail)) {
+        errors.email = isMm ? 'မှန်ကန်သော အီးမေးလ်လိပ်စာ ထည့်ပေးပါ' : 'Please enter a valid email address';
+      } else {
+        const isDuplicate = this.state.registeredUsers.some(u => u.email.toLowerCase() === cleanEmail);
+        if (isDuplicate) {
+          // Rule 4: "This email address is already registered"
+          errors.email = isMm ? 'ဤအီးမေးလ်လိပ်စာဖြင့် အကောင့်ဖွင့်ထားပြီးဖြစ်ပါသည်' : 'This email address is already registered';
+        }
+      }
+
+      // 3. Password validation: min 8 chars, letters and numbers required
+      const hasLetter = /[a-zA-Z]/.test(cleanPassword);
+      const hasNumber = /[0-9]/.test(cleanPassword);
+      if (!cleanPassword || cleanPassword.length < 8 || !hasLetter || !hasNumber) {
+        errors.password = isMm ? 'စကားဝှက်သည် အနည်းဆုံး ၈ လုံးရှိရမည်ဖြစ်ပြီး အင်္ဂလိပ်စာလုံးနှင့် ဂဏန်းများ ပါဝင်ရမည်' : 'Password must be at least 8 characters and contain both letters and numbers';
+      }
+
+      // 4. Confirm Password validation: Must match
+      if (cleanPassword !== cleanConfirmPassword) {
+        errors.confirmPassword = isMm ? 'အတည်ပြုစကားဝှက်နှင့် မကိုက်ညီပါ' : 'Passwords do not match';
+      }
+
+      // 5. Phone validation (Optional, Myanmar format +95 or 09...)
+      if (cleanPhone) {
+        const phoneRegex = /^(\+?959|09|\+?95\s?9|\+?9509)\d{7,9}$/;
+        const strippedPhone = cleanPhone.replace(/[\s\-]/g, '');
+        if (!phoneRegex.test(strippedPhone) && !/^(\+95|0)\d{8,11}$/.test(strippedPhone)) {
+          errors.phone = isMm ? 'မြန်မာဖုန်းနံပါတ် ပုံစံမှန်ကန်စွာ ထည့်သွင်းပါ (+95 သို့မဟုတ် 09...)' : 'Please enter a valid Myanmar phone number (starts with +95 or 09)';
+        }
+      }
+
+      // 6. Terms Agreement validation
+      if (!agreeTerms) {
+        errors.terms = isMm ? 'အကောင့်မဖွင့်မီ အသုံးပြုမှုစည်းမျဉ်းများကို သဘောတူရန် လိုအပ်ပါသည်' : 'You must agree to the Terms of Service to create an account';
+      }
+
+      if (Object.keys(errors).length > 0) {
+        this.state.registerState.errors = errors;
+        this.notify();
+        return false;
+      }
+
+      // Start Registration Execution
+      this.state.registerState.isLoading = true;
+      this.state.registerState.loadingAction = 'email';
+      this.state.registerState.errors = {};
+      this.notify();
+
+      setTimeout(() => {
+        this.state.registerState.isLoading = false;
+        this.state.registerState.loadingAction = null;
+
+        // Save new user to registered database
+        this.state.registeredUsers.push({
+          email: cleanEmail,
+          name: cleanName,
+          phone: cleanPhone || '09791234567',
+          provider: 'email'
+        });
+
+        // Set pending user data
+        this.state.myPageData.userName = cleanName;
+        this.state.myPageData.userEmail = cleanEmail;
+        this.state.myPageData.userPhone = cleanPhone || '+95 9 791 234 567';
+        this.state.myPageData.authProvider = 'email';
+        this.state.myPageData.emailVerified = false; // Unverified until MAIL-01 link clicked
+        this.state.myPageData.phoneVerified = false; // Stored as Unverified in Package 1
+
+        // Trigger MAIL-01 Confirmation flow
+        this.state.registerState.showMail01Modal = true;
+        this.state.registerState.registeredUserEmail = cleanEmail;
+        this.state.registerState.registeredUserName = cleanName;
+
+        this.notify();
+      }, 750);
+
+      return true;
+    }
+
+    verifyMail01Confirmation(email) {
+      const isMm = this.state.currentLanguage === 'MM';
+      this.state.myPageData.emailVerified = true;
+      this.state.isAuthenticated = true;
+      this.state.registerState.showMail01Modal = false;
+
+      this.state.myPageData.notifications.unshift({
+        id: 'n_' + Date.now(),
+        title: isMm ? 'အီးမေးလ်လိပ်စာ အတည်ပြုပြီးပါပြီ။ Yoyaku မှ ကြိုဆိုပါသည်!' : 'Email verified successfully! Welcome to Yoyaku.',
+        time: 'Just now',
+        isUnread: true
+      });
+
+      if (this.state.loginState.isGuestFlow && this.state.bookingModalState.restaurant) {
+        this.state.bookingModalState.isOpen = true;
+      } else {
+        this.setActiveTab('mypage');
+      }
+
+      this.showToast(isMm ? 'အီးမေးလ် အတည်ပြုခြင်း အောင်မြင်ပြီး အကောင့်ဖွင့်ပြီးပါပြီ!' : 'Email verified! Account activated successfully.');
+    }
+
+    resendMail01Confirmation(email) {
+      const isMm = this.state.currentLanguage === 'MM';
+      this.showToast(isMm ? `${email} သို့ အတည်ပြုလင့်ခ် (MAIL-01) ပြန်လည်ပေးပို့ပြီးပါပြီ` : `Confirmation email (MAIL-01) resent to ${email}`);
+    }
+
+    closeMail01Modal() {
+      this.state.registerState.showMail01Modal = false;
+      this.notify();
     }
   }
 
