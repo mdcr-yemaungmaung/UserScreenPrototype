@@ -63,9 +63,6 @@
             <h2 class="font-headline text-3xl sm:text-4xl text-[#231916] font-extrabold">
               ${isMm ? 'ကြိုတင်မှာယူမှု အောင်မြင်ပါသည်။' : 'Reservation Confirmed!'}
             </h2>
-            <p class="font-body text-sm text-[#58413f] max-w-md mx-auto">
-              ${isMm ? `${cBooking.restaurantName} သို့ အကြောင်းကြားပြီးပါပြီ။ စာပွဲ ရရှိကြောင်း လက်မှတ် အသင့်ရှိပါသည်။` : `We've notified ${cBooking.restaurantName}. Your instant check-in pass is ready.`}
-            </p>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">

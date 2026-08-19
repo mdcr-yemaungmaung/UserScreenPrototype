@@ -72,22 +72,88 @@
             </h2>
           </div>
 
-          <div class="relative h-36 rounded-2xl overflow-hidden shadow-sm">
-            <img src="${restaurant.heroImage}" alt="${restaurant.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent"></div>
-            <div class="absolute inset-0 p-6 flex flex-col justify-between text-white">
-              <div class="font-headline text-2xl font-bold">${restaurant.name}</div>
-              <div class="flex flex-wrap gap-2 font-label text-xs">
-                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-md font-bold">${bData.date}</span>
-                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-md font-bold">${bData.time}</span>
-                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-md font-bold">${bData.guests} ${isMm ? 'ဦး' : 'Guests'} (${bData.seatingPreference})</span>
+          <!-- 1. RESTAURANT & RESERVATION DETAILS CARD -->
+          <div class="bg-[#FBF3E2] p-5 sm:p-6 rounded-2xl border border-[#EADFD1] space-y-4">
+            <div class="flex items-center justify-between border-b border-[#EADFD1] pb-3">
+              <div class="font-headline text-base font-bold text-[#231916] flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#840f16] text-lg">restaurant</span>
+                <span>${isMm ? 'ဆိုင်နှင့် စားပွဲဝိုင်း အချက်အလက်' : 'Restaurant & Table Details'}</span>
+              </div>
+              <span class="text-xs font-label font-bold text-[#840f16] bg-[#840f16]/10 px-2.5 py-1 rounded-md border border-[#840f16]/20">
+                ${restaurant.cuisine || 'Fine Dining'}
+              </span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-xs border border-[#EADFD1]">
+                <img src="${restaurant.heroImage}" alt="${restaurant.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-headline text-lg text-[#231916] font-bold truncate">${restaurant.name}</h3>
+                <p class="font-body text-xs text-[#58413f] truncate flex items-center gap-1 mt-0.5">
+                  <span class="material-symbols-outlined text-xs text-[#840f16]">location_on</span>
+                  <span>${restaurant.address || restaurant.area || 'Yangon, Myanmar'}</span>
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2 font-label text-xs">
+                  <span class="bg-[#FFF7E8] border border-[#EADFD1] px-2.5 py-1 rounded-lg font-semibold text-[#231916] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs text-[#840f16]">calendar_today</span>
+                    ${bData.date}
+                  </span>
+                  <span class="bg-[#FFF7E8] border border-[#EADFD1] px-2.5 py-1 rounded-lg font-semibold text-[#231916] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs text-[#840f16]">schedule</span>
+                    ${bData.time}
+                  </span>
+                  <span class="bg-[#FFF7E8] border border-[#EADFD1] px-2.5 py-1 rounded-lg font-semibold text-[#231916] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs text-[#840f16]">group</span>
+                    ${bData.guests} ${isMm ? 'ဦး' : 'Guests'} (${bData.seatingPreference})
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
+          <!-- 2. GUEST & PAYMENT SUMMARY CARD -->
+          <div class="bg-[#FBF3E2] p-5 sm:p-6 rounded-2xl border border-[#EADFD1] space-y-3 font-label text-xs">
+            <div class="font-headline text-base font-bold text-[#231916] border-b border-[#EADFD1] pb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#840f16] text-lg">person_pin</span>
+              <span>${isMm ? 'ဧည့်သည်နှင့် ငွေပေးချေမှု အချက်အလက်' : 'Guest & Payment Information'}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+                <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'ဧည့်သည် အမည်' : 'Guest Name'}</div>
+                <div class="text-[#231916] text-sm font-bold font-body mt-0.5">${gData.guestName || '—'}</div>
+              </div>
+              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+                <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'ဖုန်းနံပါတ်' : 'Phone Number'}</div>
+                <div class="text-[#231916] text-sm font-bold font-body mt-0.5">${gData.guestPhone || '—'}</div>
+              </div>
+              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+                <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'အီးမေးလ်' : 'Email Address'}</div>
+                <div class="text-[#231916] text-sm font-bold font-body mt-0.5 truncate">${gData.guestEmail || '—'}</div>
+              </div>
+              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+                <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'ငွေပေးချေမှု ပုံစံ' : 'Payment Preference'}</div>
+                <div class="text-[#840f16] text-sm font-bold font-body mt-0.5 flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm">${gData.paymentMethod === 'qr' ? 'qr_code_2' : 'payments'}</span>
+                  <span>${gData.paymentMethod === 'qr' ? (isMm ? 'KBZPay / AYA Pay QR (၅၀,၀၀၀ ကျပ် လျှော့ပြီး)' : 'KBZPay / AYA Pay QR (Promo Applied)') : (isMm ? 'ဆိုင်တွင် ပေးချေမည်' : 'Pay at Restaurant')}</span>
+                </div>
+              </div>
+            </div>
+
+            ${gData.specialRequests ? `
+              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1] mt-2">
+                <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'အထူး တောင်းဆိုချက် / မှတ်ချက်' : 'Special Requests / Dietary Notes'}</div>
+                <div class="text-[#231916] text-xs font-body mt-0.5">${gData.specialRequests}</div>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- 3. ESTIMATED PRICING BREAKDOWN CARD -->
           <div class="bg-[#FBF3E2] p-6 rounded-2xl border border-[#EADFD1] space-y-3 font-label text-xs">
-            <div class="font-headline text-sm font-bold text-[#231916] border-b border-[#EADFD1] pb-2">
-              ${isMm ? 'ခန့်မှန်းခြေ ကုန်ကျစရိတ် တွက်ချက်မှု' : 'Estimated Pricing Breakdown'}
+            <div class="font-headline text-base font-bold text-[#231916] border-b border-[#EADFD1] pb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#840f16] text-lg">receipt_long</span>
+              <span>${isMm ? 'ခန့်မှန်းခြေ ကုန်ကျစရိတ် တွက်ချက်မှု' : 'Estimated Pricing Breakdown'}</span>
             </div>
             <div class="flex justify-between text-[#58413f]">
               <span>${isMm ? 'အထူး ဟင်းပွဲ မီနူး' : 'Experience Tasting Menu'} (x${bData.guests})</span>
@@ -122,11 +188,11 @@
             </span>
           </label>
 
-          <div class="pt-4 flex justify-between items-center gap-4 bg-[#FBF3E2] p-5 rounded-2xl border border-[#EADFD1]">
-            <button id="step3-back-btn" class="px-6 py-3.5 rounded-full border border-[#EADFD1] font-label text-xs font-semibold text-[#58413f] hover:bg-white cursor-pointer">
+          <div class="flex justify-between items-center gap-4 pt-2">
+            <button id="step3-back-btn" class="px-6 py-3.5 rounded-full border border-[#D5C2AF] font-label text-xs font-semibold text-[#58413f] hover:bg-[#F5EBDC] transition-all cursor-pointer">
               ${isMm ? 'နောက်သို့' : 'Back'}
             </button>
-            <button id="step3-final-btn" class="flex-1 btn-primary py-4 rounded-full font-label text-sm font-semibold shadow-md flex items-center justify-center gap-2 cursor-pointer">
+            <button id="step3-final-btn" class="flex-1 btn-primary py-4 rounded-full font-label text-sm font-semibold shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all">
               <span>${isMm ? 'ကြိုတင်မှာယူမှု အတည်ပြုမည်' : 'Confirm Reservation'}</span>
               <span class="material-symbols-outlined text-sm">check_circle</span>
             </button>

@@ -82,9 +82,6 @@
             <h2 class="font-headline text-2xl font-bold text-[#231916]">
               ${isMm ? 'စိုတ်ထားမှု မှတ်တမ်း' : 'Reservation History'}
             </h2>
-            <p class="font-body text-xs text-[#58413f] mt-0.5">
-              ${isMm ? 'သင်၏ စားပွဲဝိုင်း စိုတ်ထားမှု အသေးစိတ်၊ ပြင်ဆင်ခြင်းနှင့် QR Pass များကို ကြည့်ရှုပါ' : 'View booking details, check-in QR passes, reschedule, or rebook past dining.'}
-            </p>
           </div>
 
           <div class="flex items-center gap-6">
@@ -106,7 +103,7 @@
                   : 'font-semibold text-[#58413f] hover:text-[#231916]'
               }"
             >
-              ${isMm ? 'အားလုံး / ယခင်' : 'All & Past'} (${allReservations.length})
+              ${isMm ? 'အားလုံး' : 'All'} (${allReservations.length})
             </button>
           </div>
         </div>

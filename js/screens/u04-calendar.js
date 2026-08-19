@@ -78,9 +78,6 @@
             <h2 class="font-headline text-2xl sm:text-3xl text-[#231916] font-bold">
               ${isMm ? 'ရက်စွဲနှင့် အချိန် ရွေးချယ်ပါ' : 'Select Date & Schedule'}
             </h2>
-            <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1">
-              ${isMm ? `လူဦးရေ ${bData.guests} ဦးအတွက် အဆင်ပြေမည့် ရက်၊ အချိန်နှင့် နေရာထိုင်ခင်း ရွေးချယ်ပါ` : `Choose your preferred dining date, time, and table location for ${bData.guests} guests.`}
-            </p>
           </div>
 
           <div id="booking-modal-calendar-container" class="bg-[#F7EFE2] p-5 rounded-2xl border border-[#EADFD1]">
