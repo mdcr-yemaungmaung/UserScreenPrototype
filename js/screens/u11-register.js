@@ -34,9 +34,6 @@
             </svg>
           </div>
           <h1 class="login-brand-title font-headline font-black text-[#1B2028]">Yoyaku</h1>
-          <p class="login-brand-tagline">
-            ${isMm ? 'စားသောက်ဆိုင် စားပွဲဝိုင်း ကြိုတင်စိုတ်ယူခြင်းနှင့် စီမံခန့်ခွဲမှု' : 'Premium Dining Reservations & Instant Passes in Yangon'}
-          </p>
 
           <!-- Main Auth Card -->
           <div class="login-card-container w-full shadow-lg border border-[#EADFD1] bg-white rounded-3xl overflow-hidden mt-5" id="register-card-container">
@@ -59,14 +56,11 @@
 
             <div class="login-card-content p-5 sm:p-6 space-y-4">
               
-              <!-- Screen Title / Subtitle -->
+              <!-- Screen Title -->
               <div class="text-center pb-1">
                 <h2 class="text-lg sm:text-xl font-headline font-bold text-[#231916]">
-                  ${isMm ? 'အကောင့်အသစ် ဖွင့်ပါ (U-11)' : 'Create Your Account'}
+                  ${isMm ? 'အကောင့်အသစ် ဖွင့်ပါ' : 'Create Your Account'}
                 </h2>
-                <p class="text-xs text-[#58413f] mt-1">
-                  ${isMm ? 'အကောင့်ဖွင့်ရန် နည်းလမ်း (၃) ခုမှ မိမိနှစ်သက်ရာကို ရွေးချယ်ပါ' : 'Choose one of 3 simple ways to register'}
-                </p>
               </div>
 
               <!-- General Error Banner if any -->
@@ -91,10 +85,10 @@
                     <span class="material-symbols-outlined animate-spin text-base">progress_activity</span>
                     <span>${isMm ? 'ချိတ်ဆက်နေသည်...' : 'Connecting...'}</span>
                   ` : `
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" style="width: 20px; height: 20px; flex-shrink: 0; fill: #ffffff;" fill="#ffffff">
+                      <path fill="#ffffff" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
-                    <span>${isMm ? 'Facebook ဖြင့် အကောင့်ဖွင့်ရန်' : 'Register with Facebook'}</span>
+                    <span class="text-white">${isMm ? 'Facebook ဖြင့် အကောင့်ဖွင့်ရန်' : 'Register with Facebook'}</span>
                   `}
                 </button>
 
@@ -119,14 +113,14 @@
                   `}
                 </button>
 
-                <!-- 3. Register with Email Address Trigger Button -->
+                <!-- 3. Register with Email Trigger Button -->
                 <button
                   type="button"
                   id="btn-toggle-email-register-form"
                   class="btn-auth-email w-full flex items-center justify-center gap-2 py-3 rounded-2xl cursor-pointer ${regState.showEmailForm ? 'border-[#840f16] bg-[#FBF3E2] text-[#840f16]' : ''}"
                 >
-                  <span class="material-symbols-outlined text-lg">mail</span>
-                  <span>${isMm ? 'အီးမေးလ်လိပ်စာဖြင့် အကောင့်ဖွင့်ရန်' : 'Register with Email Address'}</span>
+                  <span class="material-symbols-outlined" style="font-size: 1.125rem; color: #443632;">mail</span>
+                  <span>${isMm ? 'အီးမေးလ်ဖြင့် အကောင့်ဖွင့်ရန်' : 'Register with Email'}</span>
                   <span class="material-symbols-outlined text-sm transition-transform ${regState.showEmailForm ? 'rotate-180' : ''}">
                     expand_more
                   </span>
@@ -271,11 +265,7 @@
                       </div>
                       ${errors.phone ? `
                         <p class="text-[11px] text-[#840f16] font-semibold mt-0.5">${errors.phone}</p>
-                      ` : `
-                        <p class="text-[10px] text-[#8d7b75] leading-relaxed">
-                          ${isMm ? 'ℹ️ Package 1: ဖုန်းနံပါတ်ကို စနစ်တွင် အတည်မပြုရသေးသောအခြေအနေ (Unverified) အဖြစ် သိမ်းဆည်းပါမည်။ အကောင့်ဖွင့်ရန် ဖုန်းအတည်ပြုချက် မလိုအပ်ပါ။' : 'ℹ️ Package 1: Stored as Unverified. Phone confirmation not required for signup.'}
-                        </p>
-                      `}
+                      ` : ''}
                     </div>
 
                     <!-- 6. Terms of Service Agreement Checkbox -->
@@ -309,7 +299,7 @@
                       <button
                         type="submit"
                         id="btn-submit-email-register"
-                        class="btn-primary-action w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl cursor-pointer"
+                        class="w-full btn-primary py-3 rounded-2xl font-label text-sm font-semibold shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                         ${isLoading ? 'disabled' : ''}
                       >
                         ${isLoading && loadingAction === 'email' ? `
@@ -317,7 +307,7 @@
                           <span>${isMm ? 'အကောင့်ဖွင့်နေပါသည်...' : 'Creating Account...'}</span>
                         ` : `
                           <span class="material-symbols-outlined text-lg">how_to_reg</span>
-                          <span>${isMm ? 'အကောင့်ဖွင့်မည် (Create Account)' : 'Create My Account'}</span>
+                          <span>${isMm ? 'အကောင့်ဖွင့်မည်' : 'Create Account'}</span>
                         `}
                       </button>
                     </div>
@@ -340,25 +330,6 @@
               </div>
 
             </div>
-          </div>
-
-          <!-- Bottom Utility Links -->
-          <div class="login-footer-nav">
-            <button id="register-footer-privacy-btn" class="login-footer-link">
-              ${isMm ? 'ကိုယ်ရေးလုံခြုံမှု' : 'Privacy Policy'}
-            </button>
-            <span class="text-[#EADFD1]">•</span>
-            <button id="register-footer-terms-btn" class="login-footer-link">
-              ${isMm ? 'အသုံးပြုမှုစည်းမျဉ်းများ' : 'Terms of Service'}
-            </button>
-            <span class="text-[#EADFD1]">•</span>
-            <button id="register-footer-lang-btn" class="login-footer-link lang-highlight">
-              ${isMm ? 'English' : 'မြန်မာ'}
-            </button>
-            <span class="text-[#EADFD1]">•</span>
-            <button id="register-return-home-btn" class="login-footer-link">
-              ${isMm ? 'ပင်မစာမျက်နှာ' : 'Home'}
-            </button>
           </div>
 
         </div>

@@ -70,13 +70,10 @@
       <div class="space-y-8 pb-16 text-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         
         <!-- HEADER TITLE -->
-        <div class="space-y-2">
+        <div>
           <h1 class="font-headline text-3xl sm:text-4xl font-extrabold text-[#231916]">
             ${isMm ? 'စားသောက်ဆိုင်များ ရှာဖွေရန်' : 'Search Dining Venues'}
           </h1>
-          <p class="font-body text-xs sm:text-sm text-[#58413f]">
-            ${isMm ? 'မိမိနှစ်သက်ရာ နေရာ၊ အမျိုးအစားနှင့် စေျးနှုန်းအလိုက် စားပွဲဝိုင်းများ ရှာဖွေပါ' : 'Filter by neighborhood, culinary cuisine style, price level, and seating options.'}
-          </p>
         </div>
 
         <!-- SEARCH & FILTER CAPSULE BAR -->

@@ -32,7 +32,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#104b2b] text-white"><span class="material-symbols-outlined text-sm font-bold">check</span></div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#8d7b75]">STEP 01</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'ရက်စွဲနှင့် အချိန်' : 'Date & Schedule'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate stepper-step-title">${isMm ? 'ရက်စွဲနှင့် အချိန်' : 'Date & Schedule'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#104b2b]"></div>
@@ -42,7 +42,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#104b2b] text-white"><span class="material-symbols-outlined text-sm font-bold">check</span></div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#8d7b75]">STEP 02</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'ဧည့်သည် အချက်အလက်' : 'Guest Details'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate stepper-step-title">${isMm ? 'ဧည့်သည် အချက်အလက်' : 'Guest Details'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#104b2b]"></div>
@@ -52,7 +52,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#840f16] text-white shadow-xs">3</div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#840f16]">STEP 03</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate stepper-step-title">${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#840f16]"></div>
@@ -69,13 +69,11 @@
             </h2>
           </div>
 
-          <!-- 1. RESTAURANT & RESERVATION DETAILS CARD -->
-          <div class="bg-[#FBF3E2] p-5 sm:p-6 rounded-2xl border border-[#EADFD1] space-y-4">
-            <div class="flex items-center justify-between border-b border-[#EADFD1] pb-3">
-              <div class="font-headline text-base font-bold text-[#231916] flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#840f16] text-lg">restaurant</span>
-                <span>${isMm ? 'ဆိုင်နှင့် စားပွဲဝိုင်း အချက်အလက်' : 'Restaurant & Table Details'}</span>
-              </div>
+          <!-- 1. RESTAURANT & RESERVATION DETAILS -->
+          <div class="space-y-4">
+            <div class="font-headline text-base font-bold text-[#231916] border-b border-[#EADFD1] pb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[#840f16] text-lg">restaurant</span>
+              <span>${isMm ? 'ဆိုင်နှင့် စားပွဲဝိုင်း အချက်အလက်' : 'Restaurant & Table Details'}</span>
             </div>
 
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -88,45 +86,47 @@
                   <span class="material-symbols-outlined text-xs text-[#840f16]">location_on</span>
                   <span>${restaurant.address || restaurant.area || 'Yangon, Myanmar'}</span>
                 </p>
-                <div class="flex flex-wrap gap-2 mt-2 font-label text-xs">
-                  <span class="bg-[#FFF7E8] border border-[#EADFD1] px-2.5 py-1 rounded-lg font-semibold text-[#231916] flex items-center gap-1">
-                    <span class="material-symbols-outlined text-xs text-[#840f16]">calendar_today</span>
-                    ${bData.date}
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-2 font-label text-xs">
+                  <span class="font-medium text-[#231916] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-[#840f16]">calendar_today</span>
+                    <span>${bData.date}</span>
                   </span>
-                  <span class="bg-[#FFF7E8] border border-[#EADFD1] px-2.5 py-1 rounded-lg font-semibold text-[#231916] flex items-center gap-1">
-                    <span class="material-symbols-outlined text-xs text-[#840f16]">schedule</span>
-                    ${bData.time}
+                  <span class="text-[#D5C2AF] hidden sm:inline">•</span>
+                  <span class="font-medium text-[#231916] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-[#840f16]">schedule</span>
+                    <span>${bData.time}</span>
                   </span>
-                  <span class="bg-[#FFF7E8] border border-[#EADFD1] px-2.5 py-1 rounded-lg font-semibold text-[#231916] flex items-center gap-1">
-                    <span class="material-symbols-outlined text-xs text-[#840f16]">group</span>
-                    ${bData.guests} ${isMm ? 'ဦး' : 'Guests'} (${bData.seatingPreference})
+                  <span class="text-[#D5C2AF] hidden sm:inline">•</span>
+                  <span class="font-medium text-[#231916] flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-[#840f16]">group</span>
+                    <span>${bData.guests} ${isMm ? 'ဦး' : 'Guests'} (${bData.seatingPreference})</span>
                   </span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 2. GUEST & PAYMENT SUMMARY CARD -->
-          <div class="bg-[#FBF3E2] p-5 sm:p-6 rounded-2xl border border-[#EADFD1] space-y-3 font-label text-xs">
-            <div class="font-headline text-base font-bold text-[#231916] border-b border-[#EADFD1] pb-3 flex items-center gap-2">
+          <!-- 2. GUEST & PAYMENT SUMMARY -->
+          <div class="space-y-4">
+            <div class="font-headline text-base font-bold text-[#231916] border-b border-[#EADFD1] pb-2 flex items-center gap-2">
               <span class="material-symbols-outlined text-[#840f16] text-lg">person_pin</span>
               <span>${isMm ? 'ဧည့်သည်နှင့် ငွေပေးချေမှု အချက်အလက်' : 'Guest & Payment Information'}</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="bg-[#FBF3E2] p-3 rounded-xl border border-[#EADFD1]">
                 <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'ဧည့်သည် အမည်' : 'Guest Name'}</div>
                 <div class="text-[#231916] text-sm font-bold font-body mt-0.5">${gData.guestName || '—'}</div>
               </div>
-              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+              <div class="bg-[#FBF3E2] p-3 rounded-xl border border-[#EADFD1]">
                 <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'ဖုန်းနံပါတ်' : 'Phone Number'}</div>
                 <div class="text-[#231916] text-sm font-bold font-body mt-0.5">${gData.guestPhone || '—'}</div>
               </div>
-              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+              <div class="bg-[#FBF3E2] p-3 rounded-xl border border-[#EADFD1]">
                 <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'အီးမေးလ်' : 'Email Address'}</div>
                 <div class="text-[#231916] text-sm font-bold font-body mt-0.5 truncate">${gData.guestEmail || '—'}</div>
               </div>
-              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1]">
+              <div class="bg-[#FBF3E2] p-3 rounded-xl border border-[#EADFD1]">
                 <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'ငွေပေးချေမှု ပုံစံ' : 'Payment Preference'}</div>
                 <div class="text-[#840f16] text-sm font-bold font-body mt-0.5 flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-sm">${gData.paymentMethod === 'qr' ? 'qr_code_2' : 'payments'}</span>
@@ -136,15 +136,15 @@
             </div>
 
             ${gData.specialRequests ? `
-              <div class="bg-[#FFF7E8] p-3 rounded-xl border border-[#EADFD1] mt-2">
+              <div class="bg-[#FBF3E2] p-3 rounded-xl border border-[#EADFD1]">
                 <div class="text-[#8d7b75] text-[10px] uppercase font-bold tracking-wider">${isMm ? 'အထူး တောင်းဆိုချက် / မှတ်ချက်' : 'Special Requests / Dietary Notes'}</div>
                 <div class="text-[#231916] text-xs font-body mt-0.5">${gData.specialRequests}</div>
               </div>
             ` : ''}
           </div>
 
-          <!-- 3. ESTIMATED PRICING BREAKDOWN CARD -->
-          <div class="bg-[#FBF3E2] p-6 rounded-2xl border border-[#EADFD1] space-y-3 font-label text-xs">
+          <!-- 3. ESTIMATED PRICING BREAKDOWN -->
+          <div class="space-y-3 font-label text-xs">
             <div class="font-headline text-base font-bold text-[#231916] border-b border-[#EADFD1] pb-2 flex items-center gap-2">
               <span class="material-symbols-outlined text-[#840f16] text-lg">receipt_long</span>
               <span>${isMm ? 'ခန့်မှန်းခြေ ကုန်ကျစရိတ် တွက်ချက်မှု' : 'Estimated Pricing Breakdown'}</span>
@@ -169,9 +169,9 @@
               <span>${isMm ? 'ဝန်ဆောင်ခ (၁၈%)' : 'Service Charge (18%)'}</span>
               <span class="font-bold text-[#231916]">${serviceCharge.toLocaleString()} MMK</span>
             </div>
-            <div class="pt-3 border-t border-[#EADFD1] flex justify-between items-center text-base">
+            <div class="pt-3 border-t border-[#EADFD1] flex justify-between items-center text-sm sm:text-base">
               <span class="font-headline font-bold text-[#231916]">${isMm ? 'စုစုပေါင်း ခန့်မှန်းကုန်ကျစရိတ်' : 'Estimated Total'}</span>
-              <span class="font-headline font-extrabold text-[#840f16] text-xl sm:text-2xl">${totalAmount.toLocaleString()} MMK</span>
+              <span class="font-headline font-bold text-[#840f16] text-sm sm:text-base">${totalAmount.toLocaleString()} MMK</span>
             </div>
           </div>
 

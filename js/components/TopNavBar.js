@@ -47,7 +47,7 @@
                 <circle cx="98" cy="92" r="13" fill="#93181F" />
               </svg>
             </div>
-            <div>
+            <div class="hidden lg:block">
               <span class="font-headline text-2xl font-black tracking-tight text-[#1B2028] block leading-none">
                 Yoyaku
               </span>

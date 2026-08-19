@@ -221,6 +221,11 @@ textarea {
   box-shadow: 0 2px 6px rgba(24, 119, 242, 0.2);
 }
 
+.btn-auth-facebook svg {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
 .btn-auth-facebook:hover {
   background-color: #166FE5 !important;
   transform: translateY(-1px);
@@ -730,6 +735,19 @@ textarea {
 input[type="checkbox"],
 input[type="radio"] {
   accent-color: #840f16;
+}
+
+/* Responsive Stepper Step Titles (Hide ONLY on mobile < 640px, visible on tablet and desktop/web) */
+@media (max-width: 639px) {
+  .stepper-step-title {
+    display: none !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .stepper-step-title {
+    display: block !important;
+  }
 }
 
 
