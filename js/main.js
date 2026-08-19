@@ -88,8 +88,10 @@
       return;
     }
 
+    const hideBottomNav = !!state.selectedRestaurant || !!(state.bookingModalState && state.bookingModalState.isOpen) || !!state.selectedReservationId;
+
     root.innerHTML = `
-      <div class="min-h-screen flex flex-col justify-between pb-20 md:pb-0">
+      <div class="min-h-screen flex flex-col justify-between ${hideBottomNav ? 'pb-0' : 'pb-20 md:pb-0'}">
         
         <!-- Top Navigation Header -->
         ${renderTopNavBar(state)}

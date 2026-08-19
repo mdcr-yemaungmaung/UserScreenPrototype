@@ -5,6 +5,15 @@
 
 
   function renderBottomNavBar(state) {
+    // Hide on Shop Detail (U-03), Booking Flow Steps (U-04, U-05, U-06, U-07), and Booking Details
+    const isShopDetail = !!state.selectedRestaurant;
+    const isBookingFlow = !!(state.bookingModalState && state.bookingModalState.isOpen);
+    const isBookingDetail = !!state.selectedReservationId;
+
+    if (isShopDetail || isBookingFlow || isBookingDetail) {
+      return '';
+    }
+
     const isMm = state.currentLanguage === 'MM';
     const reservationCount = state.reservations.length;
 

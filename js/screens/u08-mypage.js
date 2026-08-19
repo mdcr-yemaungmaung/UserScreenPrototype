@@ -137,23 +137,23 @@
                     const isCompleted = (item.status || '').toLowerCase() === 'completed';
 
                     return `
-                      <div class="luxe-card bg-[#FFF8EE] rounded-2xl border border-[#EADECB] p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-md transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div class="luxe-card bg-[#FFF8EE] rounded-2xl border border-[#EADECB] p-4 sm:p-6 md:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-md transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
                         
                         <!-- Left Column: Title & Details -->
-                        <div class="space-y-2 min-w-0 flex-1">
+                        <div class="space-y-2 min-w-0 flex-1 w-full md:w-auto">
 
                           <!-- Restaurant Name -->
                           <h3
-                            class="font-headline text-2xl sm:text-[26px] font-bold text-[#1E1B13] leading-tight truncate my-1"
+                            class="font-headline text-lg sm:text-2xl md:text-[26px] font-bold text-[#1E1B13] leading-snug truncate my-0.5 sm:my-1"
                           >
                             ${isMm ? (item.restaurantNameMM || item.restaurantName) : item.restaurantName}
                           </h3>
 
                           <!-- Date, Time, Guests -->
-                          <div class="flex items-center flex-wrap gap-x-6 gap-y-1.5 text-sm text-[#4E3F3A] font-medium font-body">
+                          <div class="flex items-center flex-wrap gap-x-3.5 sm:gap-x-6 gap-y-1.5 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body">
                             <!-- Date -->
-                            <span class="inline-flex items-center gap-2">
-                              <svg class="w-4 h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <span class="inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                                 <line x1="16" y1="2" x2="16" y2="6"/>
                                 <line x1="8" y1="2" x2="8" y2="6"/>
@@ -163,8 +163,8 @@
                             </span>
 
                             <!-- Time -->
-                            <span class="inline-flex items-center gap-2">
-                              <svg class="w-4 h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <span class="inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"/>
                                 <polyline points="12 6 12 12 16 14"/>
                               </svg>
@@ -172,8 +172,8 @@
                             </span>
 
                             <!-- Guests -->
-                            <span class="inline-flex items-center gap-2">
-                              <svg class="w-4 h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <span class="inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -184,30 +184,31 @@
                           </div>
 
                           <!-- Location -->
-                          <div class="flex items-center gap-2 text-sm text-[#4E3F3A] font-medium font-body pt-0.5">
-                            <svg class="w-4 h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <div class="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body pt-0.5 min-w-0">
+                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                               <circle cx="12" cy="10" r="3"/>
                             </svg>
-                            <span>${item.location || 'Yangon Cultural District'}</span>
+                            <span class="truncate">${item.location || 'Yangon Cultural District'}</span>
                           </div>
 
                         </div>
 
                         <!-- Right Column: Status & Action Buttons -->
-                        <div class="flex flex-col items-end gap-3 shrink-0 self-stretch md:self-auto justify-between md:justify-end mt-3 md:mt-0 w-full md:w-auto">
+                        <div class="flex flex-col items-stretch sm:items-end gap-2.5 shrink-0 self-stretch md:self-auto justify-between md:justify-end mt-1 sm:mt-3 md:mt-0 w-full md:w-auto">
                           
                           <!-- Top Row: Status Badge (Right Most) -->
-                          <div class="flex items-center justify-end w-full">
+                          <div class="flex items-center justify-between sm:justify-end w-full">
+                            <span class="sm:hidden text-xs text-[#7A6B65] font-semibold">${isMm ? 'အခြေအနေ' : 'Status'}</span>
                             ${renderStatusPill(item.status, isMm)}
                           </div>
 
                           <!-- Bottom Row: Action Buttons -->
-                          <div class="flex items-center flex-wrap gap-2.5 justify-end w-full">
+                          <div class="flex items-center flex-wrap sm:flex-nowrap gap-2 justify-stretch sm:justify-end w-full">
                             <!-- Details & Modify Button -->
                             <button
                               data-mypage-view-detail-id="${item.id}"
-                              class="btn-primary px-5 py-2.5 rounded-full font-label font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                              class="btn-primary flex-1 sm:flex-initial px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-label font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
                             >
                               <span class="material-symbols-outlined text-base">visibility</span>
                               <span>${isMm ? 'အသေးစိတ်နှင့် ပြင်ဆင်ရန်' : 'Details & Modify'}</span>
@@ -216,7 +217,7 @@
                             <!-- View QR Button -->
                             <button
                               data-mypage-view-pass-id="${item.id}"
-                              class="px-4 py-2.5 rounded-full bg-white border border-[#EADFD1] font-label font-semibold text-xs sm:text-sm text-[#231916] hover:bg-[#840f16] hover:text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                              class="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white border border-[#EADFD1] font-label font-semibold text-xs sm:text-sm text-[#231916] hover:bg-[#840f16] hover:text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs whitespace-nowrap"
                             >
                               <span class="material-symbols-outlined text-base">qr_code_2</span>
                               <span>QR</span>
@@ -229,7 +230,7 @@
                                   <button
                                     data-write-review-id="${item.id}"
                                     data-review-restaurant="${item.restaurantName}"
-                                    class="bg-[#FFF3D6] hover:bg-[#FFE7AB] border border-[#D08E1C]/40 text-[#8F5D0B] font-label font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-full shadow-2xs transition-all cursor-pointer flex items-center gap-1"
+                                    class="bg-[#FFF3D6] hover:bg-[#FFE7AB] border border-[#D08E1C]/40 text-[#8F5D0B] font-label font-semibold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap flex-1 sm:flex-initial"
                                   >
                                     <span class="material-symbols-outlined text-sm text-[#D08E1C]">star</span>
                                     <span>${isMm ? 'သုံးသပ်ချက်' : 'Review'}</span>
@@ -241,7 +242,7 @@
                                     data-rebook-date="${item.date}"
                                     data-rebook-time="${item.time}"
                                     data-rebook-guests="${item.guests}"
-                                    class="bg-white hover:bg-[#FAF4EB] border border-[#EADFD1] text-[#58413F] font-label font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-full transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                                    class="bg-white hover:bg-[#FAF4EB] border border-[#EADFD1] text-[#58413F] font-label font-semibold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs whitespace-nowrap flex-1 sm:flex-initial"
                                     title="${isMm ? 'ယခင် အချက်အလက်များဖြင့် ပြန်စိုတ်ရန်' : 'Rebook with Same Conditions'}"
                                   >
                                     <span class="material-symbols-outlined text-base">restart_alt</span>

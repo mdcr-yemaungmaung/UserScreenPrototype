@@ -180,7 +180,7 @@
                     <h3 class="font-headline text-xl font-bold text-[#231916]">
                       ${isMm ? 'အဆောက်အအုံနှင့် ဝန်ဆောင်မှုများ (Facilities)' : 'Facilities & Amenities'}
                     </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+                    <div class="flex flex-wrap gap-2.5 sm:gap-3">
                       ${(restaurant.facilities && restaurant.facilities.length > 0
                         ? restaurant.facilities
                         : [
@@ -192,11 +192,9 @@
                       )
                         .map(
                           fac => `
-                        <div class="bg-[#FDF8EE] p-4 rounded-2xl border border-[#EADFD1] flex items-center gap-3 shadow-2xs hover:border-[#840f16]/40 transition-all">
-                          <div class="w-9 h-9 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-xl">${fac.icon}</span>
-                          </div>
-                          <span class="font-label text-xs sm:text-sm font-bold text-[#231916] leading-snug">
+                        <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#FAF3E8] border border-[#EADFD1] text-[#231916] hover:border-[#840f16]/40 transition-colors shadow-2xs">
+                          <span class="material-symbols-outlined text-base text-[#840f16] shrink-0">${fac.icon}</span>
+                          <span class="font-label text-xs sm:text-sm font-semibold text-[#231916]">
                             ${isMm ? (fac.labelMM || fac.label) : fac.label}
                           </span>
                         </div>
@@ -545,10 +543,10 @@
         </div>
 
         <!-- MOBILE & TABLET FLOATING ACTION BUTTON (ကြိုတင်မှာယူမှု Floating ခလုတ်) -->
-        <div class="lg:hidden fixed bottom-20 md:bottom-8 right-5 sm:right-6 z-50">
+        <div class="lg:hidden fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
           <button
             id="mobile-sticky-reserve-btn"
-            class="bg-[#840f16] hover:bg-[#6b0c12] active:bg-[#52090d] text-white px-5 sm:px-6 py-3.5 rounded-full font-label text-sm font-bold shadow-[0_10px_25px_rgba(132,15,22,0.45)] flex items-center gap-2 cursor-pointer border border-[#f5ebdc]/30 transition-all duration-200 active:scale-95 hover:shadow-[0_12px_28px_rgba(132,15,22,0.55)]"
+            class="bg-[#840f16] hover:bg-[#6b0c12] active:bg-[#52090d] text-white px-5 sm:px-6 py-3.5 rounded-full font-label text-sm font-bold shadow-[0_8px_20px_rgba(132,15,22,0.4)] flex items-center gap-2 cursor-pointer border border-[#f5ebdc]/30 transition-all duration-200 active:scale-95 hover:shadow-[0_10px_24px_rgba(132,15,22,0.5)]"
           >
             <span class="material-symbols-outlined text-lg">calendar_month</span>
             <span>${isMm ? 'ကြိုတင်မှာယူမည်' : 'Book Now'}</span>
