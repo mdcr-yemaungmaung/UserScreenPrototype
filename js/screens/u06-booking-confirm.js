@@ -52,7 +52,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#840f16] text-white shadow-xs">3</div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#840f16]">STEP 03</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုမှု' : 'Confirm Order'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#840f16]"></div>
@@ -64,11 +64,8 @@
         <div class="bg-[#FFF7E8] rounded-3xl border border-[#EADFD1] shadow-xl overflow-hidden p-6 sm:p-8 space-y-6">
           
           <div class="border-b border-[#EADFD1] pb-4">
-            <div class="text-[#840f16] font-label text-xs font-bold uppercase tracking-wider mb-1">
-              ${isMm ? 'အဆင့် ၃ • စစ်ဆေးပြီး အတည်ပြုမည်' : 'Step 3 of 3 • Review & Confirm'}
-            </div>
             <h2 class="font-headline text-2xl sm:text-3xl text-[#231916] font-bold">
-              ${isMm ? 'ကြိုတင်မှာယူမှုကို အတည်ပြုပါ' : 'Confirm Reservation'}
+              ${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}
             </h2>
           </div>
 
@@ -79,9 +76,6 @@
                 <span class="material-symbols-outlined text-[#840f16] text-lg">restaurant</span>
                 <span>${isMm ? 'ဆိုင်နှင့် စားပွဲဝိုင်း အချက်အလက်' : 'Restaurant & Table Details'}</span>
               </div>
-              <span class="text-xs font-label font-bold text-[#840f16] bg-[#840f16]/10 px-2.5 py-1 rounded-md border border-[#840f16]/20">
-                ${restaurant.cuisine || 'Fine Dining'}
-              </span>
             </div>
 
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -182,17 +176,18 @@
           </div>
 
           <label class="flex items-center gap-3 cursor-pointer bg-[#FBF3E2] p-4 rounded-xl border border-[#EADFD1]">
-            <input type="checkbox" id="step3-terms" checked class="w-5 h-5 rounded border-[#EADFD1] text-[#840f16] cursor-pointer" />
+            <input type="checkbox" id="step3-terms" checked class="w-5 h-5 rounded border-[#EADFD1] accent-[#840f16] cursor-pointer" />
             <span class="font-body text-xs text-[#231916] font-semibold">
               ${isMm ? 'ပယ်ဖျက်ခြင်းဆိုင်ရာ စည်းမျဉ်းများနှင့် စည်းကမ်းချက်များကို သဘောတူပါသည်။' : 'I agree to the cancellation policy and restaurant terms of service.'}
             </span>
           </label>
 
-          <div class="flex justify-between items-center gap-4 pt-2">
-            <button id="step3-back-btn" class="px-6 py-3.5 rounded-full border border-[#D5C2AF] font-label text-xs font-semibold text-[#58413f] hover:bg-[#F5EBDC] transition-all cursor-pointer">
-              ${isMm ? 'နောက်သို့' : 'Back'}
+          <div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 mt-5">
+            <button id="step3-back-btn" class="w-full sm:w-auto px-7 py-3.5 rounded-full border border-[#D5C2AF] font-label text-sm font-semibold text-[#58413f] hover:bg-[#F5EBDC] transition-all cursor-pointer flex items-center justify-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">arrow_back</span>
+              <span>${isMm ? 'နောက်သို့' : 'Back'}</span>
             </button>
-            <button id="step3-final-btn" class="flex-1 btn-primary py-4 rounded-full font-label text-sm font-semibold shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all">
+            <button id="step3-final-btn" class="w-full sm:w-auto bg-[#840f16] hover:bg-[#6b0c12] text-white font-label text-sm font-bold px-8 py-3.5 rounded-full shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all">
               <span>${isMm ? 'ကြိုတင်မှာယူမှု အတည်ပြုမည်' : 'Confirm Reservation'}</span>
               <span class="material-symbols-outlined text-sm">check_circle</span>
             </button>

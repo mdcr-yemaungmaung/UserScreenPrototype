@@ -45,7 +45,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#104b2b] text-white"><span class="material-symbols-outlined text-sm font-bold">check</span></div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#8d7b75]">STEP 03</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုမှု' : 'Confirm Order'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#104b2b]"></div>

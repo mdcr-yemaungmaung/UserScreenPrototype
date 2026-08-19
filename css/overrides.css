@@ -726,5 +726,11 @@ textarea {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+/* Form Controls Accent Color */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #840f16;
+}
+
 
 

@@ -55,7 +55,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#EADFD1] text-[#58413f]">3</div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#8d7b75]">STEP 03</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုမှု' : 'Confirm Order'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#EADFD1]/60"></div>
@@ -71,12 +71,8 @@
           </button>
 
           <div class="border-b border-[#EADFD1] pb-4 pr-12">
-            <div class="flex items-center gap-1.5 text-[#840f16] font-label text-[11px] font-bold uppercase tracking-widest mb-1">
-              <span class="w-2 h-2 rounded-full bg-[#840f16]"></span>
-              ${isMm ? 'အဆင့် ၁ • ' + restaurant.name : `STEP 1 OF 3 • ${restaurant.name.toUpperCase()}`}
-            </div>
             <h2 class="font-headline text-2xl sm:text-3xl text-[#231916] font-bold">
-              ${isMm ? 'ရက်စွဲနှင့် အချိန် ရွေးချယ်ပါ' : 'Select Date & Schedule'}
+              ${isMm ? 'ရက်စွဲနှင့် အချိန်' : 'Date & Schedule'}
             </h2>
           </div>
 

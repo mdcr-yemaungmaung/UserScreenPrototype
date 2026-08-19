@@ -45,7 +45,7 @@
                 <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-[#EADFD1] text-[#58413f]">3</div>
                 <div class="min-w-0">
                   <div class="font-label text-[10px] font-bold uppercase tracking-wider text-[#8d7b75]">STEP 03</div>
-                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုမှု' : 'Confirm Order'}</div>
+                  <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] truncate">${isMm ? 'အတည်ပြုချက်' : 'Confirm Reservation'}</div>
                 </div>
               </div>
               <div class="mt-2.5 h-1 rounded-full w-full bg-[#EADFD1]/60"></div>
@@ -57,11 +57,8 @@
         <div class="bg-[#FFF7E8] rounded-3xl border border-[#EADFD1] shadow-xl overflow-hidden p-6 sm:p-8">
           
           <div class="border-b border-[#EADFD1] pb-4 mb-6">
-            <div class="text-[#840f16] font-label text-xs font-bold uppercase tracking-wider mb-1">
-              ${isMm ? 'အဆင့် ၂ • ဧည့်သည် အချက်အလက်နှင့် ငွေပေးချေမှု' : 'Step 2 of 3 • Guest & Payment Details'}
-            </div>
             <h2 class="font-headline text-2xl sm:text-3xl text-[#231916] font-bold">
-              ${isMm ? 'ကြိုတင်မှာယူမှု ပြီးမြောက်အောင် ဖြည့်စွက်ပါ' : 'Complete Reservation'}
+              ${isMm ? 'ဧည့်သည် အချက်အလက်' : 'Guest Details'}
             </h2>
           </div>
 
@@ -116,11 +113,12 @@
               </div>
             </div>
 
-            <div class="flex items-center justify-between gap-4 pt-4 border-t border-[#EADFD1]">
-              <button id="step2-back-btn" type="button" class="px-6 py-3.5 rounded-full border border-[#D5C2AF] font-label text-xs font-semibold text-[#58413f] hover:bg-[#F5EBDC] transition-all cursor-pointer">
-                ${isMm ? 'နောက်သို့' : 'Back'}
+            <div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 mt-6">
+              <button id="step2-back-btn" type="button" class="w-full sm:w-auto px-7 py-3.5 rounded-full border border-[#D5C2AF] font-label text-sm font-semibold text-[#58413f] hover:bg-[#F5EBDC] transition-all cursor-pointer flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                <span>${isMm ? 'နောက်သို့' : 'Back'}</span>
               </button>
-              <button type="submit" class="flex-1 sm:flex-initial sm:min-w-[240px] btn-primary py-3.5 px-8 rounded-full font-label text-sm font-semibold shadow-md cursor-pointer flex items-center justify-center gap-2">
+              <button type="submit" class="w-full sm:w-auto bg-[#840f16] hover:bg-[#6b0c12] text-white font-label text-sm font-bold px-8 py-3.5 rounded-full shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all">
                 <span>${isMm ? 'စစ်ဆေးချက် သို့ ဆက်သွားမည်' : 'Continue to Summary'}</span>
                 <span class="material-symbols-outlined text-sm">arrow_forward</span>
               </button>
