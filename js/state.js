@@ -4,83 +4,188 @@
   const INITIAL_RESERVATIONS = [
     {
       id: 'res-2026-001',
-      reservationNo: 'RES-2026-001',
-      restaurantId: 'rest-2',
-      restaurantName: 'The Glass Pavilion',
-      restaurantImage: 'assets/images/seeds.jpg',
-      location: 'Inya Lake Waterfront, Yangon',
-      date: 'Jul 20, 2026',
-      time: '19:00',
-      guests: 4,
-      seatingPreference: 'Lake View',
-      specialRequests: 'Window table preferred.',
-      guestName: 'alex',
+      reservationNo: 'RSV-665304',
+      restaurantId: 'rest-1',
+      restaurantName: 'The Gilded Fork',
+      restaurantNameMM: 'ဂီးလ်ဒက် ဖော့ခ် သီးသန့် အဆင့်မြင့် စားသောက်ဆိုင်',
+      restaurantImage: 'assets/images/gilded_fork.jpg',
+      restaurantPhone: '+95 9 798 123 456',
+      location: 'Yangon Cultural District',
+      address: 'No. 105, Manawhari Road, Cultural District, Dagon, Yangon',
+      date: 'Aug 14, 2026',
+      time: '18:30',
+      guests: 2,
+      seatingPreference: 'Lake View Window',
+      seatingTags: ['Lake View', 'Window Table', 'Private Corner', 'Air Conditioned'],
+      courseName: 'Luxe Waterfront 5-Course Tasting Experience',
+      courseNameMM: 'သီးသန့် ၅ မျိုးဆက် ရေကန်စပ် အထူး မြည်းစမ်းဟင်းလျာတွဲ',
+      menuItems: [
+        { name: 'Truffle Scented Shan Avocado Tartare', nameMM: 'ထရက်ဖယ်ဆီမွှေး ရှမ်းထောပတ်သီး အသုတ်', priceMMK: 35000, priceUSD: 10, qty: 2 },
+        { name: 'Pan-Seared Andaman Sea Bass with Lemongrass Beurre Blanc', nameMM: 'ကရဝေးဆီဆမ်း ကင်္ကလာပင်လယ် ကကတစ်ငါးကင်', priceMMK: 55000, priceUSD: 16, qty: 2 },
+        { name: 'Charcoal Grilled Grass-Fed Ribeye (Mandalay Dry-Aged)', nameMM: 'မန္တလေးအမဲသား ကင်ချက် အထူးဟင်းလျာ', priceMMK: 65000, priceUSD: 19, qty: 2 },
+        { name: 'Artisanal Bagan Palm Jaggery Soufflé', nameMM: 'ပုဂံထန်းလျက် အချိုပွဲ', priceMMK: 25000, priceUSD: 7, qty: 2 }
+      ],
+      specialRequests: 'Celebrating 5th wedding anniversary. Quiet romantic window table overlooking the lake.',
+      guestName: 'Alex Aung',
       guestPhone: '+95 9 791 234 567',
       guestEmail: 'alex@example.com',
-      paymentMethod: 'qr',
-      status: 'Confirmed',
-      createdAt: '2026-07-15T10:00:00Z',
-      totalAmount: 350000
+      paymentMethod: 'KBZPay QR',
+      paymentStatus: 'Pre-paid Deposit Verified',
+      status: 'Confirmed', // 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled'
+      cancelHours: 24,
+      cancellationPolicy: 'Free cancellation up to 24 hours prior to reservation. 50% fee within 24h, 100% on same day.',
+      cancellationPolicyMM: 'လာရောက်မည့်အချိန်မတိုင်မီ ၂၄ နာရီအလိုအထိ အခမဲ့ ပယ်ဖျက်နိုင်ပါသည်။ ၂၄ နာရီအတွင်း ပယ်ဖျက်ပါက ၅၀%၊ ထိုနေ့တွင် ပယ်ဖျက်ပါက ၁၀၀% ပယ်ဖျက်ခ ကျသင့်ပါမည်။',
+      createdAt: '2026-08-10T10:00:00Z',
+      totalAmount: 180000,
+      totalAmountMMK: 180000,
+      totalAmountUSD: 54
     },
     {
       id: 'res-2026-002',
       reservationNo: 'RES-2026-002',
       restaurantId: 'rest-1',
       restaurantName: 'Golden Mandalay',
+      restaurantNameMM: 'ဂီးလ်ဒက် ဖော့ခ် သီးသန့် အဆင့်မြင့် စားသောက်ဆိုင်',
       restaurantImage: 'assets/images/padonmar.jpg',
+      restaurantPhone: '+95 9 450 098 765',
       location: 'Bahan Township, Yangon',
-      date: 'Jul 18, 2026',
+      address: 'No. 105, Manawhari Road, Cultural District, Dagon, Yangon',
+      date: 'Aug 22, 2026',
       time: '12:00',
       guests: 2,
-      seatingPreference: 'Standard',
-      specialRequests: 'Quiet corner.',
-      guestName: 'alex',
+      seatingPreference: 'Private Teakwood Alcove',
+      seatingTags: ['Private Room', 'Traditional Ambience', 'Air Conditioned'],
+      courseName: 'Royal Burmese Heritage Luncheon',
+      courseNameMM: 'နန်းတွင်း မြန်မာ့ရိုးရာ နေ့လယ်စာ ဟင်းလျာတွဲ',
+      menuItems: [
+        { name: 'Royal Tea Leaf Salad (Lahpet Thoke)', nameMM: 'နန်းတွင်း အထူး အော်ဂဲနစ် လက်ဖက်သုတ်', priceMMK: 28000, priceUSD: 8, qty: 2 },
+        { name: 'Golden Curry Soft Shell Crab', nameMM: 'ပင်လယ်စာ ပော့ခွံနူး ကဏန်း အနှစ်ချက်', priceMMK: 65000, priceUSD: 19, qty: 2 },
+        { name: 'Heritage Mohinga Degustation', nameMM: 'နန်းတွင်း အထူး မုန့်ဟင်းခါး', priceMMK: 38000, priceUSD: 11, qty: 2 }
+      ],
+      specialRequests: 'Quiet corner table for a business discussion. Low spice level.',
+      guestName: 'Alex Aung',
       guestPhone: '+95 9 791 234 567',
       guestEmail: 'alex@example.com',
-      paymentMethod: 'qr',
+      paymentMethod: 'WavePay',
+      paymentStatus: 'Awaiting Venue Confirmation',
       status: 'Pending',
-      createdAt: '2026-07-14T09:30:00Z',
-      totalAmount: 180000
+      cancelHours: 24,
+      cancellationPolicy: 'Free cancellation up to 24 hours before dining.',
+      cancellationPolicyMM: 'လာရောက်မည့်အချိန်မတိုင်မီ ၂၄ နာရီအလိုအထိ အခမဲ့ ပယ်ဖျက်နိုင်ပါသည်။',
+      createdAt: '2026-08-14T09:30:00Z',
+      totalAmount: 180000,
+      totalAmountMMK: 180000,
+      totalAmountUSD: 54
     },
     {
       id: 'res-2026-003',
       reservationNo: 'RES-2026-003',
       restaurantId: 'rest-5',
       restaurantName: 'Sakura Garden',
+      restaurantNameMM: 'ဆာကူရာ ဂျပန်ရိုးရာ အိုမိုကာဆေး စားသောက်ဆိုင်',
       restaurantImage: 'assets/images/gekko.jpg',
+      restaurantPhone: '+95 9 780 432 100',
       location: 'Yangon Downtown',
+      address: 'Merchant Street, Kyauktada Township, Downtown Yangon',
       date: 'Jul 10, 2026',
       time: '19:30',
       guests: 6,
       seatingPreference: 'Private Tatami Room',
-      specialRequests: 'Chef Omakase Set for 6.',
-      guestName: 'alex',
+      seatingTags: ['Tatami Room', 'VIP Chef Counter', 'Non-Smoking'],
+      courseName: 'Premium Chef Omakase Degustation (6 Pax)',
+      courseNameMM: 'ပရီမီယံ ဂျပန်စားဖိုမှူး အထူး အိုမိုကာဆေး ၆ ယောက်စာ',
+      menuItems: [
+        { name: 'Sashimi Moriawase & Hokkaido Scallop', nameMM: 'ဆာရှိမိ ငါးစိမ်းလတ်လတ်ဆတ်ဆတ်နှင့် ကမာ', priceMMK: 120000, priceUSD: 36, qty: 6 },
+        { name: 'A5 Miyazaki Wagyu Sukiyaki Pot', nameMM: 'A5 ဝါဂျူး အမဲသား ဆူကီယာကီ အိုးကြီး', priceMMK: 180000, priceUSD: 54, qty: 1 },
+        { name: 'Matcha Fondant with Gold Leaf', nameMM: 'ရွှေဆိုင်းချ မတ်ချာ ရေခဲမုန့် အချိုပွဲ', priceMMK: 35000, priceUSD: 10, qty: 6 }
+      ],
+      specialRequests: 'Chef Omakase Set for 6 guests. Welcome champagne glasses.',
+      guestName: 'Alex Aung',
       guestPhone: '+95 9 791 234 567',
       guestEmail: 'alex@example.com',
-      paymentMethod: 'qr',
+      paymentMethod: 'Credit Card',
+      paymentStatus: 'Completed & Settled',
       status: 'Completed',
+      cancelHours: 48,
+      cancellationPolicy: 'Non-refundable if cancelled within 48 hours.',
+      cancellationPolicyMM: '၄၈ နာရီအတွင်း ပယ်ဖျက်ပါက ပယ်ဖျက်ခ အပြည့် ကျသင့်ပါမည်။',
       createdAt: '2026-07-02T14:15:00Z',
-      totalAmount: 480000
+      totalAmount: 480000,
+      totalAmountMMK: 480000,
+      totalAmountUSD: 145
     },
     {
       id: 'res-2026-004',
       reservationNo: 'RES-2026-004',
       restaurantId: 'rest-6',
       restaurantName: 'Lakeview Terrace',
+      restaurantNameMM: 'လိပ်ဗျူး အပန်းဖြေ ပြင်ပ စားသောက်ဆိုင်',
       restaurantImage: 'assets/images/lopera.jpg',
+      restaurantPhone: '+95 9 512 345 678',
       location: 'Mayangone Township, Yangon',
+      address: 'Kabar Aye Pagoda Road, Mayangone, Yangon',
       date: 'Jul 5, 2026',
       time: '18:00',
       guests: 2,
-      seatingPreference: 'Terrace Garden',
-      specialRequests: 'Anniversary celebration.',
-      guestName: 'alex',
+      seatingPreference: 'Terrace Garden Sunset View',
+      seatingTags: ['Terrace Garden', 'Sunset View', 'Outdoor Seating'],
+      courseName: 'Sunset Italian Bistro Experience',
+      courseNameMM: 'နေဝင်ဆည်းဆာ အီတလီ အထူး ညစာတွဲ',
+      menuItems: [
+        { name: 'Burrata Caprese with Organic Heirlooms', nameMM: 'ဘူရာတာ ဒိန်ခဲနှင့် ခရမ်းချဉ်သီး အသုတ်', priceMMK: 40000, priceUSD: 12, qty: 2 },
+        { name: 'Handmade Black Truffle Tagliolini', nameMM: 'လက်လုပ် ထရက်ဖယ် ခေါက်ဆွဲဟင်းလျာ', priceMMK: 58000, priceUSD: 17, qty: 2 },
+        { name: 'Classic Tiramisu al Mascarpone', nameMM: 'ရိုးရာ တီရာမီဆု အချိုပွဲ', priceMMK: 22000, priceUSD: 6, qty: 2 }
+      ],
+      specialRequests: 'Anniversary celebration. Outdoor terrace table.',
+      guestName: 'Alex Aung',
       guestPhone: '+95 9 791 234 567',
       guestEmail: 'alex@example.com',
-      paymentMethod: 'qr',
+      paymentMethod: 'Cash on Arrival',
+      paymentStatus: 'Cancelled by User',
       status: 'Cancelled',
+      cancelHours: 24,
+      cancellationPolicy: 'Free cancellation up to 24 hours before dining.',
+      cancellationPolicyMM: 'လာရောက်မည့်အချိန်မတိုင်မီ ၂၄ နာရီအလိုအထိ အခမဲ့ ပယ်ဖျက်နိုင်ပါသည်။',
       createdAt: '2026-06-28T11:00:00Z',
-      totalAmount: 220000
+      totalAmount: 220000,
+      totalAmountMMK: 220000,
+      totalAmountUSD: 66
+    },
+    {
+      id: 'res-guest-2026-849',
+      reservationNo: 'R20260815-K7M2QX',
+      restaurantId: 'rest-2',
+      restaurantName: 'The Glass Pavilion',
+      restaurantNameMM: 'သီးသန့် ရေကန်စပ် အဆင့်မြင့် စားသောက်ဆိုင်',
+      restaurantImage: 'assets/images/seeds.jpg',
+      restaurantPhone: '+95 9 798 123 456',
+      location: 'Inya Lake Waterfront, Yangon',
+      address: 'No. 63/A, U Tun Nyein Street, Ward 10, Mayangone, Yangon',
+      date: 'Aug 25, 2026',
+      time: '18:30',
+      guests: 2,
+      seatingPreference: 'Lake View Window',
+      seatingTags: ['Lake View', 'Window Table', 'Air Conditioned'],
+      courseName: 'Romantic Lakefront Tasting Menu',
+      courseNameMM: 'ရိုမန်းတစ် ရေကန်စပ် အထူး ညစာတွဲ',
+      menuItems: [
+        { name: 'Truffle Scented Shan Avocado Tartare', nameMM: 'ထရက်ဖယ်ဆီမွှေး ရှမ်းထောပတ်သီး အသုတ်', priceMMK: 35000, priceUSD: 10, qty: 2 },
+        { name: 'Pan-Seared Andaman Sea Bass with Lemongrass Beurre Blanc', nameMM: 'ကရဝေးဆီဆမ်း ကင်္ကလာပင်လယ် ကကတစ်ငါးကင်', priceMMK: 55000, priceUSD: 16, qty: 2 }
+      ],
+      specialRequests: 'Window seat preferred. Non-smoking zone.',
+      guestName: 'Daw Thida Win',
+      guestPhone: '09791234567',
+      guestEmail: 'guest.thida@example.com',
+      paymentMethod: 'KBZPay QR',
+      paymentStatus: 'Pre-paid Deposit Verified',
+      status: 'Confirmed',
+      cancelHours: 24,
+      cancellationPolicy: 'Free cancellation up to 24 hours before dining. 50% within 24h.',
+      cancellationPolicyMM: 'လာရောက်မည့်အချိန်မတိုင်မီ ၂၄ နာရီအလိုအထိ အခမဲ့ ပယ်ဖျက်နိုင်ပါသည်။',
+      createdAt: '2026-08-15T12:00:00Z',
+      totalAmount: 180000,
+      totalAmountMMK: 180000,
+      totalAmountUSD: 54
     }
   ];
 
@@ -151,7 +256,7 @@
 
         // My Page Modal State
         myPageModal: 'none', // 'none' | 'waitlist' | 'coupons' | 'notifications' | 'viber' | 'announcements' | 'points' | 'account' | 'review'
-        myPageSubTab: 'past', // 'upcoming' | 'past'
+        myPageSubTab: 'upcoming', // 'upcoming' | 'past'
         myPageActiveMenu: 'reservations', // 'reservations' | 'favorites' | 'waitlist' | 'coupons' | 'points' | 'notifications' | 'viber' | 'announcements' | 'account'
         myPageData: {
           waitlists: [
@@ -267,6 +372,61 @@
           resetEmail: '',
           showSignUp: false,
           isGuestFlow: false
+        },
+
+        // =====================================================================
+        // U-09: Reservation Details, Change & Cancellation State
+        // =====================================================================
+        selectedReservationId: null, // string (e.g. 'res-2026-001') or null for list
+        isGuestReservationView: false, // true if viewed by guest without login
+
+        // U-09: Date/Time & Guest Count Change Modal
+        u09ChangeModal: {
+          isOpen: false,
+          reservationId: null,
+          date: 'Aug 20, 2026',
+          time: '19:00',
+          guests: 4,
+          originalGuests: 4,
+          originalAmount: 350000,
+          newAmount: 350000,
+          cancelHours: 24,
+          isWithinCancelHours: false,
+          errorMessage: null,
+          isSubmitting: false
+        },
+
+        // U-09: Cancellation Modal with Fee Calculator
+        u09CancelModal: {
+          isOpen: false,
+          reservationId: null,
+          reason: 'schedule_change',
+          otherReasonText: '',
+          feePercentage: 0,
+          feeAmount: 0,
+          isSubmitting: false
+        },
+
+        // U-09: Review Modal (for Completed Reservations)
+        u09ReviewModal: {
+          isOpen: false,
+          reservationId: null,
+          restaurantId: null,
+          restaurantName: '',
+          overallRating: 5,
+          foodRating: 5,
+          serviceRating: 5,
+          ambienceRating: 5,
+          valueRating: 5,
+          comment: '',
+          photos: [],
+          isSubmitting: false
+        },
+
+        // U-09: Quick QR Pass Modal
+        u09QrPassModal: {
+          isOpen: false,
+          reservationId: null
         }
       };
 
@@ -383,14 +543,270 @@
     }
 
     cancelReservation(id) {
-      const next = this.state.reservations.filter(b => b.id !== id);
-      this.state.reservations = next;
+      const target = this.state.reservations.find(b => b.id === id);
+      if (target) {
+        target.status = 'Cancelled';
+      }
       try {
-        localStorage.setItem('yoyaku_reservations', JSON.stringify(next));
+        localStorage.setItem('yoyaku_reservations', JSON.stringify(this.state.reservations));
       } catch (e) {
         console.error(e);
       }
       this.showToast('Reservation cancelled');
+      this.notify();
+    }
+
+    // =========================================================================
+    // U-09: Reservation Details, Change & Cancellation Actions
+    // =========================================================================
+    selectReservationForDetail(reservationId, isGuest = false) {
+      this.state.selectedReservationId = reservationId;
+      this.state.isGuestReservationView = isGuest;
+      this.state.activeTab = 'reservations';
+      this.notify();
+    }
+
+    clearSelectedReservationDetail() {
+      this.state.selectedReservationId = null;
+      this.state.isGuestReservationView = false;
+      this.notify();
+    }
+
+    openU09ChangeModal(resId) {
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      const baseAmount = res.totalAmountMMK || res.totalAmount || 350000;
+      this.state.u09ChangeModal = {
+        isOpen: true,
+        reservationId: resId,
+        date: res.date || 'Aug 20, 2026',
+        time: res.time || '19:00',
+        guests: res.guests || 2,
+        originalGuests: res.guests || 2,
+        originalAmount: baseAmount,
+        newAmount: baseAmount,
+        cancelHours: res.cancelHours || 24,
+        isWithinCancelHours: false,
+        errorMessage: null,
+        isSubmitting: false
+      };
+      this.notify();
+    }
+
+    closeU09ChangeModal() {
+      this.state.u09ChangeModal.isOpen = false;
+      this.notify();
+    }
+
+    updateU09ChangeField(field, value) {
+      const m = this.state.u09ChangeModal;
+      if (!m.isOpen) return;
+
+      if (field === 'guests') {
+        const g = Math.max(1, Math.min(20, parseInt(value, 10) || 1));
+        m.guests = g;
+        const perPerson = m.originalAmount / (m.originalGuests || 1);
+        m.newAmount = Math.round(perPerson * g);
+      } else {
+        m[field] = value;
+      }
+      this.notify();
+    }
+
+    confirmU09Change(resId) {
+      const m = this.state.u09ChangeModal;
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      res.date = m.date;
+      res.time = m.time;
+      res.guests = m.guests;
+      res.totalAmount = m.newAmount;
+      res.totalAmountMMK = m.newAmount;
+      res.totalAmountUSD = Math.round(m.newAmount / 3300);
+      res.updatedAt = new Date().toISOString();
+
+      try {
+        localStorage.setItem('yoyaku_reservations', JSON.stringify(this.state.reservations));
+      } catch (e) {
+        console.error(e);
+      }
+
+      const isMm = this.state.currentLanguage === 'MM';
+      this.state.myPageData.notifications.unshift({
+        id: 'n_' + Date.now(),
+        title: isMm
+          ? `${res.restaurantName} မှာယူမှု ရက်စွဲနှင့် အချိန် (${m.date}၊ ${m.time}) သို့ ပြောင်းလဲပြီးပါပြီ`
+          : `Reservation at ${res.restaurantName} changed to ${m.date} at ${m.time}`,
+        time: 'Just now',
+        isUnread: true
+      });
+
+      this.state.u09ChangeModal.isOpen = false;
+      this.showToast(isMm ? 'မှာယူမှု ရက်စွဲနှင့် အချိန် ပြောင်းလဲခြင်း အောင်မြင်ပါသည်' : 'Reservation date & time updated successfully!');
+      this.notify();
+    }
+
+    openU09CancelModal(resId) {
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      const total = res.totalAmountMMK || res.totalAmount || 350000;
+      // Calculate fee based on restaurant policy
+      // If booking is >24h away: 0% fee; if <24h: 50% fee; if same-day: 100%
+      const feePercent = 0; // Default free cancellation window for demo
+      const feeAmt = Math.round(total * (feePercent / 100));
+
+      this.state.u09CancelModal = {
+        isOpen: true,
+        reservationId: resId,
+        reason: 'schedule_change',
+        otherReasonText: '',
+        feePercentage: feePercent,
+        feeAmount: feeAmt,
+        isSubmitting: false
+      };
+      this.notify();
+    }
+
+    closeU09CancelModal() {
+      this.state.u09CancelModal.isOpen = false;
+      this.notify();
+    }
+
+    setU09CancelReason(reason, otherText = '') {
+      this.state.u09CancelModal.reason = reason;
+      this.state.u09CancelModal.otherReasonText = otherText;
+      this.notify();
+    }
+
+    confirmU09Cancellation(resId) {
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      res.status = 'Cancelled';
+      res.cancelledAt = new Date().toISOString();
+      res.cancellationReason = this.state.u09CancelModal.reason;
+
+      try {
+        localStorage.setItem('yoyaku_reservations', JSON.stringify(this.state.reservations));
+      } catch (e) {
+        console.error(e);
+      }
+
+      const isMm = this.state.currentLanguage === 'MM';
+      this.state.myPageData.notifications.unshift({
+        id: 'n_' + Date.now(),
+        title: isMm
+          ? `${res.restaurantName} (${res.reservationNo}) မှာယူမှုကို ပယ်ဖျက်ပြီးပါပြီ`
+          : `Reservation at ${res.restaurantName} (${res.reservationNo}) was cancelled`,
+        time: 'Just now',
+        isUnread: true
+      });
+
+      this.state.u09CancelModal.isOpen = false;
+      this.showToast(isMm ? 'မှာယူမှုကို အောင်မြင်စွာ ပယ်ဖျက်ပြီးပါပြီ' : 'Reservation has been cancelled');
+      this.notify();
+    }
+
+    openU09ReviewModal(resId) {
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      this.state.u09ReviewModal = {
+        isOpen: true,
+        reservationId: resId,
+        restaurantId: res.restaurantId,
+        restaurantName: res.restaurantName,
+        overallRating: 5,
+        foodRating: 5,
+        serviceRating: 5,
+        ambienceRating: 5,
+        valueRating: 5,
+        comment: '',
+        photos: [],
+        isSubmitting: false
+      };
+      this.notify();
+    }
+
+    closeU09ReviewModal() {
+      this.state.u09ReviewModal.isOpen = false;
+      this.notify();
+    }
+
+    setU09ReviewField(field, value) {
+      if (this.state.u09ReviewModal.isOpen) {
+        this.state.u09ReviewModal[field] = value;
+        this.notify();
+      }
+    }
+
+    submitU09Review(resId) {
+      const rev = this.state.u09ReviewModal;
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      res.hasReviewed = true;
+      try {
+        localStorage.setItem('yoyaku_reservations', JSON.stringify(this.state.reservations));
+      } catch (e) {
+        console.error(e);
+      }
+
+      const isMm = this.state.currentLanguage === 'MM';
+      this.state.myPageData.notifications.unshift({
+        id: 'n_' + Date.now(),
+        title: isMm
+          ? `${rev.restaurantName} အတွက် သုံးသပ်ချက် ပေးပို့မှု အောင်မြင်ပါသည် (+500 Points ရရှိပါသည်)`
+          : `Thank you for reviewing ${rev.restaurantName}! (+500 Gourmet Points earned)`,
+        time: 'Just now',
+        isUnread: true
+      });
+
+      this.state.u09ReviewModal.isOpen = false;
+      this.showToast(isMm ? 'သုံးသပ်ချက် (Review) ပေးပို့မှု အောင်မြင်ပါသည်!' : 'Review submitted successfully! +500 Points earned.');
+      this.notify();
+    }
+
+    rebookReservation(resId) {
+      const res = this.state.reservations.find(b => b.id === resId);
+      if (!res) return;
+
+      const { RESTAURANTS_DATA } = window.YoyakuData || {};
+      const targetRest = (RESTAURANTS_DATA && RESTAURANTS_DATA.find(r => r.id === res.restaurantId)) || {
+        id: res.restaurantId,
+        name: res.restaurantName,
+        images: [res.restaurantImage],
+        image: res.restaurantImage,
+        location: res.location,
+        address: res.address || res.location,
+        phone: res.restaurantPhone || '+95 9 798 123 456'
+      };
+
+      this.state.bookingModalState = {
+        isOpen: true,
+        restaurant: targetRest,
+        step: 1,
+        bookingData: {
+          date: 'Aug 28, 2026',
+          time: res.time || '19:00',
+          guests: res.guests || 2,
+          seatingPreference: res.seatingPreference || 'Lake View Window'
+        },
+        guestData: {
+          guestName: res.guestName || this.state.myPageData.userName || 'Alex Aung',
+          guestPhone: res.guestPhone || this.state.myPageData.userPhone || '+95 9 791 234 567',
+          guestEmail: res.guestEmail || this.state.myPageData.userEmail || 'alex@example.com',
+          specialRequests: res.specialRequests || '',
+          paymentMethod: res.paymentMethod || 'qr'
+        },
+        createdBooking: null
+      };
+
+      const isMm = this.state.currentLanguage === 'MM';
+      this.showToast(isMm ? 'ယခင် အချက်အလက်များဖြင့် ပြန်လည်မှာယူမှု စတင်နေပါသည်' : 'Re-booking initialized with your saved preferences!');
       this.notify();
     }
 

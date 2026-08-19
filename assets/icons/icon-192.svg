@@ -1,36 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192" fill="none">
   <defs>
-    <linearGradient id="yoyakuBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#840f16" />
-      <stop offset="50%" stop-color="#60090e" />
-      <stop offset="100%" stop-color="#231916" />
+    <!-- Background Card Gradient -->
+    <linearGradient id="iconBg192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF9" />
+      <stop offset="100%" stop-color="#FBF3E2" />
     </linearGradient>
-    <linearGradient id="goldAcc" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FBF3E2" />
-      <stop offset="100%" stop-color="#D4AF37" />
+    <linearGradient id="pinLeft192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#93181F"/>
+      <stop offset="100%" stop-color="#7C0E15"/>
     </linearGradient>
-    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    <linearGradient id="pinRight192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6F0A11"/>
+      <stop offset="100%" stop-color="#55050A"/>
+    </linearGradient>
+    <filter id="dropShadow192" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#840f16" flood-opacity="0.25"/>
     </filter>
   </defs>
-  <!-- Background Rounded Squircle -->
-  <rect width="192" height="192" rx="42" fill="url(#yoyakuBg)" />
-  
-  <!-- Subtle Inner Border -->
-  <rect x="4" y="4" width="184" height="184" rx="38" fill="none" stroke="rgba(251, 243, 226, 0.2)" stroke-width="2" />
-  
-  <!-- Center Dining / Reservation Icon -->
-  <g filter="url(#dropShadow)">
-    <!-- Plate Ring -->
-    <circle cx="96" cy="96" r="44" fill="none" stroke="url(#goldAcc)" stroke-width="4" stroke-dasharray="2 3" opacity="0.6"/>
-    <circle cx="96" cy="96" r="36" fill="#840f16" stroke="url(#goldAcc)" stroke-width="3"/>
-    
-    <!-- Stylized Utensils / Cloche Symbol -->
-    <!-- Fork -->
-    <path d="M78 72 v20 c0 4 3 7 7 7 v27 h4 v-27 c4 0 7-3 7-7 v-20 h-3 v14 h-3 v-14 h-2 v14 h-3 v-14 z" fill="#FFF7E8"/>
-    <!-- Knife -->
-    <path d="M114 72 c-5 0 -8 4 -8 10 v17 c0 4 3 7 7 7 v20 h4 v-48 c0 -4 -1 -6 -3 -6 z" fill="#FFF7E8"/>
-    <!-- Center Sparkle / Star -->
-    <circle cx="96" cy="96" r="3.5" fill="#D4AF37"/>
+
+  <!-- Squircle Base -->
+  <rect width="192" height="192" rx="44" fill="url(#iconBg192)" stroke="#EADFD1" stroke-width="2"/>
+
+  <!-- Center Pin Logo -->
+  <g transform="translate(48, 22) scale(0.48)" filter="url(#dropShadow192)">
+    <!-- LEFT HALF OF PIN -->
+    <path d="M 100 12 C 58 12 24 46 24 88 C 24 128 62 170 100 216 L 100 12 Z" fill="url(#pinLeft192)" />
+
+    <!-- RIGHT HALF OF PIN -->
+    <path d="M 100 12 L 100 216 C 138 170 176 128 176 88 C 176 46 142 12 100 12 Z" fill="url(#pinRight192)" />
+
+    <!-- SPOON CUTOUT -->
+    <path d="
+      M 93 208
+      C 94 185 88 150 78 126
+      C 67 99 68 56 100 56
+      C 132 56 133 99 122 126
+      C 112 150 106 185 107 208
+      Z"
+      fill="#FFFDF9"
+    />
+
+    <!-- CENTER RED DOT -->
+    <circle cx="100" cy="94" r="14" fill="#7C0E15" />
+    <circle cx="98" cy="92" r="13" fill="#93181F" />
   </g>
+
+  <!-- Subtitle -->
+  <text x="96" y="160" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="900" fill="#1B2028" letter-spacing="-0.03em">
+    Yoyaku
+  </text>
 </svg>

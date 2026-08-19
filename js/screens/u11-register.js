@@ -14,14 +14,26 @@
         <div class="w-full max-w-md mx-auto flex flex-col items-center">
           
           <!-- Brand Logo & Header -->
-          <div class="login-brand-icon-box" id="register-brand-icon">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/>
-              <path d="M15 2v18a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V2"/>
-              <path d="M6 2v4a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2"/>
+          <div class="mb-2">
+            <svg style="width: 48px; height: 58px;" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="regPinLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#93181F"/>
+                  <stop offset="100%" stop-color="#7C0E15"/>
+                </linearGradient>
+                <linearGradient id="regPinRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#6F0A11"/>
+                  <stop offset="100%" stop-color="#55050A"/>
+                </linearGradient>
+              </defs>
+              <path d="M 100 12 C 58 12 24 46 24 88 C 24 128 62 170 100 216 L 100 12 Z" fill="url(#regPinLeft)" />
+              <path d="M 100 12 L 100 216 C 138 170 176 128 176 88 C 176 46 142 12 100 12 Z" fill="url(#regPinRight)" />
+              <path d="M 93 208 C 94 185 88 150 78 126 C 67 99 68 56 100 56 C 132 56 133 99 122 126 C 112 150 106 185 107 208 Z" fill="#FFF7E8" />
+              <circle cx="100" cy="94" r="14" fill="#7C0E15" />
+              <circle cx="98" cy="92" r="13" fill="#93181F" />
             </svg>
           </div>
-          <h1 class="login-brand-title font-headline">EzBookNow</h1>
+          <h1 class="login-brand-title font-headline font-black text-[#1B2028]">Yoyaku</h1>
           <p class="login-brand-tagline">
             ${isMm ? 'စားသောက်ဆိုင် စားပွဲဝိုင်း ကြိုတင်စိုတ်ယူခြင်းနှင့် စီမံခန့်ခွဲမှု' : 'Premium Dining Reservations & Instant Passes in Yangon'}
           </p>

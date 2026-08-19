@@ -1,36 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
   <defs>
-    <linearGradient id="yoyakuBg512" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#840f16" />
-      <stop offset="45%" stop-color="#650a0f" />
-      <stop offset="100%" stop-color="#1f1412" />
+    <linearGradient id="iconBg512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF9" />
+      <stop offset="100%" stop-color="#FBF3E2" />
     </linearGradient>
-    <linearGradient id="goldAcc512" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FBF3E2" />
-      <stop offset="100%" stop-color="#D4AF37" />
+    <linearGradient id="pinLeft512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#93181F"/>
+      <stop offset="100%" stop-color="#7C0E15"/>
     </linearGradient>
-    <filter id="shadow512" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.4"/>
+    <linearGradient id="pinRight512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6F0A11"/>
+      <stop offset="100%" stop-color="#55050A"/>
+    </linearGradient>
+    <filter id="dropShadow512" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#840f16" flood-opacity="0.25"/>
     </filter>
   </defs>
-  <!-- Background Rounded Rect -->
-  <rect width="512" height="512" rx="112" fill="url(#yoyakuBg512)" />
-  
-  <!-- Subtle Inner Border -->
-  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="rgba(251, 243, 226, 0.25)" stroke-width="4" />
-  
-  <!-- Content -->
-  <g filter="url(#shadow512)">
-    <!-- Outer Ring -->
-    <circle cx="256" cy="240" r="120" fill="none" stroke="url(#goldAcc512)" stroke-width="8" stroke-dasharray="6 8" opacity="0.7"/>
-    <circle cx="256" cy="240" r="96" fill="#840f16" stroke="url(#goldAcc512)" stroke-width="6"/>
-    
-    <!-- Fork & Knife -->
-    <path d="M210 180 v50 c0 10 8 18 18 18 v68 h10 v-68 c10 0 18-8 18-18 v-50 h-8 v34 h-7 v-34 h-6 v34 h-7 v-34 z" fill="#FFF7E8"/>
-    <path d="M302 180 c-12 0 -20 10 -20 24 v44 c0 10 8 18 18 18 v50 h10 v-120 c0 -10 -3 -16 -8 -16 z" fill="#FFF7E8"/>
-    
-    <!-- Wordmark -->
-    <text x="256" y="420" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="44" font-weight="900" fill="#FBF3E2" letter-spacing="4">YOYAKU</text>
-    <text x="256" y="450" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="700" fill="#D4AF37" letter-spacing="6">MYANMAR DINING</text>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="118" fill="url(#iconBg512)" stroke="#EADFD1" stroke-width="4"/>
+
+  <!-- Center Pin Logo -->
+  <g transform="translate(136, 60) scale(1.2)" filter="url(#dropShadow512)">
+    <!-- LEFT HALF OF PIN -->
+    <path d="M 100 12 C 58 12 24 46 24 88 C 24 128 62 170 100 216 L 100 12 Z" fill="url(#pinLeft512)" />
+
+    <!-- RIGHT HALF OF PIN -->
+    <path d="M 100 12 L 100 216 C 138 170 176 128 176 88 C 176 46 142 12 100 12 Z" fill="url(#pinRight512)" />
+
+    <!-- SPOON CUTOUT -->
+    <path d="
+      M 93 208
+      C 94 185 88 150 78 126
+      C 67 99 68 56 100 56
+      C 132 56 133 99 122 126
+      C 112 150 106 185 107 208
+      Z"
+      fill="#FFFDF9"
+    />
+
+    <!-- CENTER RED DOT -->
+    <circle cx="100" cy="94" r="14" fill="#7C0E15" />
+    <circle cx="98" cy="92" r="13" fill="#93181F" />
   </g>
+
+  <!-- Wordmark -->
+  <text x="256" y="420" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="52" font-weight="900" fill="#1B2028" letter-spacing="-0.03em">
+    Yoyaku
+  </text>
+  <text x="256" y="456" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="700" fill="#840f16" letter-spacing="4">
+    MYANMAR DINING
+  </text>
 </svg>

@@ -1,6 +1,6 @@
 (() => {
   const store = window.store;
-  const { renderTopNavBar, attachTopNavBarEvents, renderBottomNavBar, attachBottomNavBarEvents, renderFooter, attachFooterEvents, renderDiscoverView, attachDiscoverViewEvents, renderResultListView, attachResultListViewEvents, renderRestaurantDetailView, attachRestaurantDetailViewEvents, renderBookingStep1, attachBookingStep1Events, renderBookingStep2, attachBookingStep2Events, renderBookingStep3, attachBookingStep3Events, renderBookingStep4, attachBookingStep4Events, renderReservationsListView, attachReservationsListViewEvents, renderFavoritesView, attachFavoritesViewEvents, renderCuratedView, attachCuratedViewEvents, renderMyPageView, attachMyPageViewEvents, renderLoginView, attachLoginViewEvents, renderRegisterView, attachRegisterViewEvents, renderInfoModals, attachInfoModalsEvents, renderToast } = window.YoyakuComponents;
+  const { renderTopNavBar, attachTopNavBarEvents, renderBottomNavBar, attachBottomNavBarEvents, renderFooter, attachFooterEvents, renderDiscoverView, attachDiscoverViewEvents, renderResultListView, attachResultListViewEvents, renderRestaurantDetailView, attachRestaurantDetailViewEvents, renderBookingStep1, attachBookingStep1Events, renderBookingStep2, attachBookingStep2Events, renderBookingStep3, attachBookingStep3Events, renderBookingStep4, attachBookingStep4Events, renderFavoritesView, attachFavoritesViewEvents, renderCuratedView, attachCuratedViewEvents, renderMyPageView, attachMyPageViewEvents, renderBookingDetailView, attachBookingDetailViewEvents, renderLoginView, attachLoginViewEvents, renderRegisterView, attachRegisterViewEvents, renderInfoModals, attachInfoModalsEvents, renderToast } = window.YoyakuComponents;
 
   function renderApp() {
     const root = document.getElementById('root');
@@ -11,7 +11,9 @@
     // Determine Main View Content
     let mainContentHtml = '';
 
-    if (state.bookingModalState.isOpen && state.bookingModalState.restaurant) {
+    if (state.selectedReservationId && renderBookingDetailView) {
+      mainContentHtml = renderBookingDetailView(state);
+    } else if (state.bookingModalState.isOpen && state.bookingModalState.restaurant) {
       const step = state.bookingModalState.step;
       if (step === 1) {
         mainContentHtml = renderBookingStep1(state);
@@ -33,7 +35,7 @@
           mainContentHtml = renderResultListView(state);
           break;
         case 'reservations':
-          mainContentHtml = renderReservationsListView(state);
+          mainContentHtml = renderMyPageView(state);
           break;
         case 'favorites':
           mainContentHtml = renderFavoritesView(state);
@@ -120,7 +122,9 @@
     attachFooterEvents(root);
     attachInfoModalsEvents(root);
 
-    if (state.bookingModalState.isOpen && state.bookingModalState.restaurant) {
+    if (state.selectedReservationId && attachBookingDetailViewEvents) {
+      attachBookingDetailViewEvents(root);
+    } else if (state.bookingModalState.isOpen && state.bookingModalState.restaurant) {
       const step = state.bookingModalState.step;
       if (step === 1) {
         attachBookingStep1Events(root);
@@ -142,7 +146,7 @@
           attachResultListViewEvents(root);
           break;
         case 'reservations':
-          attachReservationsListViewEvents(root);
+          attachMyPageViewEvents(root);
           break;
         case 'favorites':
           attachFavoritesViewEvents(root);

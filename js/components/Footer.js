@@ -16,11 +16,27 @@
             
             <!-- Column 1: Brand & Tagline -->
             <div class="lg:col-span-2 space-y-4">
-              <div class="flex items-center gap-3 cursor-pointer group" id="footer-brand-logo">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#840f16] to-[#a52a2a] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
-                  <span class="material-symbols-outlined text-2xl font-bold">restaurant</span>
+              <div class="flex items-center gap-2.5 cursor-pointer group" id="footer-brand-logo">
+                <div class="h-9 w-auto flex items-center group-hover:scale-105 transition-transform shrink-0">
+                  <svg class="h-9 w-auto" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="footPinLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#B22222"/>
+                        <stop offset="100%" stop-color="#93181F"/>
+                      </linearGradient>
+                      <linearGradient id="footPinRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#7C0E15"/>
+                        <stop offset="100%" stop-color="#55050A"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M 100 12 C 58 12 24 46 24 88 C 24 128 62 170 100 216 L 100 12 Z" fill="url(#footPinLeft)" />
+                    <path d="M 100 12 L 100 216 C 138 170 176 128 176 88 C 176 46 142 12 100 12 Z" fill="url(#footPinRight)" />
+                    <path d="M 93 208 C 94 185 88 150 78 126 C 67 99 68 56 100 56 C 132 56 133 99 122 126 C 112 150 106 185 107 208 Z" fill="#FFF7E8" />
+                    <circle cx="100" cy="94" r="14" fill="#93181F" />
+                    <circle cx="98" cy="92" r="13" fill="#B22222" />
+                  </svg>
                 </div>
-                <span class="font-headline text-2xl font-extrabold tracking-tight text-white">
+                <span class="font-headline text-2xl font-black tracking-tight text-white">
                   Yoyaku
                 </span>
               </div>

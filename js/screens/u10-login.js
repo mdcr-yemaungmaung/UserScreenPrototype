@@ -44,16 +44,32 @@
     return `
       <div id="u10-login-screen" class="login-screen-bg select-none">
         
-        <!-- TOP BRANDING (EXACT MATCH TO REFERENCE IMAGE) -->
-        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 0.35rem;">
-          <!-- Cutlery Icon in Rounded Box -->
-          <div class="login-brand-icon-box">
-            ${cutleryIcon}
+        <!-- TOP BRANDING (EXACT MATCH TO OFFICIAL YOYAKU LOGO) -->
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 0.5rem;">
+          <!-- Official Yoyaku Pin & Spoon Mark -->
+          <div class="mb-2">
+            <svg style="width: 48px; height: 58px;" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="loginPinLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#93181F"/>
+                  <stop offset="100%" stop-color="#7C0E15"/>
+                </linearGradient>
+                <linearGradient id="loginPinRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#6F0A11"/>
+                  <stop offset="100%" stop-color="#55050A"/>
+                </linearGradient>
+              </defs>
+              <path d="M 100 12 C 58 12 24 46 24 88 C 24 128 62 170 100 216 L 100 12 Z" fill="url(#loginPinLeft)" />
+              <path d="M 100 12 L 100 216 C 138 170 176 128 176 88 C 176 46 142 12 100 12 Z" fill="url(#loginPinRight)" />
+              <path d="M 93 208 C 94 185 88 150 78 126 C 67 99 68 56 100 56 C 132 56 133 99 122 126 C 112 150 106 185 107 208 Z" fill="#FFF7E8" />
+              <circle cx="100" cy="94" r="14" fill="#7C0E15" />
+              <circle cx="98" cy="92" r="13" fill="#93181F" />
+            </svg>
           </div>
 
           <!-- Brand Title -->
-          <h1 class="login-brand-title">
-            EzBookNow
+          <h1 class="login-brand-title font-headline font-black text-[#1B2028]">
+            Yoyaku
           </h1>
         </div>
 
@@ -384,15 +400,26 @@
                       </div>
                     </div>
 
-                    <button
-                      type="button"
-                      id="btn-open-lookup-pass"
-                      class="btn-primary-action"
-                      style="height: 36px; font-size: 0.75rem;"
-                    >
-                      <span class="material-symbols-outlined" style="font-size: 0.875rem;">qr_code</span>
-                      <span>${isMm ? 'QR လက်မှတ် ဖွင့်ကြည့်ရန်' : 'View Pass & QR'}</span>
-                    </button>
+                    <div style="display: flex; gap: 0.4rem;">
+                      <button
+                        type="button"
+                        id="btn-open-lookup-detail"
+                        class="btn-primary-action"
+                        style="flex: 1; height: 36px; font-size: 0.75rem;"
+                      >
+                        <span class="material-symbols-outlined" style="font-size: 0.875rem;">receipt_long</span>
+                        <span>${isMm ? 'မှာယူမှု အသေးစိတ် (U-09)' : 'View Details'}</span>
+                      </button>
+                      <button
+                        type="button"
+                        id="btn-open-lookup-pass"
+                        class="btn-secondary-action"
+                        style="height: 36px; font-size: 0.75rem; padding: 0 0.75rem;"
+                      >
+                        <span class="material-symbols-outlined" style="font-size: 0.875rem;">qr_code</span>
+                        <span>Pass</span>
+                      </button>
+                    </div>
                   </div>
                 `
                     : ''
@@ -777,6 +804,17 @@
         }
 
         store.executeLookupReservation(resNo, phone);
+      });
+    }
+
+    // Open lookup detail (U-09 in guest mode)
+    const openLookupDetailBtn = root.querySelector('#btn-open-lookup-detail');
+    if (openLookupDetailBtn) {
+      openLookupDetailBtn.addEventListener('click', () => {
+        const res = store.getState().loginState.lookupResult;
+        if (res) {
+          store.selectReservationForDetail(res.id, true);
+        }
       });
     }
 
