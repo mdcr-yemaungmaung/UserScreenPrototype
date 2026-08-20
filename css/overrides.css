@@ -581,6 +581,27 @@ textarea {
 /* =========================================================================
    MOBILE & TABLET HORIZONTAL SCROLL FOR HOME SECTIONS
    ========================================================================= */
+.horizontal-scroll-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+}
+
+.horizontal-scroll-row::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.horizontal-scroll-row > * {
+  flex-shrink: 0 !important;
+  scroll-snap-align: start;
+}
+
 .mobile-horizontal-scroll {
   display: flex;
   overflow-x: auto;

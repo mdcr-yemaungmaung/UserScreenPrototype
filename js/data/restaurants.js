@@ -1088,7 +1088,11 @@
     { id: 'c1', name: 'Burmese', nameMM: 'မြန်မာ အစားအစာ', count: 24, image: 'assets/images/gilded_fork.jpg' },
     { id: 'c2', name: 'Teahouse & Snacks', nameMM: 'လက်ဖက်ရည်ဆိုင်နှင့် မုန့်များ', count: 18, image: 'assets/images/gilded_fork.jpg' },
     { id: 'c3', name: 'Japanese', nameMM: 'ဂျပန် အစားအစာ', count: 14, image: 'assets/images/gilded_fork.jpg' },
-    { id: 'c4', name: 'Italian & Pizza', nameMM: 'အီတလီ အစားအစာ', count: 12, image: 'assets/images/gilded_fork.jpg' }
+    { id: 'c4', name: 'Italian & Pizza', nameMM: 'အီတလီ အစားအစာ', count: 12, image: 'assets/images/gilded_fork.jpg' },
+    { id: 'c5', name: 'Chinese & Dim Sum', nameMM: 'တရုတ်နှင့် ဒင်းဆမ်း', count: 20, image: 'assets/images/gilded_fork.jpg' },
+    { id: 'c6', name: 'Thai & Southeast Asian', nameMM: 'ထိုင်းနှင့် အာရှဟင်းလျာ', count: 16, image: 'assets/images/gilded_fork.jpg' },
+    { id: 'c7', name: 'Seafood & Grill', nameMM: 'ပင်လယ်စာနှင့် အကင်', count: 15, image: 'assets/images/gilded_fork.jpg' },
+    { id: 'c8', name: 'Artisanal Bakery & Cafe', nameMM: 'မုန့်တိုက်နှင့် ကော်ဖီဆိုင်', count: 19, image: 'assets/images/gilded_fork.jpg' }
   ];
 
   window.YoyakuData.COLLECTIONS_DATA = [

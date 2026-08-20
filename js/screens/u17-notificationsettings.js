@@ -25,7 +25,7 @@
         </div>
 
         <!-- UNIFIED NOTIFICATION SETTINGS SECTION -->
-        <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] shadow-sm p-6 sm:p-7 space-y-6">
+        <div class="space-y-6">
           
           <!-- SUBSECTION 1: NOTIFICATION CHANNELS -->
           <div class="space-y-2.5">

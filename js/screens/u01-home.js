@@ -217,7 +217,7 @@
         </section>
 
         <!-- EXPLORE BY CUISINE -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left relative">
           <div class="flex justify-between items-end mb-4 lg:mb-6">
             <div>
               <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916]">
@@ -227,81 +227,156 @@
                 ${isMm ? 'မိမိနှစ်သက်သော ဟင်းလျာအလိုက် စားသောက်ဆိုင်များကို ရွေးချယ်ပါ' : 'Select from traditional heritage recipes to contemporary international fusion.'}
               </p>
             </div>
-            <button
-              data-nav-tab="resultlist"
-              class="font-label text-xs font-bold text-[#840f16] hover:underline flex items-center gap-1 cursor-pointer"
-            >
-              <span>${isMm ? 'အားလုံးကြည့်ရန်' : 'View All'}</span>
-              <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
+            <div class="flex items-center gap-3">
+              <!-- Slidable arrowhead navigation icons for web view -->
+              <div class="hidden sm:flex items-center gap-1.5 bg-[#FBF3E2] p-1 rounded-2xl border border-[#EADFD1]">
+                <button
+                  id="cuisine-slide-prev"
+                  aria-label="Previous cuisines"
+                  class="w-8 h-8 rounded-xl bg-white hover:bg-[#840f16] text-[#231916] hover:text-white border border-[#EADFD1] hover:border-[#840f16] flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95"
+                >
+                  <span class="material-symbols-outlined text-lg leading-none select-none">chevron_left</span>
+                </button>
+                <button
+                  id="cuisine-slide-next"
+                  aria-label="Next cuisines"
+                  class="w-8 h-8 rounded-xl bg-white hover:bg-[#840f16] text-[#231916] hover:text-white border border-[#EADFD1] hover:border-[#840f16] flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95"
+                >
+                  <span class="material-symbols-outlined text-lg leading-none select-none">chevron_right</span>
+                </button>
+              </div>
+
+              <button
+                data-nav-tab="resultlist"
+                class="font-label text-xs font-bold text-[#840f16] hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <span>${isMm ? 'အားလုံးကြည့်ရန်' : 'View All'}</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Explore by Cuisine Carousel/Grid -->
-          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-2 lg:pb-0">
-            ${CUISINES_DATA.map(c => `
-              <button
-                data-cuisine-filter="${c.name}"
-                class="shrink-0 w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] lg:w-auto lg:h-auto snap-start group bg-[#FBF3E2] p-2 sm:p-2.5 lg:p-4 rounded-2xl lg:rounded-3xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-lg transition-all text-center lg:text-left flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 sm:gap-1.5 lg:gap-4 cursor-pointer"
-              >
-                <div class="w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0">
-                  <img src="${c.image}" alt="${c.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <div class="min-w-0">
-                  <div class="font-headline text-[11px] sm:text-xs lg:text-base font-bold text-[#231916] group-hover:text-[#840f16] transition-colors truncate">
-                    ${isMm ? c.nameMM : c.name}
+          <!-- Explore by Cuisine Carousel Container with Pressable Floating Arrow Controls -->
+          <div class="relative group/cuisine-carousel">
+            <!-- Left Pressable Scroll Arrow -->
+            <button
+              id="cuisine-float-prev"
+              aria-label="Scroll left"
+              title="Scroll left"
+              class="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-[#840f16] text-[#231916] hover:text-white border border-[#EADFD1] shadow-lg items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
+            >
+              <span class="material-symbols-outlined text-xl leading-none select-none">chevron_left</span>
+            </button>
+
+            <!-- Scrollable Cuisine Items Row -->
+            <div
+              id="cuisine-scroll-container"
+              class="horizontal-scroll-row flex flex-nowrap items-center overflow-x-auto overflow-y-hidden scroll-smooth -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 gap-3 sm:gap-3.5 pb-2 pt-1"
+            >
+              ${CUISINES_DATA.map(c => `
+                <button
+                  data-cuisine-filter="${c.name}"
+                  class="shrink-0 snap-start w-auto min-w-max group bg-[#FBF3E2] hover:bg-[#F5E8D3] active:scale-98 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-[#EADFD1] hover:border-[#840f16] hover:shadow-md transition-all text-left flex items-center gap-3 cursor-pointer"
+                >
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden border border-[#EADFD1] shrink-0 shadow-xs">
+                    <img src="${c.image}" alt="${c.name}" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div class="font-label text-[9px] sm:text-[10px] text-[#58413f] mt-0.5 hidden sm:block">
-                    ${c.count} ${isMm ? 'ဆိုင်များ' : 'Venues'}
+                  <div class="pr-1">
+                    <div class="font-headline text-xs sm:text-sm font-bold text-[#231916] group-hover:text-[#840f16] transition-colors whitespace-nowrap">
+                      ${isMm ? c.nameMM : c.name}
+                    </div>
+                    <div class="font-label text-[10px] sm:text-[11px] text-[#58413f] whitespace-nowrap mt-0.5">
+                      ${c.count} ${isMm ? 'ဆိုင်များ' : 'Venues'}
+                    </div>
                   </div>
-                </div>
-              </button>
-            `).join('')}
+                </button>
+              `).join('')}
+            </div>
+
+            <!-- Right Pressable Scroll Arrow -->
+            <button
+              id="cuisine-float-next"
+              aria-label="Scroll right"
+              title="Scroll right"
+              class="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-[#840f16] text-[#231916] hover:text-white border border-[#EADFD1] shadow-lg items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
+            >
+              <span class="material-symbols-outlined text-xl leading-none select-none">chevron_right</span>
+            </button>
           </div>
         </section>
 
-        <!-- PROMOTION & ANNOUNCEMENT BANNERS (ကြေညာချက်ဘန်နာများ) -->
+        <!-- PROMOTION & ANNOUNCEMENT BANNERS (ကြေညာချက်ဘန်နာများ - 1 Slidable Row with Indicators) -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-2 gap-3 sm:gap-4 pb-2 lg:pb-0">
-            
-            <!-- Banner 1: KBZPay / WavePay Special Offer -->
-            <div class="shrink-0 w-[calc(85vw-28px)] sm:w-[calc(48vw-28px)] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#840f16] to-[#a52a2a] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#840f16]/30">
-              <div class="space-y-1.5 z-10 text-left min-w-0">
-                <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-amber-200">
-                  <span class="material-symbols-outlined text-xs">local_activity</span>
-                  <span>${isMm ? 'ပရိုမိုးရှင်း အထူးအစီအစဉ်' : 'Exclusive Dining Offer'}</span>
+          <div class="relative group/promo-carousel">
+            <!-- Left Pressable Scroll Arrow -->
+            <button
+              id="promo-float-prev"
+              aria-label="Previous promo banner"
+              title="Previous banner"
+              class="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-[#840f16] text-[#231916] hover:text-white border border-[#EADFD1] shadow-lg items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
+            >
+              <span class="material-symbols-outlined text-xl leading-none select-none">chevron_left</span>
+            </button>
+
+            <div
+              id="promo-scroll-container"
+              class="horizontal-scroll-row flex flex-nowrap items-stretch overflow-x-auto overflow-y-hidden scroll-smooth -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 gap-3.5 sm:gap-4 pb-2 pt-1"
+            >
+              <!-- Banner 1: KBZPay / WavePay Special Offer -->
+              <div class="shrink-0 w-[calc(88vw-24px)] sm:w-[500px] lg:w-[580px] snap-start relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#840f16] to-[#a52a2a] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#840f16]/30">
+                <div class="space-y-1.5 z-10 text-left min-w-0">
+                  <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-amber-200">
+                    <span class="material-symbols-outlined text-xs">local_activity</span>
+                    <span>${isMm ? 'ပရိုမိုးရှင်း အထူးအစီအစဉ်' : 'Exclusive Dining Offer'}</span>
+                  </div>
+                  <h3 class="font-headline text-base sm:text-lg lg:text-xl font-extrabold leading-tight">
+                    ${isMm ? 'KBZPay & WavePay ဖြင့် စိုတ်ယူပါက ၂၀% လျှော့ဈေး' : '20% Off Weekend Dining Pass with KBZPay'}
+                  </h3>
+                  <p class="font-body text-xs text-white/80 line-clamp-2 sm:line-clamp-none">
+                    ${isMm ? 'ယခုပတ်အတွင်း စားပွဲဝိုင်း စိုတ်ယူသူများအတွက် ရရှိနိုင်သော ကူပွန်' : 'Apply voucher code YOYAKUKBZ50K at checkout for instant table discount.'}
+                  </p>
                 </div>
-                <h3 class="font-headline text-base sm:text-lg lg:text-xl font-extrabold leading-tight">
-                  ${isMm ? 'KBZPay & WavePay ဖြင့် စိုတ်ယူပါက ၂၀% လျှော့ဈေး' : '20% Off Weekend Dining Pass with KBZPay'}
-                </h3>
-                <p class="font-body text-xs text-white/80 line-clamp-2 sm:line-clamp-none">
-                  ${isMm ? 'ယခုပတ်အတွင်း စားပွဲဝိုင်း စိုတ်ယူသူများအတွက် ရရှိနိုင်သော ကူပွန်' : 'Apply voucher code YOYAKUKBZ50K at checkout for instant table discount.'}
-                </p>
+                <button data-nav-tab="mypage" class="shrink-0 bg-white text-[#840f16] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-amber-100 transition-colors shadow-md cursor-pointer z-10 whitespace-nowrap">
+                  ${isMm ? 'ကူပွန်ယူမည်' : 'Claim Voucher'}
+                </button>
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
               </div>
-              <button data-nav-tab="mypage" class="shrink-0 bg-white text-[#840f16] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-amber-100 transition-colors shadow-md cursor-pointer z-10 whitespace-nowrap">
-                ${isMm ? 'ကူပွန်ယူမည်' : 'Claim Voucher'}
-              </button>
-              <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+
+              <!-- Banner 2: Instant VIP Table Pass Info -->
+              <div class="shrink-0 w-[calc(88vw-24px)] sm:w-[500px] lg:w-[580px] snap-start relative overflow-hidden rounded-3xl bg-[#1c1311] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#362723]">
+                <div class="space-y-1.5 z-10 text-left min-w-0">
+                  <div class="inline-flex items-center gap-1.5 bg-[#d08e1c]/20 px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-[#d08e1c]">
+                    <span class="material-symbols-outlined text-xs">verified</span>
+                    <span>${isMm ? 'စနစ်ဆိုင်ရာ အသိပေးချက်' : 'System Announcement'}</span>
+                  </div>
+                  <h3 class="font-headline text-base sm:text-lg lg:text-xl font-extrabold text-[#e8dfd8] leading-tight">
+                    ${isMm ? 'ဗဟန်း၊ ဒဂုံ၊ မြို့ထဲတွင် Instant Pass စတင်ပါပြီ' : 'Instant Table Confirmation Enabled in Yangon'}
+                  </h3>
+                  <p class="font-body text-xs text-[#bcaaa4] line-clamp-2 sm:line-clamp-none">
+                    ${isMm ? 'စောင့်ဆိုင်းရန် မလိုဘဲ စားပွဲဝိုင်းများကို ချက်ချင်းအတည်ပြုပေးပါသည်' : 'No phone calls needed. Receive instant QR entry pass right on your phone.'}
+                  </p>
+                </div>
+                <button data-nav-tab="resultlist" class="shrink-0 bg-[#d08e1c] text-white px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-[#b07616] transition-colors shadow-md cursor-pointer z-10 whitespace-nowrap">
+                  ${isMm ? 'စိုတ်ယူရန်' : 'Book Table'}
+                </button>
+              </div>
             </div>
 
-            <!-- Banner 2: Instant VIP Table Pass Info -->
-            <div class="shrink-0 w-[calc(85vw-28px)] sm:w-[calc(48vw-28px)] lg:w-auto snap-start relative overflow-hidden rounded-3xl bg-[#1c1311] p-5 sm:p-6 text-white shadow-xl flex items-center justify-between gap-4 border border-[#362723]">
-              <div class="space-y-1.5 z-10 text-left min-w-0">
-                <div class="inline-flex items-center gap-1.5 bg-[#d08e1c]/20 px-3 py-0.5 rounded-full text-[10px] font-label font-bold uppercase tracking-wider text-[#d08e1c]">
-                  <span class="material-symbols-outlined text-xs">verified</span>
-                  <span>${isMm ? 'စနစ်ဆိုင်ရာ အသိပေးချက်' : 'System Announcement'}</span>
-                </div>
-                <h3 class="font-headline text-base sm:text-lg lg:text-xl font-extrabold text-[#e8dfd8] leading-tight">
-                  ${isMm ? 'ဗဟန်း၊ ဒဂုံ၊ မြို့ထဲတွင် Instant Pass စတင်ပါပြီ' : 'Instant Table Confirmation Enabled in Yangon'}
-                </h3>
-                <p class="font-body text-xs text-[#bcaaa4] line-clamp-2 sm:line-clamp-none">
-                  ${isMm ? 'စောင့်ဆိုင်းရန် မလိုဘဲ စားပွဲဝိုင်းများကို ချက်ချင်းအတည်ပြုပေးပါသည်' : 'No phone calls needed. Receive instant QR entry pass right on your phone.'}
-                </p>
-              </div>
-              <button data-nav-tab="resultlist" class="shrink-0 bg-[#d08e1c] text-white px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl font-label text-xs font-bold hover:bg-[#b07616] transition-colors shadow-md cursor-pointer z-10 whitespace-nowrap">
-                ${isMm ? 'စိုတ်ယူရန်' : 'Book Table'}
-              </button>
-            </div>
+            <!-- Right Pressable Scroll Arrow -->
+            <button
+              id="promo-float-next"
+              aria-label="Next promo banner"
+              title="Next banner"
+              class="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-20 w-10 h-10 rounded-full bg-white/95 hover:bg-[#840f16] text-[#231916] hover:text-white border border-[#EADFD1] shadow-lg items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
+            >
+              <span class="material-symbols-outlined text-xl leading-none select-none">chevron_right</span>
+            </button>
 
+            <!-- Slidable Dot Indicators -->
+            <div class="flex items-center justify-center gap-1.5 mt-2.5" id="promo-dots-container">
+              <button data-promo-dot="0" class="w-6 h-1.5 rounded-full bg-[#840f16] transition-all cursor-pointer" aria-label="Go to slide 1"></button>
+              <button data-promo-dot="1" class="w-2 h-1.5 rounded-full bg-[#EADFD1] hover:bg-[#840f16]/50 transition-all cursor-pointer" aria-label="Go to slide 2"></button>
+            </div>
           </div>
         </section>
 
@@ -505,6 +580,129 @@
         store.setActiveTab('resultlist');
       });
     });
+
+    // Cuisine horizontal slide controls (header buttons + floating buttons)
+    const cuisineScrollContainer = containerElement.querySelector('#cuisine-scroll-container');
+    const cuisinePrevBtn = containerElement.querySelector('#cuisine-slide-prev');
+    const cuisineNextBtn = containerElement.querySelector('#cuisine-slide-next');
+    const cuisineFloatPrev = containerElement.querySelector('#cuisine-float-prev');
+    const cuisineFloatNext = containerElement.querySelector('#cuisine-float-next');
+
+    const updateCuisineScrollButtons = () => {
+      if (!cuisineScrollContainer) return;
+      const { scrollLeft, scrollWidth, clientWidth } = cuisineScrollContainer;
+      const isAtStart = scrollLeft <= 10;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+
+      if (cuisineFloatPrev) {
+        cuisineFloatPrev.style.opacity = isAtStart ? '0' : '1';
+        cuisineFloatPrev.style.pointerEvents = isAtStart ? 'none' : 'auto';
+      }
+      if (cuisineFloatNext) {
+        cuisineFloatNext.style.opacity = isAtEnd ? '0' : '1';
+        cuisineFloatNext.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+      }
+      if (cuisinePrevBtn) {
+        cuisinePrevBtn.disabled = isAtStart;
+        cuisinePrevBtn.style.opacity = isAtStart ? '0.4' : '1';
+      }
+      if (cuisineNextBtn) {
+        cuisineNextBtn.disabled = isAtEnd;
+        cuisineNextBtn.style.opacity = isAtEnd ? '0.4' : '1';
+      }
+    };
+
+    const handleScrollLeft = (e) => {
+      if (e) e.preventDefault();
+      if (cuisineScrollContainer) {
+        cuisineScrollContainer.scrollBy({ left: -280, behavior: 'smooth' });
+      }
+    };
+
+    const handleScrollRight = (e) => {
+      if (e) e.preventDefault();
+      if (cuisineScrollContainer) {
+        cuisineScrollContainer.scrollBy({ left: 280, behavior: 'smooth' });
+      }
+    };
+
+    if (cuisinePrevBtn) cuisinePrevBtn.addEventListener('click', handleScrollLeft);
+    if (cuisineNextBtn) cuisineNextBtn.addEventListener('click', handleScrollRight);
+    if (cuisineFloatPrev) cuisineFloatPrev.addEventListener('click', handleScrollLeft);
+    if (cuisineFloatNext) cuisineFloatNext.addEventListener('click', handleScrollRight);
+
+    if (cuisineScrollContainer) {
+      cuisineScrollContainer.addEventListener('scroll', updateCuisineScrollButtons, { passive: true });
+      // Initialize states after paint
+      setTimeout(updateCuisineScrollButtons, 50);
+    }
+
+    // Promotion banners horizontal slide controls & indicators
+    const promoScrollContainer = containerElement.querySelector('#promo-scroll-container');
+    const promoFloatPrev = containerElement.querySelector('#promo-float-prev');
+    const promoFloatNext = containerElement.querySelector('#promo-float-next');
+    const promoDots = containerElement.querySelectorAll('[data-promo-dot]');
+
+    const updatePromoCarouselState = () => {
+      if (!promoScrollContainer) return;
+      const { scrollLeft, scrollWidth, clientWidth } = promoScrollContainer;
+      const isAtStart = scrollLeft <= 10;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+
+      if (promoFloatPrev) {
+        promoFloatPrev.style.opacity = isAtStart ? '0' : '1';
+        promoFloatPrev.style.pointerEvents = isAtStart ? 'none' : 'auto';
+      }
+      if (promoFloatNext) {
+        promoFloatNext.style.opacity = isAtEnd ? '0' : '1';
+        promoFloatNext.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+      }
+
+      // Update dot active indicator states
+      const maxScroll = Math.max(1, scrollWidth - clientWidth);
+      const activeIndex = scrollLeft / maxScroll > 0.4 ? 1 : 0;
+      promoDots.forEach((dot, idx) => {
+        if (idx === activeIndex) {
+          dot.className = 'w-6 h-1.5 rounded-full bg-[#840f16] transition-all cursor-pointer';
+        } else {
+          dot.className = 'w-2 h-1.5 rounded-full bg-[#EADFD1] hover:bg-[#840f16]/50 transition-all cursor-pointer';
+        }
+      });
+    };
+
+    if (promoFloatPrev) {
+      promoFloatPrev.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (promoScrollContainer) {
+          promoScrollContainer.scrollBy({ left: -340, behavior: 'smooth' });
+        }
+      });
+    }
+
+    if (promoFloatNext) {
+      promoFloatNext.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (promoScrollContainer) {
+          promoScrollContainer.scrollBy({ left: 340, behavior: 'smooth' });
+        }
+      });
+    }
+
+    promoDots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetIdx = parseInt(dot.getAttribute('data-promo-dot') || '0', 10);
+        if (promoScrollContainer) {
+          const targetLeft = targetIdx === 0 ? 0 : promoScrollContainer.scrollWidth;
+          promoScrollContainer.scrollTo({ left: targetLeft, behavior: 'smooth' });
+        }
+      });
+    });
+
+    if (promoScrollContainer) {
+      promoScrollContainer.addEventListener('scroll', updatePromoCarouselState, { passive: true });
+      setTimeout(updatePromoCarouselState, 50);
+    }
 
     // Hero Calendar View Popover Logic
     const dateTrigger = containerElement.querySelector('#hero-date-trigger');
