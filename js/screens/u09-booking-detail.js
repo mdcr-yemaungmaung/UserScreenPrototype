@@ -10,12 +10,12 @@
     return Number(amount).toLocaleString('en-US') + ' MMK';
   }
 
-  // Render Status Badge
+  // Render Status Badge (Clean typography without container box shape)
   function renderStatusBadge(status, isMm) {
     const s = (status || 'confirmed').toLowerCase();
     if (s === 'confirmed') {
       return `
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 shadow-sm">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700">
           <span class="material-symbols-outlined text-sm text-emerald-600">check_circle</span>
           <span>${isMm ? 'အတည်ပြုပြီး' : 'Confirmed'}</span>
         </span>
@@ -23,7 +23,7 @@
     }
     if (s === 'pending') {
       return `
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-300 shadow-sm">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700">
           <span class="material-symbols-outlined text-sm text-amber-600">schedule</span>
           <span>${isMm ? 'စောင့်ဆိုင်းဆဲ' : 'Pending Approval'}</span>
         </span>
@@ -31,7 +31,7 @@
     }
     if (s === 'completed') {
       return `
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300 shadow-sm">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700">
           <span class="material-symbols-outlined text-sm text-slate-500">task_alt</span>
           <span>${isMm ? 'ပြီးမြောက်ပြီး' : 'Completed'}</span>
         </span>
@@ -39,14 +39,14 @@
     }
     if (s === 'cancelled') {
       return `
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-800 border border-rose-300 shadow-sm">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700">
           <span class="material-symbols-outlined text-sm text-rose-600">cancel</span>
           <span>${isMm ? 'ပယ်ဖျက်ပြီး' : 'Cancelled'}</span>
         </span>
       `;
     }
     return `
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-700 border border-gray-300 shadow-sm">
+      <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#58413f]">
         <span>${status}</span>
       </span>
     `;
@@ -103,28 +103,22 @@
       <div id="u09-booking-detail-page" class="min-h-screen bg-[#FFF7E8] text-[#231916] pb-24 font-body antialiased">
         
         <!-- TOP BREADCRUMB & BACK HEADER -->
-        <div class="bg-[#FFFDF9] border-b border-[#EADFD1] sticky top-16 z-20 shadow-xs">
+        <div class="bg-[#FFFDF9] sticky top-16 z-20">
           <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
             
             <div class="flex items-center gap-3">
               <button
                 id="u09-back-btn"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold text-[#58413f] hover:text-[#840F16] hover:bg-[#F5EDE0] transition-colors cursor-pointer"
+                class="inline-flex items-center gap-2 text-xs sm:text-sm font-label font-bold text-[#840f16] hover:text-[#680b11] transition-colors cursor-pointer py-1"
                 title="${isMm ? 'နောက်သို့ ပြန်သွားရန်' : 'Back'}"
               >
-                <span class="material-symbols-outlined text-xl">arrow_back</span>
+                <span class="material-symbols-outlined text-base sm:text-lg text-[#840f16]">arrow_back</span>
                 <span>${isGuest ? (isMm ? 'ဧည့်သည် စုံစမ်းမှုသို့' : 'Back to Inquiry') : (isMm ? 'မှတ်တမ်းသို့ ပြန်သွားရန်' : 'Back to Reservations')}</span>
               </button>
             </div>
 
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-semibold text-[#7A6B65] uppercase tracking-wider hidden sm:inline">
-                ${isMm ? 'စိုတ်ထားမှု အမှတ်စဉ်:' : 'Reservation:'}
-              </span>
-              <span class="font-mono text-xs font-bold text-[#840F16] bg-[#FCEEEA] px-2.5 py-1 rounded-md border border-[#F2D2CB]">
-                ${resNumber}
-              </span>
-            </div>
+            <!-- Top Right Space / Actions Placeholder -->
+            <div></div>
 
           </div>
         </div>
@@ -156,23 +150,26 @@
           ` : ''}
 
           <!-- SECTION 1: RESERVATION SUMMARY HEADER CARD -->
-          <div class="bg-[#FFFDF9] rounded-2xl border border-[#EADFD1] p-6 sm:p-8 shadow-sm space-y-6">
+          <div class="bg-transparent lg:bg-[#FFFDF9] rounded-none lg:rounded-2xl border-0 lg:border lg:border-[#EADFD1] p-0 lg:p-8 shadow-none lg:shadow-sm space-y-6">
             
-            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#F0E5D8] pb-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1.5">
-                <div class="flex items-center gap-2.5 flex-wrap">
-                  ${renderStatusBadge(res.status, isMm)}
-                  <span class="text-xs text-[#7A6B65] font-medium font-body flex items-center gap-1">
-                    <span class="material-symbols-outlined text-xs">tag</span>
-                    <span>${resNumber}</span>
-                  </span>
-                </div>
-                <h1 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916] tracking-tight">
+                <h1 class="font-headline text-lg sm:text-xl font-bold text-[#231916]">
                   ${restName}
                 </h1>
-                <div class="flex items-center gap-2 text-xs sm:text-sm text-[#58413f] font-medium">
-                  <span class="material-symbols-outlined text-sm text-[#840F16]">location_on</span>
-                  <span>${restLocation}</span>
+                <div class="flex items-center gap-2.5 text-xs sm:text-sm text-[#58413f] flex-wrap">
+                  <div class="flex items-center gap-1 text-xs">
+                    <span class="material-symbols-outlined text-sm text-[#840F16]">location_on</span>
+                    <span>${restLocation}</span>
+                  </div>
+                  <span class="text-[#D3C4B4] text-xs">•</span>
+                  <div class="flex items-center gap-1">
+                    ${renderStatusBadge(res.status, isMm)}
+                  </div>
+                  <span class="text-[#D3C4B4] text-xs">•</span>
+                  <span class="text-xs text-[#7A6B65] font-mono font-medium">
+                    #${resNumber}
+                  </span>
                 </div>
               </div>
 
@@ -197,6 +194,67 @@
                   <span>${isMm ? 'QR ကတ်' : 'QR Pass'}</span>
                 </button>
               </div>
+            </div>
+
+          </div>
+
+          <!-- ACTION TILES: CALL, CALENDAR, MAP (ABOVE SPECIFICATIONS) -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            
+            <!-- Call Shop Concierge -->
+            <button
+              id="u09-call-shop-btn"
+              data-phone="${res.phone || '+95 1 541 997'}"
+              class="p-4 rounded-2xl bg-[#FAF3E8] hover:bg-[#F2E5D4] border border-[#EADFD1] hover:border-[#840F16]/40 text-left transition-all flex items-center gap-3.5 cursor-pointer group shadow-2xs"
+            >
+              <div class="w-11 h-11 rounded-xl bg-white border border-[#EADFD1] group-hover:border-[#840F16]/30 group-hover:bg-[#FFF8F6] text-[#840F16] flex items-center justify-center transition-colors shrink-0 shadow-2xs">
+                <span class="material-symbols-outlined text-xl text-[#840F16]">call</span>
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-[#231916] group-hover:text-[#840F16] transition-colors truncate">${isMm ? 'ဆိုင်သို့ ဖုန်းခေါ်ဆိုရန်' : 'Call Restaurant'}</div>
+                <div class="text-[11px] font-mono text-[#58413f] truncate">${res.phone || '+95 1 541 997'}</div>
+              </div>
+            </button>
+
+            <!-- Add to Calendar -->
+            <button
+              id="u09-calendar-btn"
+              class="p-4 rounded-2xl bg-[#FAF3E8] hover:bg-[#F2E5D4] border border-[#EADFD1] hover:border-[#840F16]/40 text-left transition-all flex items-center gap-3.5 cursor-pointer group shadow-2xs"
+            >
+              <div class="w-11 h-11 rounded-xl bg-white border border-[#EADFD1] group-hover:border-[#840F16]/30 group-hover:bg-[#FFF8F6] text-[#840F16] flex items-center justify-center transition-colors shrink-0 shadow-2xs">
+                <span class="material-symbols-outlined text-xl text-[#840F16]">event</span>
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-[#231916] group-hover:text-[#840F16] transition-colors truncate">${isMm ? 'ပြက္ခဒိန်တွင် သိမ်းရန်' : 'Add to Calendar'}</div>
+                <div class="text-[11px] text-[#58413f] truncate">${res.date} • ${res.time}</div>
+              </div>
+            </button>
+
+            <!-- Get Directions / Map -->
+            <button
+              id="u09-map-btn"
+              data-address="${res.address || res.location || 'Yangon'}"
+              class="p-4 rounded-2xl bg-[#FAF3E8] hover:bg-[#F2E5D4] border border-[#EADFD1] hover:border-[#840F16]/40 text-left transition-all flex items-center gap-3.5 cursor-pointer group shadow-2xs"
+            >
+              <div class="w-11 h-11 rounded-xl bg-white border border-[#EADFD1] group-hover:border-[#840F16]/30 group-hover:bg-[#FFF8F6] text-[#840F16] flex items-center justify-center transition-colors shrink-0 shadow-2xs">
+                <span class="material-symbols-outlined text-xl text-[#840F16]">map</span>
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-[#231916] group-hover:text-[#840F16] transition-colors truncate">${isMm ? 'လမ်းညွှန် မြေပုံကြည့်ရန်' : 'View Location Map'}</div>
+                <div class="text-[11px] text-[#58413f] truncate">${restLocation}</div>
+              </div>
+            </button>
+
+          </div>
+
+          <!-- SECTION 2: DETAILED RESERVATION SPECIFICATIONS -->
+          <div class="bg-transparent lg:bg-[#FFFDF9] rounded-none lg:rounded-2xl border-0 lg:border lg:border-[#EADFD1] p-0 lg:p-8 shadow-none lg:shadow-sm space-y-6">
+            
+            <div class="flex items-center justify-between border-b border-[#F0E5D8] pb-3">
+              <h2 class="font-headline text-lg sm:text-xl font-bold text-[#231916] flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#840F16]">receipt_long</span>
+                <span>${isMm ? 'ကြိုတင်စာရင်း အချက်အလက် အပြည့်အစုံ' : 'Reservation Specifications'}</span>
+              </h2>
             </div>
 
             <!-- KEY ATTRIBUTE HIGHLIGHTS (Date, Time, Guests) -->
@@ -237,18 +295,6 @@
                 </div>
               </div>
 
-            </div>
-
-          </div>
-
-          <!-- SECTION 2: DETAILED RESERVATION SPECIFICATIONS -->
-          <div class="bg-[#FFFDF9] rounded-2xl border border-[#EADFD1] p-6 sm:p-8 shadow-sm space-y-6">
-            
-            <div class="flex items-center justify-between border-b border-[#F0E5D8] pb-3">
-              <h2 class="font-headline text-lg sm:text-xl font-bold text-[#231916] flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#840F16]">receipt_long</span>
-                <span>${isMm ? 'ကြိုတင်စာရင်း အချက်အလက် အပြည့်အစုံ' : 'Reservation Specifications'}</span>
-              </h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
@@ -329,7 +375,7 @@
           </div>
 
           <!-- SECTION 3: CHANGE AND CANCELLATION ACTIONS -->
-          <div class="bg-[#FFFDF9] rounded-2xl border border-[#EADFD1] p-6 sm:p-8 shadow-sm space-y-6">
+          <div class="bg-transparent lg:bg-[#FFFDF9] rounded-none lg:rounded-2xl border-0 lg:border lg:border-[#EADFD1] p-0 lg:p-8 shadow-none lg:shadow-sm space-y-6">
             
             <div class="flex items-center justify-between border-b border-[#F0E5D8] pb-3">
               <h2 class="font-headline text-lg sm:text-xl font-bold text-[#231916] flex items-center gap-2">
@@ -395,79 +441,19 @@
 
           </div>
 
-          <!-- SECTION 4: SECONDARY ACTIONS & VENUE CONTACT -->
-          <div class="bg-[#FFFDF9] rounded-2xl border border-[#EADFD1] p-6 sm:p-8 shadow-sm space-y-5">
-            
-            <div class="flex items-center justify-between border-b border-[#F0E5D8] pb-3">
-              <h2 class="font-headline text-lg sm:text-xl font-bold text-[#231916] flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#840F16]">storefront</span>
-                <span>${isMm ? 'ဆိုင်နှင့် ဆက်သွယ်ရန်နှင့် အခြားလုပ်ဆောင်ချက်များ' : 'Venue Contact & Secondary Actions'}</span>
-              </h2>
+          <!-- REBOOK BUTTON (if cancelled/completed) -->
+          ${(isCancelled || isCompleted) ? `
+            <div class="pt-2">
+              <button
+                id="u09-rebook-btn"
+                data-rest-id="${res.restaurantId || '1'}"
+                class="btn-primary w-full py-3.5 px-6 rounded-full font-label font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+              >
+                <span class="material-symbols-outlined text-base">repeat</span>
+                <span>${isMm ? 'ယခင်အချက်အလက်များဖြင့် ပြန်လည်မှာယူရန်' : 'Rebook This Restaurant'}</span>
+              </button>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
-              
-              <!-- Call Shop Concierge -->
-              <button
-                id="u09-call-shop-btn"
-                data-phone="${res.phone || '+95 1 541 997'}"
-                class="p-4 rounded-2xl bg-[#FAF3E8] hover:bg-[#F2E5D4] border border-[#EADFD1] hover:border-[#840F16]/40 text-left transition-all flex items-center gap-3.5 cursor-pointer group shadow-2xs"
-              >
-                <div class="w-11 h-11 rounded-xl bg-white border border-[#EADFD1] group-hover:border-[#840F16]/30 group-hover:bg-[#FFF8F6] text-[#840F16] flex items-center justify-center transition-colors shrink-0 shadow-2xs">
-                  <span class="material-symbols-outlined text-xl text-[#840F16]">call</span>
-                </div>
-                <div class="min-w-0">
-                  <div class="text-xs font-bold text-[#231916] group-hover:text-[#840F16] transition-colors truncate">${isMm ? 'ဆိုင်သို့ ဖုန်းခေါ်ဆိုရန်' : 'Call Restaurant'}</div>
-                  <div class="text-[11px] font-mono text-[#58413f] truncate">${res.phone || '+95 1 541 997'}</div>
-                </div>
-              </button>
-
-              <!-- Add to Calendar -->
-              <button
-                id="u09-calendar-btn"
-                class="p-4 rounded-2xl bg-[#FAF3E8] hover:bg-[#F2E5D4] border border-[#EADFD1] hover:border-[#840F16]/40 text-left transition-all flex items-center gap-3.5 cursor-pointer group shadow-2xs"
-              >
-                <div class="w-11 h-11 rounded-xl bg-white border border-[#EADFD1] group-hover:border-[#840F16]/30 group-hover:bg-[#FFF8F6] text-[#840F16] flex items-center justify-center transition-colors shrink-0 shadow-2xs">
-                  <span class="material-symbols-outlined text-xl text-[#840F16]">event</span>
-                </div>
-                <div class="min-w-0">
-                  <div class="text-xs font-bold text-[#231916] group-hover:text-[#840F16] transition-colors truncate">${isMm ? 'ပြက္ခဒိန်တွင် သိမ်းရန်' : 'Add to Calendar'}</div>
-                  <div class="text-[11px] text-[#58413f] truncate">${res.date} • ${res.time}</div>
-                </div>
-              </button>
-
-              <!-- Get Directions / Map -->
-              <button
-                id="u09-map-btn"
-                data-address="${res.address || res.location || 'Yangon'}"
-                class="p-4 rounded-2xl bg-[#FAF3E8] hover:bg-[#F2E5D4] border border-[#EADFD1] hover:border-[#840F16]/40 text-left transition-all flex items-center gap-3.5 cursor-pointer group shadow-2xs"
-              >
-                <div class="w-11 h-11 rounded-xl bg-white border border-[#EADFD1] group-hover:border-[#840F16]/30 group-hover:bg-[#FFF8F6] text-[#840F16] flex items-center justify-center transition-colors shrink-0 shadow-2xs">
-                  <span class="material-symbols-outlined text-xl text-[#840F16]">map</span>
-                </div>
-                <div class="min-w-0">
-                  <div class="text-xs font-bold text-[#231916] group-hover:text-[#840F16] transition-colors truncate">${isMm ? 'လမ်းညွှန် မြေပုံကြည့်ရန်' : 'View Location Map'}</div>
-                  <div class="text-[11px] text-[#58413f] truncate">${restLocation}</div>
-                </div>
-              </button>
-
-            </div>
-
-            <!-- Rebook Button (if cancelled/completed) -->
-            ${(isCancelled || isCompleted) ? `
-              <div class="pt-2">
-                <button
-                  id="u09-rebook-btn"
-                  data-rest-id="${res.restaurantId || '1'}"
-                  class="btn-primary w-full py-3.5 px-6 rounded-full font-label font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
-                >
-                  <span class="material-symbols-outlined text-base">repeat</span>
-                  <span>${isMm ? 'ယခင်အချက်အလက်များဖြင့် ပြန်လည်မှာယူရန်' : 'Rebook This Restaurant'}</span>
-                </button>
-              </div>
-            ` : ''}
-
-          </div>
+          ` : ''}
 
         </main>
 
@@ -669,16 +655,24 @@
               </button>
             </div>
 
-            <div class="space-y-1">
+            <div class="space-y-2">
               <div class="text-xs font-semibold text-[#7A6B65]">${restName}</div>
-              <div class="font-mono text-sm font-bold text-[#840F16]">${resNumber}</div>
+              
+              <!-- Reservation ID Display without Box Shape -->
+              <div class="flex items-center justify-center gap-1.5">
+                <span class="text-[11px] font-bold text-[#7A6B65] uppercase tracking-wider">${isMm ? 'ဘွတ်ကင် နံပါတ်' : 'Reservation ID'}:</span>
+                <span class="font-mono text-xs sm:text-sm font-extrabold text-[#840F16] tracking-wide">${resNumber}</span>
+              </div>
             </div>
 
             <!-- QR Code Graphic Mock -->
             <div class="p-4 bg-white rounded-2xl border-2 border-[#EADFD1] inline-block shadow-inner mx-auto">
-              <svg class="w-44 h-44 text-[#231916]" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M10 10h30v30h-30zM15 15v20h20v-20zM22 22h6v6h-6zM60 10h30v30h-30zM65 15v20h20v-20zM72 22h6v6h-6zM10 60h30v30h-30zM15 65v20h20v-20zM22 72h6v6h-6zM50 10h5v15h-5zM50 30h10v5h-10zM50 40h5v10h-5zM10 48h15v5h-15zM30 48h15v5h-15zM60 50h10v10h-10zM80 50h10v10h-10zM50 65h10v10h-10zM70 65h20v5h-20zM50 85h15v5h-15zM75 80h15v10h-15z"/>
-              </svg>
+              <img
+                src="${window.YoyakuPrototype ? window.YoyakuPrototype.createQrDataUri(`YOYAKU-${resNumber}`) : `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=YOYAKU-PASS-${resNumber}`}"
+                alt="QR Pass"
+                class="w-44 h-44 mx-auto object-contain"
+                loading="lazy"
+              />
             </div>
 
             <div class="text-xs text-[#58413f] leading-relaxed">

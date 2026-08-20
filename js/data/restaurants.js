@@ -3,6 +3,8 @@
   window.YoyakuData.RESTAURANTS_DATA = [
     {
       id: 'rest-1',
+      venueName: 'The Heritage Teakwood Estate',
+      venueNameMM: 'ရှေးဟောင်း ကျွန်းသစ် စံအိမ်တော် မဏ္ဍပ်',
       name: 'The Gilded Fork',
       nameMM: 'ဂီးလ်ဒက် ဖော့ခ် သီးသန့် အဆင့်မြင့် စားသောက်ဆိုင်',
       tagline: 'Traditional Royal & Artisan Burmese Culinary Art',
@@ -176,6 +178,8 @@
     },
     {
       id: 'rest-2',
+      venueName: 'Inya Lake Sanctuary Pavilion',
+      venueNameMM: 'အင်းလျားကန်ဘေး သဘာဝ အပန်းဖြေ မဏ္ဍပ်',
       name: 'Seeds Restaurant & Lounge',
       nameMM: 'ဆီးဒစ် အင်းလျားကန်ဘေး သီးသန့် အဆင့်မြင့် စားသောက်ဆိုင်',
       tagline: 'Contemporary European & Waterfront Fine Dining',
@@ -291,6 +295,8 @@
     },
     {
       id: 'rest-3',
+      venueName: 'Historic Pansodan Heritage Building',
+      venueNameMM: 'ပန်းဆိုးတန်း ရှေးဟောင်း အမွေအနှစ် အဆောက်အအုံ',
       name: 'Rangoon Tea House (Downtown)',
       nameMM: 'ရန်ကုန် တီးဟောက်စ် (မြို့ထဲဆိုင်ခွဲ)',
       tagline: 'Modern Nostalgic Burmese Cuisine & Craft Cocktails',
@@ -420,6 +426,8 @@
     },
     {
       id: 'rest-4',
+      venueName: 'Kandawgyi French Colonial Villa',
+      venueNameMM: 'ကန်တော်ကြီး ပြင်သစ် ကိုလိုနီ စံအိမ်',
       name: 'L’Alchimiste Fine Dining',
       nameMM: 'အယ်လ်ခီမစ် ပြင်သစ် အဆင့်မြင့် စားသောက်ဆိုင်',
       tagline: 'Classic French Gastronomy on Yangon Riverbank',
@@ -511,6 +519,8 @@
     },
     {
       id: 'rest-5',
+      venueName: 'Historic Sofaer Heritage Landmark',
+      venueNameMM: 'ဆိုဖာ သမိုင်းဝင် အမွေအနှစ် အဆောက်အအုံ',
       name: 'Gekko Tokyo Lounge & Omakase',
       nameMM: 'ဂက်ကို တိုကျို ဂျပန် အဆင့်မြင့် စားသောက်ဆိုင်',
       tagline: 'Artisanal Sushi, Omakase & Japanese Whisky Bar',
@@ -621,6 +631,8 @@
     },
     {
       id: 'rest-6',
+      venueName: 'Lakeside Botanical Garden & Villa',
+      venueNameMM: 'အင်းလျားကန်ဘေး ရုက္ခဗေဒ ပန်းဥယျာဉ် စံအိမ်',
       name: 'L’Opera Italian Restaurant',
       nameMM: 'လိုပါရာ အီတလီ စားသောက်ဆိုင်',
       tagline: 'Authentic Wood-fired Pizza & Handmade Pasta by the Lake',
@@ -723,6 +735,8 @@
     },
     {
       id: 'rest-7',
+      venueName: 'Pyidaungsu Courtyard',
+      venueNameMM: 'ပြည်ထောင်စု ရိုးရာ ဧည့်ခန်းမ ရိပ်သာ',
       name: 'Feel Myanmar Food (Dagon)',
       nameMM: 'ဖီးလ် မြန်မာ အစားအစာ (ဒဂုံဆိုင်ခွဲ)',
       tagline: 'Famous Traditional Home-style Curry Spread & Casual Dining',
@@ -849,6 +863,8 @@
     },
     {
       id: 'rest-8',
+      venueName: 'U Wisara Heritage Teahouse Hall',
+      venueNameMM: 'ဦးဝိစာရ ရှေးဟောင်း လက်ဖက်ရည် မဏ္ဍပ်',
       name: 'Lucky Seven Tea House',
       nameMM: 'လပ်ကီး ဆဲဗင်း လက်ဖက်ရည်ဆိုင်',
       tagline: 'Classic Burmese Breakfast, Dim Sum & Traditional Steamed Tea',

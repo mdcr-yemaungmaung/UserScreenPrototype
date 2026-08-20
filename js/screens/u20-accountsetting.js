@@ -34,7 +34,7 @@
         ${
           isWithdrawn
             ? `
-              <div class="bg-red-50 border border-red-200 rounded-3xl p-6 space-y-4">
+              <div class="bg-red-50 border border-red-200 rounded-2xl p-6 space-y-4">
                 <div class="flex items-start gap-3">
                   <span class="material-symbols-outlined text-red-600 text-2xl shrink-0">cancel</span>
                   <div>
@@ -60,15 +60,15 @@
         }
 
         <!-- 1. EMAIL ADDRESS CHANGE (COLLAPSIBLE ACCORDION) -->
-        <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] shadow-sm overflow-hidden transition-all">
+        <div class="bg-[#FBF3E2] rounded-2xl border border-[#EADFD1] shadow-xs overflow-hidden transition-all">
           <!-- Accordion Header Button -->
           <button
             type="button"
             data-accordion-toggle="email"
-            class="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5EAD4]/50 transition-colors select-none"
+            class="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5EAD4]/50 transition-colors select-none"
           >
             <div class="flex items-center gap-3.5 min-w-0">
-              <div class="w-11 h-11 rounded-2xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center font-bold shrink-0">
+              <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center font-bold shrink-0">
                 <span class="material-symbols-outlined text-xl">mail</span>
               </div>
               <div class="min-w-0">
@@ -111,12 +111,12 @@
           ${
             isEmailOpen
               ? `
-                <div class="p-6 sm:p-7 pt-2 border-t border-[#EADFD1] space-y-6 animate-fadeIn">
+                <div class="p-5 sm:p-6 pt-2 border-t border-[#EADFD1] space-y-6 animate-fadeIn">
                   <!-- Pending Email Alert (If Any) -->
                   ${
                     myData.pendingNewEmail
                       ? `
-                        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                           <div class="flex items-start gap-2.5">
                             <span class="material-symbols-outlined text-amber-700 text-lg shrink-0 mt-0.5">mark_email_unread</span>
                             <div>
@@ -147,7 +147,7 @@
                       <label class="block font-label text-xs font-bold text-[#231916] uppercase tracking-wider mb-1.5">
                         ${isMm ? 'လက်ရှိ အီးမေးလ်လိပ်စာ' : 'Current Email Address'}
                       </label>
-                      <div class="w-full bg-[#EADFD1]/40 border border-[#EADFD1] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] font-medium flex items-center justify-between">
+                      <div class="w-full bg-[#EADFD1]/40 border border-[#EADFD1] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] font-medium flex items-center justify-between">
                         <span>${myData.userEmail || 'alex@example.com'}</span>
                         <span class="material-symbols-outlined text-[#8d7b75] text-sm">lock</span>
                       </div>
@@ -162,7 +162,7 @@
                         type="email"
                         id="u20-input-new-email"
                         placeholder="${isMm ? 'ဥပမာ- user@example.com' : 'e.g. alex.new@example.com'}"
-                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
+                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
                         required
                       />
                     </div>
@@ -177,7 +177,7 @@
                           type="password"
                           id="u20-email-confirm-pw"
                           placeholder="${isMm ? 'လက်ရှိ စကားဝှက် ရိုက်ထည့်ပါ' : 'Enter current account password'}"
-                          class="w-full bg-[#FFF8F6] border border-[#EADFD1] focus:border-[#840f16] focus:bg-white rounded-2xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
+                          class="w-full bg-[#FFF8F6] border border-[#EADFD1] focus:border-[#840f16] focus:bg-white rounded-xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
                           required
                         />
                         <button
@@ -201,7 +201,7 @@
                     <button
                       type="button"
                       id="u20-sso-reauth-btn"
-                      class="w-full bg-white border border-[#EADFD1] hover:border-[#231916] rounded-2xl py-2.5 px-4 font-label text-xs font-semibold text-[#231916] flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                      class="w-full bg-white border border-[#EADFD1] hover:border-[#231916] rounded-xl py-2.5 px-4 font-label text-xs font-semibold text-[#231916] flex items-center justify-center gap-2 cursor-pointer transition-colors"
                     >
                       <svg class="w-4 h-4" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -228,15 +228,15 @@
 
 
         <!-- 2. PASSWORD CHANGE (COLLAPSIBLE ACCORDION) -->
-        <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] shadow-sm overflow-hidden transition-all">
+        <div class="bg-[#FBF3E2] rounded-2xl border border-[#EADFD1] shadow-xs overflow-hidden transition-all">
           <!-- Accordion Header Button -->
           <button
             type="button"
             data-accordion-toggle="password"
-            class="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5EAD4]/50 transition-colors select-none"
+            class="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5EAD4]/50 transition-colors select-none"
           >
             <div class="flex items-center gap-3.5 min-w-0">
-              <div class="w-11 h-11 rounded-2xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center font-bold shrink-0">
+              <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center font-bold shrink-0">
                 <span class="material-symbols-outlined text-xl">key</span>
               </div>
               <div class="min-w-0">
@@ -260,7 +260,7 @@
           ${
             isPasswordOpen
               ? `
-                <div class="p-6 sm:p-7 pt-2 border-t border-[#EADFD1] space-y-6 animate-fadeIn">
+                <div class="p-5 sm:p-6 pt-2 border-t border-[#EADFD1] space-y-6 animate-fadeIn">
                   <form id="u20-password-change-form" class="space-y-4">
                     <!-- Current Password -->
                     <div>
@@ -272,7 +272,7 @@
                           type="password"
                           id="u20-current-password"
                           placeholder="${isMm ? 'လက်ရှိ စကားဝှက် ရိုက်ထည့်ပါ' : 'Enter current password'}"
-                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
+                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
                           required
                         />
                         <button
@@ -296,7 +296,7 @@
                           type="password"
                           id="u20-new-password"
                           placeholder="${isMm ? 'စကားဝှက်အသစ် (အနည်းဆုံး ၈ လုံး၊ အင်္ဂလိပ်စာလုံး + ဂဏန်း)' : 'Enter new password (min 8 chars, letters + numbers)'}"
-                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
+                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
                           required
                         />
                         <button
@@ -320,7 +320,7 @@
                           type="password"
                           id="u20-confirm-password"
                           placeholder="${isMm ? 'စကားဝှက်အသစ်ကို အတည်ပြုရန် ထပ်မံရိုက်ထည့်ပါ' : 'Re-enter new password'}"
-                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
+                          class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl pl-4 pr-11 py-2.5 font-body text-xs text-[#231916] placeholder:text-[#8d7b75] focus:outline-none transition-colors"
                           required
                         />
                         <button
@@ -370,15 +370,15 @@
 
 
         <!-- 3. PHONE NUMBER CHANGE (COLLAPSIBLE ACCORDION) -->
-        <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] shadow-sm overflow-hidden transition-all">
+        <div class="bg-[#FBF3E2] rounded-2xl border border-[#EADFD1] shadow-xs overflow-hidden transition-all">
           <!-- Accordion Header Button -->
           <button
             type="button"
             data-accordion-toggle="phone"
-            class="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5EAD4]/50 transition-colors select-none"
+            class="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#F5EAD4]/50 transition-colors select-none"
           >
             <div class="flex items-center gap-3.5 min-w-0">
-              <div class="w-11 h-11 rounded-2xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center font-bold shrink-0">
+              <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center font-bold shrink-0">
                 <span class="material-symbols-outlined text-xl">phone_iphone</span>
               </div>
               <div class="min-w-0">
@@ -420,9 +420,9 @@
           ${
             isPhoneOpen
               ? `
-                <div class="p-6 sm:p-7 pt-2 border-t border-[#EADFD1] space-y-6 animate-fadeIn">
+                <div class="p-5 sm:p-6 pt-2 border-t border-[#EADFD1] space-y-6 animate-fadeIn">
                   <!-- Phone Number Policy Note -->
-                  <div class="bg-amber-50/70 rounded-2xl p-4 border border-amber-200 text-xs font-body text-amber-900 space-y-1">
+                  <div class="bg-amber-50/70 rounded-xl p-4 border border-amber-200 text-xs font-body text-amber-900 space-y-1">
                     <div class="font-bold flex items-center gap-1.5 text-amber-950">
                       <span class="material-symbols-outlined text-sm text-amber-700">warning</span>
                       <span>${isMm ? 'အရေးကြီး သတိပေးချက်' : 'Important Note on Phone Verification'}</span>
@@ -440,7 +440,7 @@
                       <label class="block font-label text-xs font-bold text-[#231916] uppercase tracking-wider mb-2.5">
                         ${isMm ? 'လက်ရှိ ဖုန်းနံပါတ်' : 'Current Phone Number'}
                       </label>
-                      <div class="w-full bg-[#EADFD1]/40 border border-[#EADFD1] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] font-medium flex items-center justify-between">
+                      <div class="w-full bg-[#EADFD1]/40 border border-[#EADFD1] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] font-medium flex items-center justify-between">
                         <span>${myData.userPhone || '+95 9 791 234 567'}</span>
                         <span class="material-symbols-outlined text-[#8d7b75] text-sm">call</span>
                       </div>
@@ -452,7 +452,7 @@
                         ${isMm ? 'ဖုန်းနံပါတ် အသစ်ထည့်ရန်' : 'New Phone Number'} <span class="text-[#840f16]">*</span>
                       </label>
                       <div class="flex items-center gap-2">
-                        <div class="bg-[#EADFD1]/60 border border-[#EADFD1] rounded-2xl px-3.5 py-2.5 font-label font-bold text-xs text-[#231916] shrink-0 flex items-center gap-1.5">
+                        <div class="bg-[#EADFD1]/60 border border-[#EADFD1] rounded-xl px-3.5 py-2.5 font-label font-bold text-xs text-[#231916] shrink-0 flex items-center gap-1.5">
                           <span>🇲🇲</span>
                           <span>+95</span>
                         </div>
@@ -460,7 +460,7 @@
                           type="tel"
                           id="u20-input-new-phone"
                           placeholder="09 791 234 567 or 9791234567"
-                          class="flex-1 bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] focus:outline-none transition-colors"
+                          class="flex-1 bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] focus:outline-none transition-colors"
                           required
                         />
                       </div>
@@ -498,15 +498,15 @@
 
 
         <!-- 4. ACCOUNT WITHDRAWAL (COLLAPSIBLE ACCORDION) -->
-        <div class="bg-[#FFF8F6] rounded-3xl border border-[#840f16]/30 shadow-sm overflow-hidden transition-all">
+        <div class="bg-[#FFF8F6] rounded-2xl border border-[#840f16]/30 shadow-xs overflow-hidden transition-all">
           <!-- Accordion Header Button -->
           <button
             type="button"
             data-accordion-toggle="withdrawal"
-            class="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#840f16]/5 transition-colors select-none"
+            class="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-[#840f16]/5 transition-colors select-none"
           >
             <div class="flex items-center gap-3.5 min-w-0">
-              <div class="w-11 h-11 rounded-2xl bg-[#840f16] text-white flex items-center justify-center font-bold shrink-0">
+              <div class="w-10 h-10 rounded-xl bg-[#840f16] text-white flex items-center justify-center font-bold shrink-0">
                 <span class="material-symbols-outlined text-xl">warning</span>
               </div>
               <div class="min-w-0">
@@ -531,12 +531,12 @@
           ${
             isWithdrawOpen
               ? `
-                <div class="p-6 sm:p-7 pt-2 border-t border-[#840f16]/20 space-y-6 animate-fadeIn">
+                <div class="p-5 sm:p-6 pt-2 border-t border-[#840f16]/20 space-y-6 animate-fadeIn">
                   <!-- Comprehensive Withdrawal Terms Grid -->
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     
                     <!-- Irreversible Warning -->
-                    <div class="bg-white p-4 rounded-2xl border border-[#EADFD1] space-y-2">
+                    <div class="bg-white p-4 rounded-xl border border-[#EADFD1] space-y-2">
                       <div class="flex items-center gap-2 text-xs font-label font-bold text-[#840f16]">
                         <span class="material-symbols-outlined text-base">block</span>
                         <span>${isMm ? 'သတိပေးချက်' : 'Irreversible'}</span>
@@ -549,7 +549,7 @@
                     </div>
 
                     <!-- Upcoming Reservations Policy -->
-                    <div class="bg-white p-4 rounded-2xl border border-[#EADFD1] space-y-2">
+                    <div class="bg-white p-4 rounded-xl border border-[#EADFD1] space-y-2">
                       <div class="flex items-center gap-2 text-xs font-label font-bold text-[#840f16]">
                         <span class="material-symbols-outlined text-base">event_busy</span>
                         <span>${isMm ? 'ကြိုတင်မှာယူမှုများ' : 'Upcoming Bookings'}</span>
@@ -562,7 +562,7 @@
                     </div>
 
                     <!-- PDPA Data Anonymization -->
-                    <div class="bg-white p-4 rounded-2xl border border-[#EADFD1] space-y-2">
+                    <div class="bg-white p-4 rounded-xl border border-[#EADFD1] space-y-2">
                       <div class="flex items-center gap-2 text-xs font-label font-bold text-[#104b2b]">
                         <span class="material-symbols-outlined text-base">shield</span>
                         <span>${isMm ? 'ကိုယ်ရေးအချက်အလက် (PDPA)' : 'PDPA Anonymization'}</span>
@@ -584,7 +584,7 @@
                       </label>
                       <select
                         id="u20-withdraw-reason"
-                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] focus:outline-none cursor-pointer"
+                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] focus:outline-none cursor-pointer"
                         required
                       >
                         <option value="" disabled selected>${isMm ? '-- အကြောင်းရင်း ရွေးချယ်ရန် --' : '-- Select a primary reason --'}</option>
@@ -604,12 +604,12 @@
                         id="u20-withdraw-feedback"
                         rows="2"
                         placeholder="${isMm ? 'ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုကို တိုးတက်ကောင်းမွန်စေရန် အကြံပြုချက် ရေးသားနိုင်ပါသည်...' : 'Help us improve by leaving any additional remarks...'}"
-                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl p-3 font-body text-xs text-[#231916] focus:outline-none"
+                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl p-3 font-body text-xs text-[#231916] focus:outline-none"
                       ></textarea>
                     </div>
 
                     <!-- Final Agreement Checkbox -->
-                    <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-red-200 cursor-pointer select-none">
+                    <label class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-red-200 cursor-pointer select-none">
                       <input type="checkbox" id="u20-withdraw-confirm-checkbox" class="mt-0.5 rounded text-[#840f16] focus:ring-[#840f16] w-4 h-4" required />
                       <span class="font-body text-xs text-[#231916] font-medium leading-relaxed">
                         ${isMm 

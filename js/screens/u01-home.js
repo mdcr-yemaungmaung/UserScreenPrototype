@@ -467,6 +467,9 @@
             ${popularRestaurants.slice(0, 4).map(r => {
               const rawStart = r.priceRange ? r.priceRange.split('-')[0].trim() : '150,000 MMK';
               const fitPrice = rawStart.endsWith('MMK') ? rawStart : `${rawStart} MMK`;
+              const venueTitle = isMm ? (r.venueNameMM || r.venueName || r.location) : (r.venueName || r.location || `${r.name} Venue`);
+              const restaurantTitle = isMm ? (r.nameMM || r.name) : r.name;
+              const locationText = r.location || r.area || 'Yangon';
               return `
               <div
                 data-card-select-id="${r.id}"
@@ -476,7 +479,7 @@
                 <div class="relative h-44 sm:h-48 lg:h-52 overflow-hidden">
                   <img
                     src="${r.heroImage}"
-                    alt="${r.name}"
+                    alt="${venueTitle}"
                     referrerpolicy="no-referrer"
                     loading="lazy"
                     onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';"
@@ -492,24 +495,33 @@
                   </div>
                 </div>
 
-                <!-- Card Content Area -->
-                <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5">
-                  <div class="space-y-1">
-                    <!-- Venue Name / Location -->
-                    <div class="flex items-center gap-1 text-[11px] font-label font-bold text-[#840f16] uppercase tracking-wider">
-                      <span class="material-symbols-outlined text-sm">location_on</span>
-                      <span class="truncate">${r.location || r.area}</span>
-                    </div>
-
-                    <!-- Restaurant Name -->
+                <!-- Card Content Area: Main Highlight is Venue Name -->
+                <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div class="space-y-2">
+                    <!-- Venue Name (MAIN HIGHLIGHT) -->
                     <h3 class="font-headline text-base sm:text-lg font-bold text-[#231916] group-hover:text-[#840f16] transition-colors leading-snug line-clamp-1">
-                      ${r.name}
+                      ${venueTitle}
                     </h3>
+
+                    <!-- Restaurant Name & Location -->
+                    <div class="space-y-1">
+                      <!-- Restaurant Name -->
+                      <div class="flex items-center gap-1.5 text-xs text-[#58413f] font-semibold">
+                        <span class="material-symbols-outlined text-sm text-[#840f16] shrink-0">storefront</span>
+                        <span class="truncate">${restaurantTitle}</span>
+                      </div>
+
+                      <!-- Location -->
+                      <div class="flex items-center gap-1.5 text-xs text-[#7A6B65]">
+                        <span class="material-symbols-outlined text-sm text-[#7A6B65] shrink-0">location_on</span>
+                        <span class="truncate">${locationText}</span>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- Price Row -->
                   <div class="pt-2.5 border-t border-[#EADFD1] flex items-center justify-between">
-                    <span class="font-label text-xs text-[#58413f]">${isMm ? 'စျေးနှုန်း' : 'From'}</span>
+                    <span class="font-label text-xs text-[#58413f] font-medium">${isMm ? 'စျေးနှုန်း' : 'Price'}</span>
                     <span class="font-label text-xs font-extrabold text-[#840f16]">${fitPrice}</span>
                   </div>
                 </div>

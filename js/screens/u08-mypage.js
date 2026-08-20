@@ -4,7 +4,7 @@
 
   function renderDiningPlateIcon() {
     return `
-      <div class="w-12 h-12 rounded-2xl bg-[#FFF8F6] border border-[#EADFD1] flex items-center justify-center shrink-0 shadow-2xs">
+      <div class="w-12 h-12 rounded-xl bg-[#FFF8F6] border border-[#EADFD1] flex items-center justify-center shrink-0 shadow-2xs">
         <svg class="w-8 h-8" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Fork -->
           <path d="M13 14V20C13 21.6569 14.3431 23 16 23V34" stroke="#840f16" stroke-width="2" stroke-linecap="round"/>
@@ -113,7 +113,7 @@
           ${
             displayedReservations.length === 0
               ? `
-                <div class="bg-[#FFFDF9] rounded-3xl border border-[#EADFD1] p-12 text-center space-y-4 shadow-xs">
+                <div class="bg-[#FFFDF9] rounded-xl border border-[#EADFD1] p-10 text-center space-y-4 shadow-xs">
                   <div class="w-14 h-14 bg-[#840f16]/10 text-[#840f16] rounded-full flex items-center justify-center mx-auto">
                     <span class="material-symbols-outlined text-2xl">event_busy</span>
                   </div>
@@ -137,89 +137,91 @@
                     const isCompleted = (item.status || '').toLowerCase() === 'completed';
 
                     return `
-                      <div class="luxe-card bg-[#FFF8EE] rounded-2xl border border-[#EADECB] p-4 sm:p-6 md:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-md transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
+                      <div class="luxe-card bg-[#FFF8EE] rounded-2xl border border-[#EADECB] p-4 sm:p-5 md:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-md transition-all flex flex-col gap-3.5 sm:gap-4" style="border-radius: 16px;">
                         
-                        <!-- Left Column: Title & Details -->
-                        <div class="space-y-2 min-w-0 flex-1 w-full md:w-auto">
-
-                          <!-- Restaurant Name -->
-                          <h3
-                            class="font-headline text-lg sm:text-2xl md:text-[26px] font-bold text-[#1E1B13] leading-snug truncate my-0.5 sm:my-1"
-                          >
-                            ${isMm ? (item.restaurantNameMM || item.restaurantName) : item.restaurantName}
-                          </h3>
-
-                          <!-- Date, Time, Guests -->
-                          <div class="flex items-center flex-wrap gap-x-3.5 sm:gap-x-5 gap-y-1.5 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body">
-                            <!-- Date -->
-                            <span class="inline-flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
-                              <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="16" y1="2" x2="16" y2="6"/>
-                                <line x1="8" y1="2" x2="8" y2="6"/>
-                                <line x1="3" y1="10" x2="21" y2="10"/>
+                        <!-- Top Row: Restaurant Name & Location (Left), Status Badge (Right) -->
+                        <div class="flex items-start justify-between gap-3 w-full">
+                          <div class="min-w-0 flex-1 space-y-1">
+                            <h3
+                              class="font-headline text-lg sm:text-xl md:text-2xl font-bold text-[#1E1B13] leading-snug truncate my-0.5"
+                            >
+                              ${isMm ? (item.restaurantNameMM || item.restaurantName) : item.restaurantName}
+                            </h3>
+                            <!-- Location -->
+                            <div class="flex items-center gap-1.5 text-xs sm:text-sm text-[#58413f] font-medium font-body min-w-0">
+                              <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
                               </svg>
-                              <span>${item.date}</span>
-                            </span>
-
-                            <!-- Time -->
-                            <span class="inline-flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
-                              <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                              </svg>
-                              <span>${item.time}</span>
-                            </span>
-
-                            <!-- Guests -->
-                            <span class="inline-flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
-                              <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                              </svg>
-                              <span>${item.guests} ${isMm ? 'ဦး' : (item.guests === 1 ? 'guest' : 'guests')}</span>
-                            </span>
+                              <span class="truncate">${item.location || 'Yangon Cultural District'}</span>
+                            </div>
                           </div>
-
-                          <!-- Location -->
-                          <div class="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body pt-0.5 min-w-0">
-                            <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                              <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span class="truncate">${item.location || 'Yangon Cultural District'}</span>
-                          </div>
-
-                        </div>
-
-                        <!-- Right Column: Status & Action Buttons -->
-                        <div class="flex flex-col items-stretch sm:items-end gap-2.5 shrink-0 self-stretch md:self-auto justify-between md:justify-end mt-1 sm:mt-3 md:mt-0 w-full md:w-auto">
-                          
-                          <!-- Top Row: Status Badge (Right Most) -->
-                          <div class="flex items-center justify-end w-full">
+                          <div class="shrink-0 pt-0.5">
                             ${renderStatusPill(item.status, isMm)}
                           </div>
+                        </div>
 
-                          <!-- Bottom Row: Action Buttons -->
-                          <div class="flex items-center flex-wrap sm:flex-nowrap gap-2 justify-stretch sm:justify-end w-full">
+                        <!-- Middle Row: Date, Time, Guests Badges -->
+                        <div class="flex items-center flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm font-medium font-body">
+                          <!-- Date -->
+                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FAF3E8] border border-[#EADFD1]/80 text-[#231916] whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                              <line x1="16" y1="2" x2="16" y2="6"/>
+                              <line x1="8" y1="2" x2="8" y2="6"/>
+                              <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            <span class="font-semibold">${item.date}</span>
+                          </span>
+
+                          <!-- Time -->
+                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FAF3E8] border border-[#EADFD1]/80 text-[#231916] whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"/>
+                              <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            <span class="font-semibold">${item.time}</span>
+                          </span>
+
+                          <!-- Guests -->
+                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FAF3E8] border border-[#EADFD1]/80 text-[#231916] whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                              <circle cx="9" cy="7" r="4"/>
+                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <span class="font-semibold">${item.guests} ${isMm ? 'ဦး' : (item.guests === 1 ? 'guest' : 'guests')}</span>
+                          </span>
+                        </div>
+
+                        <!-- Bottom Action Bar -->
+                        <div class="pt-3 border-t border-[#EADFD1]/70 flex flex-wrap items-center justify-between gap-2.5 w-full">
+                          <div class="text-[11px] font-mono text-[#8d7b75] hidden sm:inline-block">
+                            ID: <span class="font-bold text-[#58413f]">#${item.id}</span>
+                          </div>
+
+                          <div class="flex items-center flex-wrap gap-2 w-full sm:w-auto justify-start sm:justify-end">
                             <!-- Details & Modify Button -->
                             <button
                               data-mypage-view-detail-id="${item.id}"
-                              class="btn-primary flex-1 sm:flex-initial px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-label font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+                              class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full bg-white hover:bg-[#840f16] hover:text-white text-[#231916] border border-[#EADFD1] font-label font-bold text-xs transition-colors cursor-pointer shadow-2xs"
+                              title="${isMm ? 'အသေးစိတ်နှင့် ပြင်ဆင်ရန်' : 'Details & Modify'}"
+                              aria-label="${isMm ? 'အသေးစိတ်နှင့် ပြင်ဆင်ရန်' : 'Details & Modify'}"
                             >
                               <span class="material-symbols-outlined text-base">visibility</span>
-                              <span>${isMm ? 'အသေးစိတ်နှင့် ပြင်ဆင်ရန်' : 'Details & Modify'}</span>
+                              <span>${isMm ? 'အသေးစိတ်' : 'Details'}</span>
                             </button>
 
-                            <!-- View QR Button -->
+                            <!-- View QR Pass Button -->
                             <button
                               data-mypage-view-pass-id="${item.id}"
-                              class="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white border border-[#EADFD1] font-label font-semibold text-xs sm:text-sm text-[#231916] hover:bg-[#840f16] hover:text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs whitespace-nowrap"
+                              class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full bg-white hover:bg-[#840f16] hover:text-white text-[#231916] border border-[#EADFD1] font-label font-bold text-xs transition-colors cursor-pointer shadow-2xs"
+                              title="${isMm ? 'QR ကုဒ်ကြည့်ရန်' : 'View QR Pass'}"
+                              aria-label="${isMm ? 'QR ကုဒ်ကြည့်ရန်' : 'View QR Pass'}"
                             >
                               <span class="material-symbols-outlined text-base">qr_code_2</span>
-                              <span>QR</span>
+                              <span>${isMm ? 'QR ကုဒ်' : 'QR Pass'}</span>
                             </button>
 
                             <!-- Extra Actions for Completed (Review & Rebook) -->
@@ -229,7 +231,7 @@
                                   <button
                                     data-write-review-id="${item.id}"
                                     data-review-restaurant="${item.restaurantName}"
-                                    class="bg-[#FFF3D6] hover:bg-[#FFE7AB] border border-[#D08E1C]/40 text-[#8F5D0B] font-label font-semibold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap flex-1 sm:flex-initial"
+                                    class="inline-flex items-center justify-center gap-1.5 bg-[#FFF3D6] hover:bg-[#FFE7AB] border border-[#D08E1C]/40 text-[#8F5D0B] font-label font-bold text-xs px-3.5 py-2 rounded-full shadow-2xs transition-all cursor-pointer"
                                   >
                                     <span class="material-symbols-outlined text-sm text-[#D08E1C]">star</span>
                                     <span>${isMm ? 'သုံးသပ်ချက်' : 'Review'}</span>
@@ -241,7 +243,7 @@
                                     data-rebook-date="${item.date}"
                                     data-rebook-time="${item.time}"
                                     data-rebook-guests="${item.guests}"
-                                    class="bg-white hover:bg-[#FAF4EB] border border-[#EADFD1] text-[#58413F] font-label font-semibold text-xs sm:text-sm px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs whitespace-nowrap flex-1 sm:flex-initial"
+                                    class="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-[#FAF4EB] border border-[#EADFD1] text-[#58413F] font-label font-bold text-xs px-3.5 py-2 rounded-full transition-colors cursor-pointer shadow-2xs"
                                     title="${isMm ? 'ယခင် အချက်အလက်များဖြင့် ပြန်စိုတ်ရန်' : 'Rebook with Same Conditions'}"
                                   >
                                     <span class="material-symbols-outlined text-base">restart_alt</span>
@@ -282,7 +284,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           ${favoriteRestaurants
             .map(r => `
-              <div class="bg-[#FFF8F6] rounded-3xl border border-[#EADFD1] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+              <div class="bg-[#FFF8F6] rounded-xl border border-[#EADFD1] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
                 <div class="relative h-44 overflow-hidden">
                   <img
                     src="${r.image || (r.images && r.images[0]) || 'assets/images/shop_theglasspavilion_1.jpg'}"
@@ -353,7 +355,7 @@
           </p>
         </div>
 
-        <div class="bg-[#FFF3D6] border border-[#EADFD1] rounded-2xl p-4 flex items-start gap-3 text-xs text-[#8f5d0b]">
+        <div class="bg-[#FFF3D6] border border-[#EADFD1] rounded-xl p-4 flex items-start gap-3 text-xs text-[#8f5d0b]">
           <span class="material-symbols-outlined text-lg text-[#D08E1C] shrink-0 mt-0.5">info</span>
           <p class="leading-relaxed">
             ${isMm ? 'စားပွဲဝိုင်း လွတ်လပ်သွားပါက SMS နှင့် Viber မှတစ်ဆင့် ၁၅ မိနစ် သီးသန့် ဝိုင်းစိုတ်လင့်ခ်ကို ပေးပို့ပေးပါမည်။' : 'When an existing booking cancels, you will receive an instant 15-minute priority booking link via SMS and Viber.'}
@@ -364,7 +366,7 @@
           ${
             waitlists.length === 0
               ? `
-                <div class="bg-[#FFF8F6] rounded-3xl border border-[#EADFD1] p-10 text-center space-y-3">
+                <div class="bg-[#FFF8F6] rounded-xl border border-[#EADFD1] p-10 text-center space-y-3">
                   <span class="material-symbols-outlined text-3xl text-[#8d7b75]">hourglass_empty</span>
                   <div class="font-headline font-bold text-base text-[#231916]">${isMm ? 'လက်ရှိ စောင့်ဆိုင်းစာရင်း မရှိပါ' : 'No active waitlist queues'}</div>
                   <p class="font-body text-xs text-[#58413f]">${isMm ? 'လူပြည့်နေသော ဆိုင်များတွင် Waitlist စာရင်းသွင်းနိုင်ပါသည်' : 'You can join a waitlist when a restaurant is fully booked on your chosen date.'}</p>
@@ -373,7 +375,7 @@
               : waitlists
                   .map(
                     w => `
-                      <div class="bg-[#FFF8F6] p-5 rounded-2xl border border-[#EADFD1] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xs">
+                      <div class="bg-[#FFF8F6] p-5 rounded-xl border border-[#EADFD1] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xs">
                         <div class="space-y-1">
                           <div class="font-headline font-bold text-base text-[#231916]">${w.restaurantName}</div>
                           <div class="font-body text-xs text-[#58413f] flex items-center gap-3">
@@ -422,7 +424,7 @@
           ${coupons
             .map(
               c => `
-                <div class="bg-[#FFF8F6] p-5 rounded-2xl border border-[#EADFD1] flex flex-col justify-between space-y-4 shadow-xs relative overflow-hidden">
+                <div class="bg-[#FFF8F6] p-5 rounded-xl border border-[#EADFD1] flex flex-col justify-between space-y-4 shadow-xs relative overflow-hidden">
                   <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-[#840f16]/5 rounded-full pointer-events-none"></div>
                   
                   <div class="space-y-1">
@@ -467,7 +469,7 @@
         </div>
 
         <!-- VIP Membership Card -->
-        <div class="bg-gradient-to-br from-[#231916] via-[#3a221f] to-[#58413f] text-white p-6 sm:p-8 rounded-3xl space-y-4 shadow-lg border border-[#D08E1C]/40 relative overflow-hidden">
+        <div class="bg-gradient-to-br from-[#231916] via-[#3a221f] to-[#58413f] text-white p-6 sm:p-8 rounded-xl space-y-4 shadow-lg border border-[#D08E1C]/40 relative overflow-hidden">
           <div class="absolute right-0 top-0 w-48 h-48 bg-[#D08E1C]/10 rounded-full blur-2xl pointer-events-none"></div>
 
           <div class="flex justify-between items-start">
@@ -497,19 +499,19 @@
 
         <!-- Point Perks Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-          <div class="bg-[#FFF8F6] p-4 rounded-2xl border border-[#EADFD1] space-y-1 text-center">
+          <div class="bg-[#FFF8F6] p-4 rounded-xl border border-[#EADFD1] space-y-1 text-center">
             <div class="font-headline font-bold text-lg text-[#840f16]">+500 PTS</div>
             <div class="font-label text-xs font-bold text-[#231916]">Per Online Booking</div>
             <p class="font-body text-[11px] text-[#58413f]">Awarded upon dining completion</p>
           </div>
 
-          <div class="bg-[#FFF8F6] p-4 rounded-2xl border border-[#EADFD1] space-y-1 text-center">
+          <div class="bg-[#FFF8F6] p-4 rounded-xl border border-[#EADFD1] space-y-1 text-center">
             <div class="font-headline font-bold text-lg text-[#840f16]">+200 PTS</div>
             <div class="font-label text-xs font-bold text-[#231916]">Verified Review</div>
             <p class="font-body text-[11px] text-[#58413f]">Share feedback with guests</p>
           </div>
 
-          <div class="bg-[#FFF8F6] p-4 rounded-2xl border border-[#EADFD1] space-y-1 text-center">
+          <div class="bg-[#FFF8F6] p-4 rounded-xl border border-[#EADFD1] space-y-1 text-center">
             <div class="font-headline font-bold text-lg text-[#840f16]">1 PT = 10 MMK</div>
             <div class="font-label text-xs font-bold text-[#231916]">Direct Redemption</div>
             <p class="font-body text-[11px] text-[#58413f]">Apply to course bills</p>
@@ -548,7 +550,7 @@
           ${
             notifications.length === 0
               ? `
-                <div class="bg-[#FFF8F6] rounded-3xl border border-[#EADFD1] p-10 text-center">
+                <div class="bg-[#FFF8F6] rounded-xl border border-[#EADFD1] p-10 text-center">
                   <span class="material-symbols-outlined text-3xl text-[#8d7b75]">notifications_off</span>
                   <div class="font-headline font-bold text-base text-[#231916] mt-2">${isMm ? 'အသိပေးချက် မရှိသေးပါ' : 'No notifications'}</div>
                 </div>
@@ -556,7 +558,7 @@
               : notifications
                   .map(
                     n => `
-                      <div class="bg-[#FFF8F6] p-4 rounded-2xl border ${
+                      <div class="bg-[#FFF8F6] p-4 rounded-xl border ${
                         n.isUnread ? 'border-[#840f16]/30 bg-[#FFF3D6]/20' : 'border-[#EADFD1]'
                       } flex items-start justify-between gap-3 shadow-xs">
                         <div class="flex items-start gap-3">
@@ -600,7 +602,7 @@
         </div>
 
         <div class="space-y-4">
-          <div class="bg-[#FFF8F6] p-6 rounded-3xl border border-[#EADFD1] space-y-3 shadow-xs">
+          <div class="bg-[#FFF8F6] p-6 rounded-xl border border-[#EADFD1] space-y-3 shadow-xs">
             <div class="flex items-center gap-2">
               <span class="bg-[#840f16] text-white text-[10px] font-label font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">New Menu</span>
               <span class="font-body text-xs text-[#8d7b75]">August 2026</span>
@@ -611,7 +613,7 @@
             </p>
           </div>
 
-          <div class="bg-[#FFF8F6] p-6 rounded-3xl border border-[#EADFD1] space-y-3 shadow-xs">
+          <div class="bg-[#FFF8F6] p-6 rounded-xl border border-[#EADFD1] space-y-3 shadow-xs">
             <div class="flex items-center gap-2">
               <span class="bg-[#D08E1C] text-white text-[10px] font-label font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">Feature</span>
               <span class="font-body text-xs text-[#8d7b75]">August 2026</span>
@@ -633,6 +635,11 @@
     const activeModal = state.myPageModal || 'none';
     let activeMenu = state.myPageActiveMenu || 'reservations';
     if (activeMenu === 'reservations-view') activeMenu = 'reservations';
+
+    const activePassBooking = (state.reservations || []).find(r => r.id === state.activePassBookingId) || (state.reservations && state.reservations[0]) || null;
+    const activePassResNo = activePassBooking?.reservationNo || activePassBooking?.id || 'R20260815-K7M2QX';
+    const activePassRestName = isMm ? (activePassBooking?.restaurantNameMM || activePassBooking?.restaurantName) : activePassBooking?.restaurantName;
+    const activePassQrImg = window.YoyakuPrototype ? window.YoyakuPrototype.createQrDataUri(`YOYAKU-${activePassResNo}`) : `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=YOYAKU-PASS-${activePassResNo}`;
 
     const menuItems = [
       { id: 'reservations', label: isMm ? 'စိုတ်ထားမှု မှတ်တမ်း' : 'Reservation History', icon: 'calendar_today' },
@@ -712,27 +719,24 @@
               !isMobileMenuOverview
                 ? `
                   <!-- Back to My Page Menu Bar on Mobile -->
-                  <div class="flex items-center justify-between bg-[#FFF8F6] border border-[#EADFD1] rounded-2xl p-3 shadow-xs">
+                  <div class="flex items-center">
                     <button
                       data-mypage-back="menu"
-                      class="inline-flex items-center gap-2 text-xs font-label font-bold text-[#840f16] hover:text-[#680b11] cursor-pointer"
+                      class="inline-flex items-center gap-2 text-xs font-label font-bold text-[#840f16] hover:text-[#680b11] cursor-pointer py-1"
                     >
                       <span class="material-symbols-outlined text-base">arrow_back</span>
                       <span>${isMm ? 'ကျွန်ုပ်၏ စာမျက်နှာ မီနူးသို့ ပြန်သွားရန်' : 'Back to Menu'}</span>
                     </button>
-                    <span class="font-label text-[11px] font-bold uppercase tracking-wider text-[#8d7b75]">
-                      ${menuItems.find(m => m.id === activeMenu)?.label || 'My Page'}
-                    </span>
                   </div>
 
                   <!-- Active Mobile Screen Panel -->
-                  <div class="bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-4 sm:p-6 shadow-sm">
+                  <div class="space-y-4">
                     ${renderActiveScreenPanel()}
                   </div>
                 `
                 : `
                   <!-- Mobile User Profile Card -->
-                  <div class="bg-[#FFF8F6] rounded-3xl border border-[#EADFD1] p-6 text-center shadow-sm space-y-3 relative">
+                  <div class="bg-[#FFF8F6] rounded-xl border border-[#EADFD1] p-6 text-center shadow-sm space-y-3 relative">
                     <div class="relative inline-block mx-auto">
                       <img
                         src="assets/images/user_avatar.jpg"
@@ -760,7 +764,7 @@
                   </div>
 
                   <!-- Mobile Menu List -->
-                  <div class="bg-[#FFF8F6] rounded-2xl border border-[#EADFD1] divide-y divide-[#EADFD1] overflow-hidden shadow-sm">
+                  <div class="bg-[#FFF8F6] rounded-xl border border-[#EADFD1] divide-y divide-[#EADFD1] overflow-hidden shadow-sm">
                     ${menuItems
                       .map(
                         item => `
@@ -782,7 +786,7 @@
                   <!-- Mobile Logout -->
                   <button
                     data-mypage-nav="logout"
-                    class="w-full py-3 rounded-2xl border border-[#840f16]/30 bg-[#FFF8F6] text-[#840f16] font-headline font-bold text-sm hover:bg-[#840f16]/10 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                    class="w-full py-3 rounded-xl border border-[#840f16]/30 bg-[#FFF8F6] text-[#840f16] font-headline font-bold text-sm hover:bg-[#840f16]/10 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                   >
                     <span class="material-symbols-outlined text-lg">logout</span>
                     <span>${isMm ? 'အကောင့်ထွက်ရန်' : 'Logout'}</span>
@@ -794,7 +798,7 @@
           <!-- ========================================================================= -->
           <!-- LEFT SIDEBAR: MY PAGE MENU (DESKTOP ONLY width ≥ 1024px) -->
           <!-- ========================================================================= -->
-          <div class="hidden lg:block lg:col-span-4 xl:col-span-3 bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-6 space-y-6 shadow-sm sticky top-24">
+          <div class="hidden lg:block lg:col-span-4 xl:col-span-3 bg-[#FBF3E2] rounded-xl border border-[#EADFD1] p-6 space-y-6 shadow-sm sticky top-24">
             
             <!-- User Profile Summary -->
             <div class="flex items-center gap-3.5 pb-4 border-b border-[#EADFD1]/80">
@@ -802,7 +806,7 @@
                 src="assets/images/user_avatar.jpg"
                 alt="${myData.userName || 'alex'}"
                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80';"
-                class="w-12 h-12 rounded-2xl object-cover border border-[#EADFD1] shadow-sm shrink-0"
+                class="w-12 h-12 rounded-xl object-cover border border-[#EADFD1] shadow-sm shrink-0"
               />
               <div class="space-y-0.5 min-w-0">
                 <h2 class="font-headline font-bold text-base text-[#231916] truncate">
@@ -829,7 +833,7 @@
                     return `
                       <button
                         data-mypage-nav="${item.id}"
-                        class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-[#840f16] text-white font-label font-bold text-xs tracking-wide shadow-sm transition-all text-left cursor-pointer"
+                        class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#840f16] text-white font-label font-bold text-xs tracking-wide shadow-sm transition-all text-left cursor-pointer"
                       >
                         <span class="material-symbols-outlined text-lg">${item.icon}</span>
                         <span class="truncate flex-1">${item.label}</span>
@@ -840,7 +844,7 @@
                   return `
                     <button
                       data-mypage-nav="${item.id}"
-                      class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-[#58413f] hover:bg-[#840f16]/8 hover:text-[#840f16] font-label font-semibold text-xs tracking-wide transition-colors text-left cursor-pointer"
+                      class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#58413f] hover:bg-[#840f16]/8 hover:text-[#840f16] font-label font-semibold text-xs tracking-wide transition-colors text-left cursor-pointer"
                     >
                       <span class="material-symbols-outlined text-lg text-[#8d7b75]">${item.icon}</span>
                       <span class="truncate flex-1">${item.label}</span>
@@ -852,7 +856,7 @@
               <div class="pt-3 border-t border-[#EADFD1]">
                 <button
                   data-mypage-nav="logout"
-                  class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-[#840f16] hover:bg-[#840f16]/10 font-label font-bold text-xs tracking-wide transition-colors text-left cursor-pointer"
+                  class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#840f16] hover:bg-[#840f16]/10 font-label font-bold text-xs tracking-wide transition-colors text-left cursor-pointer"
                 >
                   <span class="material-symbols-outlined text-lg">logout</span>
                   <span>${isMm ? 'အကောင့်ထွက်ရန်' : 'Logout'}</span>
@@ -861,7 +865,7 @@
 
               <!-- PWA Install & Offline Badge -->
               <div class="pt-3 border-t border-[#EADFD1]">
-                <div class="bg-[#FFF8F6] border border-[#EADFD1] rounded-2xl p-3.5 space-y-2 text-left">
+                <div class="bg-[#FFF8F6] border border-[#EADFD1] rounded-xl p-3.5 space-y-2 text-left">
                   <div class="flex items-center gap-2">
                     <div class="w-6 h-6 rounded-lg bg-[#840f16] text-white flex items-center justify-center">
                       <span class="material-symbols-outlined text-sm">install_mobile</span>
@@ -888,7 +892,7 @@
           <!-- ========================================================================= -->
           <!-- RIGHT COLUMN: SCREEN CONTENT (DESKTOP ONLY width ≥ 1024px) -->
           <!-- ========================================================================= -->
-          <div class="hidden lg:block lg:col-span-8 xl:col-span-9 bg-[#FBF3E2] rounded-3xl border border-[#EADFD1] p-6 sm:p-8 shadow-sm min-h-[620px]">
+          <div class="hidden lg:block lg:col-span-8 xl:col-span-9 min-h-[620px]">
             ${renderActiveScreenPanel()}
           </div>
 
@@ -903,27 +907,39 @@
           activeModal === 'qr_pass'
             ? `
               <div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-                <div class="bg-[#FFF8F6] w-full max-w-md rounded-3xl border border-[#EADFD1] p-6 space-y-6 shadow-2xl text-center">
+                <div class="bg-[#FFF8F6] w-full max-w-md rounded-2xl border border-[#EADFD1] p-6 space-y-5 shadow-2xl text-center">
                   <div class="flex justify-between items-center border-b border-[#EADFD1] pb-3">
-                    <h3 class="font-headline text-lg font-bold text-[#231916]">${isMm ? 'စားပွဲဝိုင်း Check-in QR' : 'Table Check-in Pass'}</h3>
-                    <button id="modal-close-btn" class="w-8 h-8 rounded-full bg-[#FBF3E2] hover:bg-[#EADFD1] flex items-center justify-center text-[#58413f] cursor-pointer">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[#840f16]">qr_code_2</span>
+                      <h3 class="font-headline text-lg font-bold text-[#231916]">${isMm ? 'စားပွဲဝိုင်း Check-in QR' : 'Table Check-in Pass'}</h3>
+                    </div>
+                    <button id="modal-close-btn" class="w-8 h-8 rounded-full bg-[#FBF3E2] hover:bg-[#EADFD1] flex items-center justify-center text-[#58413f] hover:text-[#840f16] cursor-pointer transition-colors">
                       <span class="material-symbols-outlined text-base">close</span>
                     </button>
                   </div>
 
-                  <div class="p-6 bg-white rounded-2xl border border-[#EADFD1] inline-block shadow-inner">
+                  <!-- Restaurant & Reservation ID -->
+                  <div class="space-y-2">
+                    <div class="font-headline font-bold text-base text-[#231916]">${activePassRestName || (isMm ? 'စားသောက်ဆိုင်' : 'Restaurant')}</div>
+                    
+                    <!-- Reservation ID Display without Box Shape -->
+                    <div class="flex items-center justify-center gap-1.5">
+                      <span class="text-[11px] font-bold text-[#7A6B65] uppercase tracking-wider">${isMm ? 'ဘွတ်ကင် နံပါတ်' : 'Reservation ID'}:</span>
+                      <span class="font-mono text-xs sm:text-sm font-extrabold text-[#840f16] tracking-wide">${activePassResNo}</span>
+                    </div>
+                  </div>
+
+                  <!-- QR Code -->
+                  <div class="p-4 bg-white rounded-2xl border border-[#EADFD1] inline-block shadow-inner">
                     <img
-                      src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=YOYAKU-PASS-${state.reservations[0]?.reservationNo || '2026'}"
+                      src="${activePassQrImg}"
                       alt="QR Code"
-                      class="w-44 h-44 mx-auto"
+                      class="w-44 h-44 mx-auto object-contain"
                       loading="lazy"
                     />
                   </div>
 
-                  <div class="space-y-1">
-                    <div class="font-headline font-bold text-base text-[#231916]">${state.reservations[0]?.restaurantName || 'The Glass Pavilion'}</div>
-                    <p class="font-body text-xs text-[#58413f]">${isMm ? 'စားသောက်ဆိုင်သို့ ရောက်ရှိပါက ဤ QR ကုဒ်ကို ပြသပါ' : 'Present this digital pass upon arrival for instant seating.'}</p>
-                  </div>
+                  <p class="font-body text-xs text-[#58413f] leading-relaxed">${isMm ? 'စားသောက်ဆိုင်သို့ ရောက်ရှိပါက ဤ QR ကုဒ်ကို ပြသပါ' : 'Present this digital pass upon arrival for instant table seating.'}</p>
 
                   <button id="modal-close-btn" class="btn-primary w-full py-3 rounded-full font-label text-xs font-bold cursor-pointer">
                     ${isMm ? 'ပိတ်မည်' : 'Close Pass'}
@@ -939,7 +955,7 @@
           activeModal === 'review'
             ? `
               <div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-                <div class="bg-[#FFF8F6] w-full max-w-lg rounded-3xl border border-[#EADFD1] p-6 space-y-6 shadow-2xl text-left">
+                <div class="bg-[#FFF8F6] w-full max-w-lg rounded-xl border border-[#EADFD1] p-6 space-y-6 shadow-2xl text-left">
                   <div class="flex justify-between items-center border-b border-[#EADFD1] pb-3">
                     <div>
                       <h3 class="font-headline text-lg font-bold text-[#231916]">${isMm ? 'သုံးသပ်ချက် ရေးသားရန်' : 'Write a Review'}</h3>
@@ -973,7 +989,7 @@
                         id="review-text-input"
                         rows="4"
                         placeholder="${isMm ? 'အစားအသောက် အရသာ၊ ဝန်ဆောင်မှုနှင့် ဆိုင်အပြင်အဆင် အကြောင်းကို ရေးသားပါ...' : 'Share what you loved about the food, ambiance, seating, and service...'}"
-                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl p-3 font-body text-xs text-[#231916] focus:outline-none"
+                        class="w-full bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl p-3 font-body text-xs text-[#231916] focus:outline-none"
                         required
                       ></textarea>
                     </div>
@@ -996,7 +1012,7 @@
           activeModal === 'phone_otp'
             ? `
               <div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-                <div class="bg-[#FFF8F6] w-full max-w-md rounded-3xl border border-[#EADFD1] p-6 space-y-6 shadow-2xl text-left">
+                <div class="bg-[#FFF8F6] w-full max-w-md rounded-xl border border-[#EADFD1] p-6 space-y-6 shadow-2xl text-left">
                   <div class="flex justify-between items-center border-b border-[#EADFD1] pb-3">
                     <div class="flex items-center gap-2.5">
                       <div class="w-8 h-8 rounded-full bg-[#D08E1C]/10 text-[#D08E1C] flex items-center justify-center">
@@ -1014,7 +1030,7 @@
                       ${isMm ? `လျှို့ဝှက် ဂဏန်း ၆ လုံးပါ SMS ကို <strong class="text-[#231916]">${myData.userPhone || ''}</strong> သို့ ပေးပို့ထားပါသည်။` : `We have sent a 6-digit verification code to <strong class="text-[#231916]">${myData.userPhone || ''}</strong> via SMS.`}
                     </p>
 
-                    <div class="p-3 bg-[#FFF3D6] rounded-2xl border border-[#EADFD1] flex items-center justify-between text-xs">
+                    <div class="p-3 bg-[#FFF3D6] rounded-xl border border-[#EADFD1] flex items-center justify-between text-xs">
                       <span class="text-[#58413f] font-mono">${isMm ? 'နမူနာကုဒ်:' : 'Demo Code:'} <strong>123456</strong></span>
                       <button id="u20-autofill-otp-btn" type="button" class="text-[#840f16] font-bold underline cursor-pointer hover:opacity-80">
                         ${isMm ? 'အလိုအလျောက် ထည့်ရန်' : 'Auto Fill'}
@@ -1028,7 +1044,7 @@
                           id="u20-otp-input"
                           maxlength="6"
                           placeholder="______"
-                          class="w-full text-center tracking-[0.5em] font-mono text-2xl py-3 rounded-2xl border border-[#EADFD1] focus:border-[#840f16] bg-white focus:outline-none"
+                          class="w-full text-center tracking-[0.5em] font-mono text-2xl py-3 rounded-xl border border-[#EADFD1] focus:border-[#840f16] bg-white focus:outline-none"
                           required
                         />
                       </div>
@@ -1059,7 +1075,7 @@
           activeModal === 'confirm_withdraw'
             ? `
               <div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-                <div class="bg-[#FFF8F6] w-full max-w-md rounded-3xl border border-[#840f16]/30 p-6 space-y-5 shadow-2xl text-left">
+                <div class="bg-[#FFF8F6] w-full max-w-md rounded-xl border border-[#840f16]/30 p-6 space-y-5 shadow-2xl text-left">
                   <div class="w-12 h-12 rounded-full bg-[#840f16]/10 text-[#840f16] flex items-center justify-center mx-auto">
                     <span class="material-symbols-outlined text-2xl">warning</span>
                   </div>
@@ -1197,8 +1213,10 @@
 
     // View QR Pass modal
     containerElement.querySelectorAll('[data-mypage-view-pass-id]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        store.openMyPageModal('qr_pass');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const passId = e.currentTarget.getAttribute('data-mypage-view-pass-id');
+        store.openMyPageModal('qr_pass', passId);
       });
     });
 

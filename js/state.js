@@ -871,8 +871,11 @@
     }
 
     // My Page Modal Actions
-    openMyPageModal(modalName) {
+    openMyPageModal(modalName, passBookingId = null) {
       this.state.myPageModal = modalName;
+      if (passBookingId) {
+        this.state.activePassBookingId = passBookingId;
+      }
       this.notify();
     }
 

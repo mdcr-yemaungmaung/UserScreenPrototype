@@ -28,7 +28,7 @@
     ];
 
     return `
-      <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFF7E8]/95 backdrop-blur-lg border-t border-[#EADFD1] px-2 py-2">
+      <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFF7E8]/95 backdrop-blur-lg border-t border-[#EADFD1] px-3 py-2">
         <div class="flex items-center justify-around max-w-md mx-auto">
           ${items
             .map(item => {
@@ -36,23 +36,24 @@
               return `
                 <button
                   data-bottom-tab="${item.id}"
-                  class="flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all cursor-pointer relative ${
+                  aria-label="${item.label}"
+                  title="${item.label}"
+                  class="w-11 h-11 rounded-full flex items-center justify-center transition-all cursor-pointer relative ${
                     isActive
                       ? 'bg-[#840f16] text-white shadow-sm font-bold scale-105'
-                      : 'text-[#58413f] hover:text-[#231916]'
+                      : 'text-[#58413f] hover:text-[#231916] hover:bg-[#840f16]/10'
                   }"
                 >
-                  <div class="relative">
-                    <span class="material-symbols-outlined text-xl">${item.icon}</span>
+                  <div class="relative flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl">${item.icon}</span>
                     ${
                       item.badge && item.badge > 0
-                        ? `<span class="absolute -top-1 -right-2 bg-[#D08E1C] text-white font-label text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border border-white">
+                        ? `<span class="absolute -top-1.5 -right-2.5 bg-[#D08E1C] text-white font-label text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border-2 border-[#FFF7E8]">
                             ${item.badge}
                           </span>`
                         : ''
                     }
                   </div>
-                  <span class="font-label text-[10px] mt-0.5 leading-tight">${item.label}</span>
                 </button>
               `;
             })

@@ -20,7 +20,7 @@
         <!-- SECTION HEADER -->
         <div class="border-b border-[#EADFD1] pb-4">
           <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-[#231916]">
-            ${isMm ? 'အသိပေးချက် ဆက်တင်နှင့် Viber ချိတ်ဆက်ခြင်း' : 'Notification Settings & Viber Integration'}
+            ${isMm ? 'အသိပေးချက် ဆက်တင်' : 'Notification Settings'}
           </h2>
         </div>
 
@@ -30,81 +30,42 @@
           <!-- SUBSECTION 1: NOTIFICATION CHANNELS -->
           <div class="space-y-2.5">
             <!-- Channel 1: In-App Notifications -->
-            <div class="bg-white rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between gap-4 hover:border-[#840f16]/40 transition-colors shadow-2xs">
-              <div class="flex items-start gap-3.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0 mt-0.5">
-                  <span class="material-symbols-outlined text-lg">app_badging</span>
-                </div>
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'App အတွင်း အသိပေးချက် (In-App)' : 'In-App Notifications'}</span>
+            <div class="bg-white rounded-xl border border-[#EADFD1] p-4 space-y-2 hover:border-[#840f16]/40 transition-colors shadow-2xs">
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-lg">app_badging</span>
                   </div>
-                  <p class="font-body text-xs text-[#58413f]">
-                    ${isMm ? 'စိုတ်ထားမှု အတည်ပြုချက်၊ စားပွဲဝိုင်း အခြေအနေနှင့် ဘောက်ချာသတိပေးချက်များကို App တွင် ချက်ချင်း ပြသမည်' : 'Instant notification center alerts, table confirmation badges, and waitlist calls.'}
-                  </p>
+                  <span class="font-headline font-bold text-sm text-[#231916] truncate">${isMm ? 'App အတွင်း အသိပေးချက် (In-App)' : 'In-App Notifications'}</span>
                 </div>
+
+                <label class="toggle-switch-wrapper shrink-0">
+                  <input
+                    type="checkbox"
+                    id="u17-toggle-inapp"
+                    class="toggle-switch-input"
+                    ${notifInApp ? 'checked' : ''}
+                  />
+                  <span class="toggle-switch-slider"></span>
+                </label>
               </div>
 
-              <label class="toggle-switch-wrapper">
-                <input
-                  type="checkbox"
-                  id="u17-toggle-inapp"
-                  class="toggle-switch-input"
-                  ${notifInApp ? 'checked' : ''}
-                />
-                <span class="toggle-switch-slider"></span>
-              </label>
+              <p class="font-body text-xs text-[#58413f] leading-relaxed pl-12">
+                ${isMm ? 'စိုတ်ထားမှု အတည်ပြုချက်၊ စားပွဲဝိုင်း အခြေအနေနှင့် ဘောက်ချာသတိပေးချက်များကို App တွင် ချက်ချင်း ပြသမည်' : 'Instant notification center alerts, table confirmation badges, and waitlist calls.'}
+              </p>
             </div>
 
             <!-- Channel 2: Web Push Notifications -->
-            <div class="bg-white rounded-2xl border border-[#EADFD1] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#840f16]/40 transition-colors shadow-2xs">
-              <div class="flex items-start gap-3.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0 mt-0.5">
-                  <span class="material-symbols-outlined text-lg">public</span>
-                </div>
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'Web Push (Browser) အသိပေးချက်' : 'Web Push Notifications'}</span>
+            <div class="bg-white rounded-xl border border-[#EADFD1] p-4 space-y-2 hover:border-[#840f16]/40 transition-colors shadow-2xs">
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-lg">public</span>
                   </div>
-                  <p class="font-body text-xs text-[#58413f]">
-                    ${isMm ? 'Browser မှတစ်ဆင့် အချိန်နှင့်တပြေးညီ အသိပေးချက်များ လက်ခံရယူခြင်း' : 'Real-time browser notifications when reservations change or table is ready.'}
-                  </p>
+                  <span class="font-headline font-bold text-sm text-[#231916] truncate">${isMm ? 'Web Push (Browser) အသိပေးချက်' : 'Web Push Notifications'}</span>
                 </div>
-              </div>
 
-              <div class="flex items-center gap-3 shrink-0 self-end sm:self-center">
-                ${
-                  !webPushSubscribed
-                    ? `
-                      <button
-                        type="button"
-                        id="u17-subscribe-push-btn"
-                        class="btn-primary px-4 py-1.5 rounded-full font-label text-xs font-bold shadow-xs cursor-pointer inline-flex items-center gap-1.5 active:scale-95"
-                      >
-                        <span class="material-symbols-outlined text-xs">notifications_active</span>
-                        <span>${isMm ? 'ဖွင့်ရန်' : 'Opt-in'}</span>
-                      </button>
-                    `
-                    : `
-                      <button
-                        type="button"
-                        id="u17-unsubscribe-push-btn"
-                        class="bg-white border border-[#840f16] text-[#840f16] hover:bg-[#840f16] hover:text-white px-3.5 py-1.5 rounded-full font-label text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1"
-                      >
-                        <span>${isMm ? 'ပယ်ဖျက်ရန်' : 'Unsubscribe'}</span>
-                      </button>
-                    `
-                }
-                <button
-                  type="button"
-                  id="u17-test-push-btn"
-                  class="bg-white border border-[#EADFD1] hover:border-[#840f16] hover:text-[#840f16] rounded-full py-1.5 px-3 font-label text-xs font-semibold text-[#231916] flex items-center justify-center gap-1 cursor-pointer transition-colors"
-                >
-                  <span class="material-symbols-outlined text-xs text-[#840f16]">send</span>
-                  <span>${isMm ? 'စမ်းသပ်' : 'Test'}</span>
-                </button>
-
-                <label class="toggle-switch-wrapper">
+                <label class="toggle-switch-wrapper shrink-0">
                   <input
                     type="checkbox"
                     id="u17-toggle-webpush"
@@ -114,81 +75,82 @@
                   <span class="toggle-switch-slider"></span>
                 </label>
               </div>
+
+              <p class="font-body text-xs text-[#58413f] leading-relaxed pl-12">
+                ${isMm ? 'Browser မှတစ်ဆင့် အချိန်နှင့်တပြေးညီ အသိပေးချက်များ လက်ခံရယူခြင်း' : 'Real-time browser notifications when reservations change or table is ready.'}
+              </p>
             </div>
 
             <!-- Channel 3: Email Notifications -->
-            <div class="bg-white rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between gap-4 hover:border-[#840f16]/40 transition-colors shadow-2xs">
-              <div class="flex items-start gap-3.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0 mt-0.5">
-                  <span class="material-symbols-outlined text-lg">mail</span>
-                </div>
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'အီးမေးလ် (Email) အသိပေးချက်' : 'Email Notifications'}</span>
+            <div class="bg-white rounded-xl border border-[#EADFD1] p-4 space-y-2 hover:border-[#840f16]/40 transition-colors shadow-2xs">
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-lg">mail</span>
                   </div>
-                  <p class="font-body text-xs text-[#58413f]">
-                    ${isMm ? `${myData.userEmail || 'alex@example.com'} သို့ စားပွဲဝိုင်း ပြေစာနှင့် အတည်ပြုစာ ပို့မည်` : `Reservation confirmation receipts and billing vouchers sent to ${myData.userEmail || 'alex@example.com'}.`}
-                  </p>
+                  <span class="font-headline font-bold text-sm text-[#231916] truncate">${isMm ? 'အီးမေးလ် (Email) အသိပေးချက်' : 'Email Notifications'}</span>
                 </div>
+
+                <label class="toggle-switch-wrapper shrink-0">
+                  <input
+                    type="checkbox"
+                    id="u17-toggle-email"
+                    class="toggle-switch-input"
+                    ${notifEmail ? 'checked' : ''}
+                  />
+                  <span class="toggle-switch-slider"></span>
+                </label>
               </div>
 
-              <label class="toggle-switch-wrapper">
-                <input
-                  type="checkbox"
-                  id="u17-toggle-email"
-                  class="toggle-switch-input"
-                  ${notifEmail ? 'checked' : ''}
-                />
-                <span class="toggle-switch-slider"></span>
-              </label>
+              <p class="font-body text-xs text-[#58413f] leading-relaxed pl-12">
+                ${isMm ? `${myData.userEmail || 'alex@example.com'} သို့ စားပွဲဝိုင်း ပြေစာနှင့် အတည်ပြုစာ ပို့မည်` : `Reservation confirmation receipts and billing vouchers sent to ${myData.userEmail || 'alex@example.com'}.`}
+              </p>
             </div>
 
             <!-- Channel 4: Viber Notifications (Upcoming) -->
-            <div class="bg-white/70 rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between gap-4 opacity-85 shadow-2xs">
-              <div class="flex items-start gap-3.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0 mt-0.5">
-                  <span class="material-symbols-outlined text-lg">chat</span>
-                </div>
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'Viber အသိပေးချက်' : 'Viber Notifications'}</span>
+            <div class="bg-white/70 rounded-xl border border-[#EADFD1] p-4 space-y-2 opacity-85 shadow-2xs">
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-lg">chat</span>
                   </div>
-                  <p class="font-body text-xs text-[#58413f]">
-                    ${isMm ? 'Viber Bot မှတစ်ဆင့် အလိုအလျောက် သတိပေးချက်နှင့် QR စားပွဲဝိုင်းကုဒ် ရယူခြင်း' : 'Automated Viber Bot dining alerts, table check-in pass delivery, and restaurant updates.'}
-                  </p>
+                  <span class="font-headline font-bold text-sm text-[#231916] truncate">${isMm ? 'Viber အသိပေးချက်' : 'Viber Notifications'}</span>
+                </div>
+
+                <div class="shrink-0 text-right">
+                  <span class="inline-flex items-center gap-1 text-[11px] font-label text-[#8d7b75] bg-[#EADFD1]/40 px-2.5 py-1 rounded-full border border-[#EADFD1]">
+                    <span class="material-symbols-outlined text-[13px]">lock</span>
+                    <span>${isMm ? 'နောက်ပိုင်းအဆင့်' : 'Future Phase'}</span>
+                  </span>
                 </div>
               </div>
 
-              <div class="shrink-0 text-right">
-                <span class="inline-flex items-center gap-1 text-[11px] font-label text-[#8d7b75] bg-[#EADFD1]/40 px-2.5 py-1 rounded-full border border-[#EADFD1]">
-                  <span class="material-symbols-outlined text-[13px]">lock</span>
-                  <span>${isMm ? 'နောက်ပိုင်းအဆင့်' : 'Future Phase'}</span>
-                </span>
-              </div>
+              <p class="font-body text-xs text-[#58413f] leading-relaxed pl-12">
+                ${isMm ? 'Viber Bot မှတစ်ဆင့် အလိုအလျောက် သတိပေးချက်နှင့် QR စားပွဲဝိုင်းကုဒ် ရယူခြင်း' : 'Automated Viber Bot dining alerts, table check-in pass delivery, and restaurant updates.'}
+              </p>
             </div>
 
             <!-- Channel 5: SMS Notifications (Upcoming) -->
-            <div class="bg-white/70 rounded-2xl border border-[#EADFD1] p-4 flex items-center justify-between gap-4 opacity-85 shadow-2xs">
-              <div class="flex items-start gap-3.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0 mt-0.5">
-                  <span class="material-symbols-outlined text-lg">sms</span>
-                </div>
-                <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="font-headline font-bold text-sm text-[#231916]">${isMm ? 'SMS (မက်ဆေ့ခ်ျ) အသိပေးချက်' : 'SMS Text Notifications'}</span>
+            <div class="bg-white/70 rounded-xl border border-[#EADFD1] p-4 space-y-2 opacity-85 shadow-2xs">
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-[#840f16]/10 text-[#840f16] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-lg">sms</span>
                   </div>
-                  <p class="font-body text-xs text-[#58413f]">
-                    ${isMm ? 'ဖုန်း SMS ဖြင့် အရေးပေါ် စားပွဲဝိုင်း အသိပေးချက်နှင့် OTP ကုဒ်များ လက်ခံခြင်း' : 'Direct SMS dispatch for booking confirmations and last-minute cancellation alerts.'}
-                  </p>
+                  <span class="font-headline font-bold text-sm text-[#231916] truncate">${isMm ? 'SMS (မက်ဆေ့ခ်ျ) အသိပေးချက်' : 'SMS Text Notifications'}</span>
+                </div>
+
+                <div class="shrink-0 text-right">
+                  <span class="inline-flex items-center gap-1 text-[11px] font-label text-[#8d7b75] bg-[#EADFD1]/40 px-2.5 py-1 rounded-full border border-[#EADFD1]">
+                    <span class="material-symbols-outlined text-[13px]">lock</span>
+                    <span>${isMm ? 'နောက်ပိုင်းအဆင့်' : 'Future Phase'}</span>
+                  </span>
                 </div>
               </div>
 
-              <div class="shrink-0 text-right">
-                <span class="inline-flex items-center gap-1 text-[11px] font-label text-[#8d7b75] bg-[#EADFD1]/40 px-2.5 py-1 rounded-full border border-[#EADFD1]">
-                  <span class="material-symbols-outlined text-[13px]">lock</span>
-                  <span>${isMm ? 'နောက်ပိုင်းအဆင့်' : 'Future Phase'}</span>
-                </span>
-              </div>
+              <p class="font-body text-xs text-[#58413f] leading-relaxed pl-12">
+                ${isMm ? 'ဖုန်း SMS ဖြင့် အရေးပေါ် စားပွဲဝိုင်း အသိပေးချက်နှင့် OTP ကုဒ်များ လက်ခံခြင်း' : 'Direct SMS dispatch for booking confirmations and last-minute cancellation alerts.'}
+              </p>
             </div>
           </div>
 
@@ -203,7 +165,7 @@
               </h3>
             </div>
 
-            <div class="bg-white rounded-2xl border border-[#EADFD1] p-5">
+            <div class="bg-white rounded-xl border border-[#EADFD1] p-5">
               <form id="u17-phone-form" class="space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <!-- Current Phone Display -->
@@ -211,7 +173,7 @@
                     <label class="block font-label text-xs font-bold text-[#231916] uppercase tracking-wider mb-2.5">
                       ${isMm ? 'လက်ရှိ ဖုန်းနံပါတ်' : 'Current Phone Number'}
                     </label>
-                    <div class="w-full bg-[#EADFD1]/40 border border-[#EADFD1] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] font-medium flex items-center justify-between">
+                    <div class="w-full bg-[#EADFD1]/40 border border-[#EADFD1] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] font-medium flex items-center justify-between">
                       <span>${userPhone}</span>
                       <span class="material-symbols-outlined text-[#8d7b75] text-sm">call</span>
                     </div>
@@ -223,7 +185,7 @@
                       ${isMm ? 'ဖုန်းနံပါတ် အသစ်ထည့်ရန်' : 'Update Phone Number'} <span class="text-[#840f16]">*</span>
                     </label>
                     <div class="flex items-center gap-2">
-                      <div class="bg-[#EADFD1]/60 border border-[#EADFD1] rounded-2xl px-3.5 py-2.5 font-label font-bold text-xs text-[#231916] shrink-0 flex items-center gap-1.5">
+                      <div class="bg-[#EADFD1]/60 border border-[#EADFD1] rounded-xl px-3.5 py-2.5 font-label font-bold text-xs text-[#231916] shrink-0 flex items-center gap-1.5">
                         <span>🇲🇲</span>
                         <span>+95</span>
                       </div>
@@ -232,7 +194,7 @@
                         id="u17-input-phone"
                         value="${userPhone.replace(/^\+95\s?/, '')}"
                         placeholder="09 791 234 567"
-                        class="flex-1 bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-2xl px-4 py-2.5 font-body text-xs text-[#231916] focus:outline-none transition-colors"
+                        class="flex-1 bg-white border border-[#EADFD1] focus:border-[#840f16] rounded-xl px-4 py-2.5 font-body text-xs text-[#231916] focus:outline-none transition-colors"
                         required
                       />
                     </div>
@@ -263,7 +225,7 @@
               </h3>
             </div>
 
-            <div class="bg-white rounded-2xl border border-[#EADFD1] p-5 space-y-4">
+            <div class="bg-white rounded-xl border border-[#EADFD1] p-5 space-y-4">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#EADFD1]/70">
                 <div class="space-y-1">
                   <div class="font-headline font-bold text-sm text-[#231916] flex items-center gap-2">
@@ -309,7 +271,7 @@
 
               <!-- Viber Features 3-Column Grid -->
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                <div class="p-3.5 rounded-2xl bg-[#FFF8F6] border border-[#EADFD1] space-y-1">
+                <div class="p-3.5 rounded-xl bg-[#FFF8F6] border border-[#EADFD1] space-y-1">
                   <div class="flex items-center gap-1.5 text-[#840f16] font-bold text-xs font-headline">
                     <span class="material-symbols-outlined text-base">alarm</span>
                     <span>${isMm ? 'အလိုအလျောက် သတိပေးချက်' : 'Auto Reminders'}</span>
@@ -319,7 +281,7 @@
                   </p>
                 </div>
 
-                <div class="p-3.5 rounded-2xl bg-[#FFF8F6] border border-[#EADFD1] space-y-1">
+                <div class="p-3.5 rounded-xl bg-[#FFF8F6] border border-[#EADFD1] space-y-1">
                   <div class="flex items-center gap-1.5 text-[#840f16] font-bold text-xs font-headline">
                     <span class="material-symbols-outlined text-base">qr_code</span>
                     <span>${isMm ? 'QR Dining Pass' : 'Direct QR Delivery'}</span>
@@ -329,7 +291,7 @@
                   </p>
                 </div>
 
-                <div class="p-3.5 rounded-2xl bg-[#FFF8F6] border border-[#EADFD1] space-y-1">
+                <div class="p-3.5 rounded-xl bg-[#FFF8F6] border border-[#EADFD1] space-y-1">
                   <div class="flex items-center gap-1.5 text-[#840f16] font-bold text-xs font-headline">
                     <span class="material-symbols-outlined text-base">campaign</span>
                     <span>${isMm ? 'အထူး ဘောက်ချာများ' : 'VIP Flash Deals'}</span>
