@@ -318,11 +318,11 @@
           </div>
 
           <!-- Cards Grid / Horizontal Scroll for Mobile & Tablet -->
-          <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-3 lg:pb-0 h-[230px]">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pb-4 lg:pb-0">
             ${COLLECTIONS_DATA.map(col => `
               <div
                 data-collection-target="${col.targetRestaurantId}"
-                class="shrink-0 w-[260px] h-[180px] sm:w-[320px] sm:h-[220px] lg:w-auto lg:h-[420px] snap-start group relative rounded-2xl lg:rounded-[28px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-4 sm:p-5 lg:p-8 text-left text-white"
+                class="shrink-0 w-[270px] h-[320px] sm:w-[320px] sm:h-[360px] lg:w-auto lg:h-[380px] snap-start group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end p-5 sm:p-6 lg:p-7 text-left text-white border border-white/10"
               >
                 <img
                   src="${col.image}"
@@ -336,14 +336,14 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
                 <!-- Card Content -->
-                <div class="relative z-10 space-y-0.5 lg:space-y-1">
-                  <div class="font-label text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[#D08E1C]">
+                <div class="relative z-10 space-y-1.5">
+                  <div class="inline-block bg-[#D08E1C] text-white font-label text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-xs">
                     ${isMm ? col.categoryTagMM : col.categoryTag}
                   </div>
-                  <h3 class="font-headline text-lg sm:text-xl lg:text-3xl font-extrabold text-white leading-tight line-clamp-1 lg:line-clamp-none">
+                  <h3 class="font-headline text-lg sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">
                     ${isMm ? col.titleMM : col.title}
                   </h3>
-                  <p class="font-body text-xs sm:text-sm text-white/80 line-clamp-1 lg:line-clamp-2">
+                  <p class="font-body text-xs sm:text-sm text-white/80 line-clamp-2 leading-relaxed">
                     ${isMm ? col.subtitleMM : col.subtitle}
                   </p>
                 </div>
@@ -388,17 +388,17 @@
             </button>
           </div>
 
-          <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pb-3 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 pb-4 lg:pb-0">
             ${popularRestaurants.slice(0, 4).map(r => {
               const rawStart = r.priceRange ? r.priceRange.split('-')[0].trim() : '150,000 MMK';
               const fitPrice = rawStart.endsWith('MMK') ? rawStart : `${rawStart} MMK`;
               return `
               <div
                 data-card-select-id="${r.id}"
-                class="shrink-0 w-[200px] sm:w-[260px] lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-2xl lg:rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
+                class="shrink-0 w-[240px] sm:w-[280px] lg:w-auto snap-start group relative bg-[#FFF9EE] border border-[#EADFD1] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left"
               >
                 <!-- Image Container -->
-                <div class="relative h-36 sm:h-40 lg:h-48 overflow-hidden">
+                <div class="relative h-44 sm:h-48 lg:h-52 overflow-hidden">
                   <img
                     src="${r.heroImage}"
                     alt="${r.name}"
@@ -407,31 +407,35 @@
                     onerror="this.onerror=null; this.src='assets/images/gilded_fork.jpg';"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                  <div class="absolute top-3 right-3 bg-[#840f16] text-white px-2.5 py-0.5 rounded-full font-label text-[10px] font-bold uppercase tracking-wider">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div class="absolute top-3 right-3 bg-[#840f16] text-white px-3 py-1 rounded-full font-label text-[10px] font-bold uppercase tracking-wider shadow-xs">
                     ${r.cuisine}
+                  </div>
+                  <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 text-[11px] font-label font-bold text-[#231916]">
+                    <span class="material-symbols-outlined text-xs text-[#D08E1C] fill-1">star</span>
+                    <span>${r.rating}</span>
                   </div>
                 </div>
 
                 <!-- Card Content Area -->
-                <div class="p-3.5 sm:p-4 lg:p-5 flex-1 flex flex-col justify-between space-y-2 lg:space-y-3">
+                <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5">
                   <div class="space-y-1">
                     <!-- Venue Name / Location -->
-                    <div class="flex items-center gap-1 text-[11px] sm:text-xs font-label font-bold text-[#840f16] uppercase tracking-wider">
+                    <div class="flex items-center gap-1 text-[11px] font-label font-bold text-[#840f16] uppercase tracking-wider">
                       <span class="material-symbols-outlined text-sm">location_on</span>
                       <span class="truncate">${r.location || r.area}</span>
                     </div>
 
                     <!-- Restaurant Name -->
-                    <h3 class="font-headline text-base sm:text-lg lg:text-xl font-bold text-[#231916] group-hover:text-[#840f16] transition-colors leading-snug line-clamp-1">
+                    <h3 class="font-headline text-base sm:text-lg font-bold text-[#231916] group-hover:text-[#840f16] transition-colors leading-snug line-clamp-1">
                       ${r.name}
                     </h3>
                   </div>
 
                   <!-- Price Row -->
-                  <div class="pt-2 border-t border-[#EADFD1] flex items-center justify-between">
-                    <span class="font-label text-[10px] sm:text-xs text-[#58413f]">${isMm ? 'စျေးနှုန်း' : 'Price'}</span>
-                    <span class="font-label text-xs font-bold text-[#231916]">${fitPrice}</span>
+                  <div class="pt-2.5 border-t border-[#EADFD1] flex items-center justify-between">
+                    <span class="font-label text-xs text-[#58413f]">${isMm ? 'စျေးနှုန်း' : 'From'}</span>
+                    <span class="font-label text-xs font-extrabold text-[#840f16]">${fitPrice}</span>
                   </div>
                 </div>
               </div>
@@ -455,7 +459,7 @@
             </div>
           </div>
 
-          <div class="mobile-horizontal-scroll -mx-4 px-0 sm:-mx-6 sm:px-0 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pb-4 lg:pb-0">
+          <div class="mobile-horizontal-scroll -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pb-4 lg:pb-0">
             ${RESTAURANTS_DATA.map(restaurant => `
               <div class="shrink-0 w-[290px] sm:w-[340px] lg:w-auto snap-start flex">
                 ${renderRestaurantCard(restaurant, state)}

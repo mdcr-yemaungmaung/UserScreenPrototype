@@ -150,10 +150,10 @@
                           </h3>
 
                           <!-- Date, Time, Guests -->
-                          <div class="flex items-center flex-wrap gap-x-3.5 sm:gap-x-6 gap-y-1.5 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body">
+                          <div class="flex items-center flex-wrap gap-x-3.5 sm:gap-x-5 gap-y-1.5 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body">
                             <!-- Date -->
-                            <span class="inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <span class="inline-flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
+                              <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                                 <line x1="16" y1="2" x2="16" y2="6"/>
                                 <line x1="8" y1="2" x2="8" y2="6"/>
@@ -163,8 +163,8 @@
                             </span>
 
                             <!-- Time -->
-                            <span class="inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <span class="inline-flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
+                              <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"/>
                                 <polyline points="12 6 12 12 16 14"/>
                               </svg>
@@ -172,8 +172,8 @@
                             </span>
 
                             <!-- Guests -->
-                            <span class="inline-flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <span class="inline-flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
+                              <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -184,8 +184,8 @@
                           </div>
 
                           <!-- Location -->
-                          <div class="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body pt-0.5 min-w-0">
-                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7A6B65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <div class="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-[#4E3F3A] font-medium font-body pt-0.5 min-w-0">
+                            <svg class="w-3.5 h-3.5 text-[#7A6B65] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                               <circle cx="12" cy="10" r="3"/>
                             </svg>
@@ -198,8 +198,7 @@
                         <div class="flex flex-col items-stretch sm:items-end gap-2.5 shrink-0 self-stretch md:self-auto justify-between md:justify-end mt-1 sm:mt-3 md:mt-0 w-full md:w-auto">
                           
                           <!-- Top Row: Status Badge (Right Most) -->
-                          <div class="flex items-center justify-between sm:justify-end w-full">
-                            <span class="sm:hidden text-xs text-[#7A6B65] font-semibold">${isMm ? 'အခြေအနေ' : 'Status'}</span>
+                          <div class="flex items-center justify-end w-full">
                             ${renderStatusPill(item.status, isMm)}
                           </div>
 
