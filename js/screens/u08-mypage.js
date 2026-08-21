@@ -276,9 +276,6 @@
           <h2 class="font-headline text-2xl font-bold text-[#231916]">
             ${isMm ? 'အကြိုက်ဆုံး ဆိုင်များ' : 'Saved Favorites'}
           </h2>
-          <p class="font-body text-xs text-[#58413f] mt-0.5">
-            ${isMm ? 'သင်အကြိုက်ဆုံးအဖြစ် သိမ်းဆည်းထားသော အဆင့်မြင့် စားသောက်ဆိုင်များ' : 'Your personal collection of saved gourmet dining spots.'}
-          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -350,9 +347,6 @@
           <h2 class="font-headline text-2xl font-bold text-[#231916]">
             ${isMm ? 'လူပြည့် စောင့်ဆိုင်းစာရင်း' : 'Waitlist & Queue Management'}
           </h2>
-          <p class="font-body text-xs text-[#58413f] mt-0.5">
-            ${isMm ? 'တန်းစီ စောင့်ဆိုင်းနေသော စားပွဲဝိုင်းများနှင့် အလိုအလျောက် အကြောင်းကြားမှု စနစ်' : 'Active table waiting lists and real-time cancellation alerts.'}
-          </p>
         </div>
 
         <div class="bg-[#FFF3D6] border border-[#EADFD1] rounded-xl p-4 flex items-start gap-3 text-xs text-[#8f5d0b]">
@@ -415,9 +409,6 @@
           <h2 class="font-headline text-2xl font-bold text-[#231916]">
             ${isMm ? 'ဘောက်ချာနှင့် ကူပွန်များ' : 'Vouchers & Promo Codes'}
           </h2>
-          <p class="font-body text-xs text-[#58413f] mt-0.5">
-            ${isMm ? 'စားသောက်ဆိုင်များတွင် အသုံးပြုနိုင်သော လျှော့စျေး ဘောက်ချာများနှင့် ပရိုမိုကုဒ်များ' : 'Active dining coupons and promo discounts applicable during reservation.'}
-          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -463,9 +454,6 @@
           <h2 class="font-headline text-2xl font-bold text-[#231916]">
             ${isMm ? 'အမှတ်နှင့် အသင်းဝင်အဆင့်' : 'Points & VIP Membership'}
           </h2>
-          <p class="font-body text-xs text-[#58413f] mt-0.5">
-            ${isMm ? 'သင်၏ Gourmet Points နှင့် အသင်းဝင် အထူးအခွင့်အရေးများ' : 'Manage your reward points balance, VIP rank, and tier benefits.'}
-          </p>
         </div>
 
         <!-- VIP Membership Card -->
@@ -533,9 +521,6 @@
             <h2 class="font-headline text-2xl font-bold text-[#231916]">
               ${isMm ? 'အသိပေးချက် စင်တာ' : 'Notification Center'}
             </h2>
-            <p class="font-body text-xs text-[#58413f] mt-0.5">
-              ${isMm ? 'စားပွဲဝိုင်း အတည်ပြုချက်များနှင့် အထူးသတင်းလွှာများ' : 'Booking receipts, arrival reminders, and system alerts.'}
-            </p>
           </div>
 
           <button
@@ -596,9 +581,6 @@
           <h2 class="font-headline text-2xl font-bold text-[#231916]">
             ${isMm ? 'အထူး ကြေညာချက်များ' : 'System Announcements'}
           </h2>
-          <p class="font-body text-xs text-[#58413f] mt-0.5">
-            ${isMm ? 'ရာသီအလိုက် အထူး မီနူးသစ်များနှင့် စားသောက်ဆိုင် ပွဲစဉ်များ' : 'Seasonal culinary menus, chef partnerships, and dining updates.'}
-          </p>
         </div>
 
         <div class="space-y-4">
@@ -694,9 +676,6 @@
             <h1 class="font-headline text-3xl sm:text-4xl font-extrabold text-[#231916] tracking-tight">
               ${isMm ? 'ကျွန်ုပ်၏ စာမျက်နှာ' : 'My Page'}
             </h1>
-            <p class="font-body text-xs sm:text-sm text-[#58413f] mt-1">
-              ${isMm ? 'သင်၏ စားပွဲဝိုင်း စိုတ်ထားမှုများ၊ အကြိုက်ဆုံးဆိုင်များနှင့် အသင်းဝင်အချက်အလက်များကို စီမံခန့်ခွဲပါ' : 'Manage your reservations, saved favorites, member perks, and account preferences.'}
-            </p>
           </div>
 
           <button
