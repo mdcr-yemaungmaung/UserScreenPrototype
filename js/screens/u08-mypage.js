@@ -162,9 +162,9 @@
                         </div>
 
                         <!-- Middle Row: Date, Time, Guests Badges -->
-                        <div class="flex items-center flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm font-medium font-body">
+                        <div class="flex items-center flex-wrap gap-x-4 sm:gap-x-3.5 gap-y-2 text-xs sm:text-sm font-medium font-body">
                           <!-- Date -->
-                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FAF3E8] border border-[#EADFD1]/80 text-[#231916] whitespace-nowrap">
+                          <span class="inline-flex items-center gap-1 sm:gap-1.5 px-0 sm:px-2.5 py-0 sm:py-1 bg-transparent sm:bg-[#FAF3E8] border-0 sm:border sm:border-[#EADFD1]/80 rounded-none sm:rounded-lg text-[#231916] whitespace-nowrap">
                             <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                               <line x1="16" y1="2" x2="16" y2="6"/>
@@ -175,8 +175,8 @@
                           </span>
 
                           <!-- Time -->
-                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FAF3E8] border border-[#EADFD1]/80 text-[#231916] whitespace-nowrap">
-                            <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <span class="inline-flex items-center gap-1 sm:gap-1.5 px-0 sm:px-2.5 py-0 sm:py-1 bg-transparent sm:bg-[#FAF3E8] border-0 sm:border sm:border-[#EADFD1]/80 rounded-none sm:rounded-lg text-[#231916] whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0 ml-[2px]" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <circle cx="12" cy="12" r="10"/>
                               <polyline points="12 6 12 12 16 14"/>
                             </svg>
@@ -184,7 +184,7 @@
                           </span>
 
                           <!-- Guests -->
-                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FAF3E8] border border-[#EADFD1]/80 text-[#231916] whitespace-nowrap">
+                          <span class="inline-flex items-center gap-1 sm:gap-1.5 px-0 sm:px-2.5 py-0 sm:py-1 bg-transparent sm:bg-[#FAF3E8] border-0 sm:border sm:border-[#EADFD1]/80 rounded-none sm:rounded-lg text-[#231916] whitespace-nowrap">
                             <svg class="w-3.5 h-3.5 text-[#840F16] shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                               <circle cx="9" cy="7" r="4"/>
